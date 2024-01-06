@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Cloth
+    uniqueID: 4008450901
+    locked: 0
