@@ -1,4 +1,4 @@
-using FlashSexJam.SO;
+using FlashSexJam.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,8 +6,12 @@ namespace FlashSexJam
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField]
-        private PlayerInfo _info;
+        private float _xMov;
+
+        private void Update()
+        {
+            GameManager.Instance.IncreaseSpeed(_xMov * Time.deltaTime);
+        }
 
         public void OnMove(InputAction.CallbackContext value)
         {
@@ -18,6 +22,8 @@ namespace FlashSexJam
             else if (mov.y < 0f) y = -3f;
 
             transform.position = new(transform.position.x, y);
+
+            _xMov = mov.x;
         }
     }
 

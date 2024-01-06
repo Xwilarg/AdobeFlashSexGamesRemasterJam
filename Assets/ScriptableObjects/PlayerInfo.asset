@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c557267260ec7b14db5796e5a378ed82, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  MaxSpeed: 10
+  MinSpeed: 1
+  MaxSpeed: 15
+  SpeedChangeMultiplier: 3
