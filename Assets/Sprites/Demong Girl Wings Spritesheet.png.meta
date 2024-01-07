@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 14ec09eb9a0905d4eb707f63824f3392
+guid: 915ab4b046e1d05479112b0c33014242
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,7 +81,33 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -113,19 +139,19 @@ TextureImporter:
       name: Demong Girl Wings Spritesheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 256.75
-        height: 216
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 47
+        y: 22
+        width: 164
+        height: 155
+      alignment: 9
+      pivot: {x: 0.9568012, y: 0.41106817}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 891e3348cbb601e42b28c2891e01301f
-      internalID: -453840337
+      spriteID: 3d5ab64da5c6fc749945b40e664b144c
+      internalID: -1869504458
       vertices: []
       indices: 
       edges: []
@@ -134,19 +160,19 @@ TextureImporter:
       name: Demong Girl Wings Spritesheet_1
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 256.75
-        height: 216
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 259
+        y: 61
+        width: 224
+        height: 125
+      alignment: 9
+      pivot: {x: 0.957519, y: 0.1979411}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f795308d40a7daa418f7b960c9afc661
-      internalID: 1379357086
+      spriteID: 5e7d5e3fc3c152b439644efd255c0291
+      internalID: -2033831632
       vertices: []
       indices: 
       edges: []
@@ -155,19 +181,19 @@ TextureImporter:
       name: Demong Girl Wings Spritesheet_2
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
-        width: 256.75
-        height: 216
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 544
+        y: 66
+        width: 208
+        height: 119
+      alignment: 9
+      pivot: {x: 0.9523735, y: 0.16760221}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00a9725f5af40a349a4a2c098ad0f645
-      internalID: -1876191744
+      spriteID: 4eff36f4823d7c14db22e25e53f49b85
+      internalID: -1661257528
       vertices: []
       indices: 
       edges: []
@@ -176,19 +202,19 @@ TextureImporter:
       name: Demong Girl Wings Spritesheet_3
       rect:
         serializedVersion: 2
-        x: 768
-        y: 0
-        width: 256.75
-        height: 216
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 790
+        y: 24
+        width: 200
+        height: 90
+      alignment: 9
+      pivot: {x: 0.9614789, y: 0.69311523}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f9f3f7596cb05b48bedd2ae0371adcf
-      internalID: 2000259620
+      spriteID: d30cb5efc9baaeb48a6fd869c641f8cc
+      internalID: -1590915911
       vertices: []
       indices: 
       edges: []
@@ -204,10 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Demong Girl Wings Spritesheet_0: -453840337
-      Demong Girl Wings Spritesheet_1: 1379357086
-      Demong Girl Wings Spritesheet_2: -1876191744
-      Demong Girl Wings Spritesheet_3: 2000259620
+      Demong Girl Wings Spritesheet_0: -1869504458
+      Demong Girl Wings Spritesheet_1: -2033831632
+      Demong Girl Wings Spritesheet_2: -1661257528
+      Demong Girl Wings Spritesheet_3: -1590915911
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 998809ecb741b8545a0b4a739161c14c
+guid: 0f95433a773739a4dbd6e7b7282b876d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Basic Tentacle Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 148
+        width: 237
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6405bd8a94da7794e9121cbf4773e516
+      internalID: 1005813941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Basic Tentacle Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 148
+        width: 227
+        height: 77
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b0903f0d096c404ca19478fe8b721c8
+      internalID: -2103716777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Basic Tentacle Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 148
+        width: 237
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d573f7a9e1647304d9ab10315a3df553
+      internalID: -1744014325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Basic Tentacle Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 1
+        width: 225
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0.85}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dcdeb83b7ba0264d8fc60b43d637515
+      internalID: 743470768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +229,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Basic Tentacle Sheet_0: 1005813941
+      Basic Tentacle Sheet_1: -2103716777
+      Basic Tentacle Sheet_2: -1744014325
+      Basic Tentacle Sheet_3: 743470768
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
