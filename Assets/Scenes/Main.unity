@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clothPart: {fileID: 1247369714}
 --- !u!1 &156504705
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clothPart: {fileID: 1989088892}
 --- !u!1 &874646790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,6 +1524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clothPart: {fileID: 0}
 --- !u!1 &1989088892
 GameObject:
   m_ObjectHideFlags: 0
