@@ -47,3 +47,6 @@ TagManager:
   - name: Cloth
     uniqueID: 4008450901
     locked: 0
+  - name: Foreground
+    uniqueID: 1968461187
+    locked: 0
