@@ -8,5 +8,9 @@ namespace FlashSexJam.SO
         public float MinSpeed, MaxSpeed;
 
         public float SpeedChangeMultiplier;
+
+        public float SpawnIntervalMin, SpawnIntervalMax;
+
+        public GameObject[] SpawnableEnemies;
     }
 }

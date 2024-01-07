@@ -15,3 +15,7 @@ MonoBehaviour:
   MinSpeed: 1
   MaxSpeed: 15
   SpeedChangeMultiplier: 3
+  SpawnIntervalMin: 5
+  SpawnIntervalMax: 10
+  SpawnableEnemies:
+  - {fileID: 4589485064582313205, guid: 0035be6a20baf2740bd27bad7804c1ed, type: 3}
