@@ -2,13 +2,21 @@ using FlashSexJam.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace FlashSexJam
+namespace FlashSexJam.Player
 {
     public class PlayerController : MonoBehaviour
     {
         private float _xMov;
 
         private float _movYOffset = 2f;
+
+        private void Awake()
+        {
+            foreach (var bp in GetComponentsInChildren<BodyPart>())
+            {
+                bp.Owner = this;
+            }
+        }
 
         private void Update()
         {
