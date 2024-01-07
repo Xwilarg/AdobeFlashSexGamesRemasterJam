@@ -1,4 +1,5 @@
 ﻿using FlashSexJam.SO;
+using Buttplug.Client;
 using UnityEngine;
 
 namespace FlashSexJam.Manager
@@ -11,6 +12,8 @@ namespace FlashSexJam.Manager
         private GameInfo _info;
 
         public float Speed { private set; get; }
+
+        private ButtplugClient _client;
 
         private void Awake()
         {

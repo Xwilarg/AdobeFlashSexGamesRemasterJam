@@ -1,0 +1,17 @@
+{
+    "name": "ButtPlugAssemblyDef",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fc32d11cd20a2d944894e5885d510e1a",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
