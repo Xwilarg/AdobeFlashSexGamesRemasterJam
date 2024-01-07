@@ -10,6 +10,9 @@ namespace FlashSexJam.Player
 
         private float _movYOffset = 2f;
 
+        [SerializeField]
+        private GameObject _modelUp, _modelMid, _modelDown;
+
         private void Awake()
         {
             foreach (var bp in GetComponentsInChildren<BodyPart>())
@@ -27,11 +30,13 @@ namespace FlashSexJam.Player
         {
             var mov = value.ReadValue<Vector2>();
 
-            var y = 0f;
-            if (mov.y > 0f) y = _movYOffset;
-            else if (mov.y < 0f) y = -_movYOffset;
+            _modelUp.SetActive(false);
+            _modelMid.SetActive(false);
+            _modelDown.SetActive(false);
 
-            transform.position = new(transform.position.x, y);
+            if (mov.y > 0) _modelUp.SetActive(true);
+            else if (mov.y < 0) _modelDown.SetActive(true);
+            else _modelMid.SetActive(true);
 
             _xMov = mov.x;
         }
