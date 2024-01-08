@@ -48,6 +48,11 @@ namespace FlashSexJam.Player
                 }
 
                 UpdateUI();
+
+                if (_strokeCount <= 0f)
+                {
+                    StopHScene();
+                }
             }
         }
 
