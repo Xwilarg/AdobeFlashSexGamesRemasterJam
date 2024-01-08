@@ -12,13 +12,10 @@ namespace FlashSexJam.Player
 
         public (GameObject UpperCloth, GameObject LowerCloth) Init(PlayerController pc)
         {
-            if (_upperBody != null)
-            {
-                _upperBody.Owner = pc;
-                _upperBody.Type = BodyPartType.UpperBody;
-                _lowerBody.Owner = pc;
-                _lowerBody.Type = BodyPartType.LowerBody;
-            }
+            _upperBody.Owner = pc;
+            _upperBody.Type = BodyPartType.UpperBody;
+            _lowerBody.Owner = pc;
+            _lowerBody.Type = BodyPartType.LowerBody;
 
             return (_upperBodyCloth, _lowerBodyCloth);
         }

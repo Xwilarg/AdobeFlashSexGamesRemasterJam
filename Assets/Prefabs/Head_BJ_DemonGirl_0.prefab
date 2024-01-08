@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4909713673705954641}
   - component: {fileID: 8962254196396341898}
   - component: {fileID: 8102316684656920786}
-  - component: {fileID: 4051374116388930476}
+  - component: {fileID: 1671980142220537095}
   m_Layer: 0
   m_Name: Head_BJ_DemonGirl_0
   m_TagString: Untagged
@@ -195,7 +195,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4051374116388930476
+--- !u!114 &1671980142220537095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,13 +204,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3535461754944050207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab1d872091831449aa2160b3f8c399d, type: 3}
+  m_Script: {fileID: 11500000, guid: eafdc332d43e584448d22c20a853b037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _upperBodyCloth: {fileID: 2938469800841803109}
   _lowerBodyCloth: {fileID: 4109213077282632251}
-  _upperBody: {fileID: 0}
-  _lowerBody: {fileID: 0}
 --- !u!1 &4038586783570082384
 GameObject:
   m_ObjectHideFlags: 0

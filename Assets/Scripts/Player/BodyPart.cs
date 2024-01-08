@@ -16,10 +16,12 @@ namespace FlashSexJam.Player
             {
                 if (!Owner.TryBreakCloth(Type))
                 {
-                    Owner.gameObject.SetActive(false);
-                    Instantiate(collision.GetComponent<EnemyController>().HScene, Owner.transform.position, Quaternion.identity);
+                    var go = Instantiate(collision.GetComponent<EnemyController>().HScene, Owner.transform.position, Quaternion.identity);
+                    go.GetComponent<HScenePositionData>().BreakClothes(Owner);
                     GameManager.Instance.Speed = 0f;
+                    Owner.gameObject.SetActive(false);
                 }
+                Destroy(collision.gameObject);
             }
         }
     }

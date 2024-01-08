@@ -51,6 +51,9 @@ namespace FlashSexJam.Player
             return true;
         }
 
+        public bool IsTopBodyBroken => !_clothes[BodyPartType.UpperBody].Any();
+        public bool IsLowerBodyBroken => !_clothes[BodyPartType.LowerBody].Any();
+
         public void OnMove(InputAction.CallbackContext value)
         {
             var mov = value.ReadValue<Vector2>();
