@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281eacd8ab4d21148860db24c9962b90, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  BaseEnergy: 0
-  BaseOrgasm: 0
+  BaseEnergy: 20
+  BaseOrgasm: 30

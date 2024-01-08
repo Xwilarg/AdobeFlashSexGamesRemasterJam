@@ -10,6 +10,9 @@ namespace FlashSexJam.Player
         [SerializeField]
         private PlayerInfo _info;
 
+        [SerializeField]
+        private RectTransform _orgasmBar, _energyBar;
+
         private PlayerController _pc;
         private float _strokeCount;
 
@@ -50,7 +53,8 @@ namespace FlashSexJam.Player
 
         private void UpdateUI()
         {
-
+            _orgasmBar.localScale = new(_orgasm / _info.BaseOrgasm, 1f, 1f);
+            _energyBar.localScale = new(_energy / _info.BaseEnergy, 1f, 1f);
         }
 
         public void PlayHScene(GameObject hSceneObj)
