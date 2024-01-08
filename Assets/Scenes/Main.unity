@@ -267,7 +267,7 @@ Animator:
   m_GameObject: {fileID: 67533523}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a87cc411213d9784d8f51ed79cdd49e2, type: 2}
+  m_Controller: {fileID: 9100000, guid: d64e02d7de00539408211beccf14654f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -793,6 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upperBodyCloth: {fileID: 208508825}
   _lowerBodyCloth: {fileID: 2126483599}
+  _head: {fileID: 125674354}
   _upperBody: {fileID: 66932017}
   _lowerBody: {fileID: 1684930252}
 --- !u!1 &281644601
@@ -905,7 +906,7 @@ Animator:
   m_GameObject: {fileID: 347826694}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a87cc411213d9784d8f51ed79cdd49e2, type: 2}
+  m_Controller: {fileID: 9100000, guid: d64e02d7de00539408211beccf14654f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1011,7 +1012,7 @@ Animator:
   m_GameObject: {fileID: 380839308}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a87cc411213d9784d8f51ed79cdd49e2, type: 2}
+  m_Controller: {fileID: 9100000, guid: d64e02d7de00539408211beccf14654f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1593,6 +1594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upperBodyCloth: {fileID: 1470041346}
   _lowerBodyCloth: {fileID: 1398671994}
+  _head: {fileID: 1856842977}
   _upperBody: {fileID: 1618490174}
   _lowerBody: {fileID: 1192218768}
 --- !u!1 &1154952458
@@ -1697,6 +1699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upperBodyCloth: {fileID: 1989088892}
   _lowerBodyCloth: {fileID: 1247369714}
+  _head: {fileID: 1619322794}
   _upperBody: {fileID: 756554146}
   _lowerBody: {fileID: 75983678}
 --- !u!1 &1192218766
@@ -2289,9 +2292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e3cb30d5a4dd84aa9ba6693edfd592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modelUp: {fileID: 210260491}
-  _modelMid: {fileID: 1154952458}
-  _modelDown: {fileID: 1134242418}
+  _modelUp: {fileID: 210260494}
+  _modelMid: {fileID: 1154952461}
+  _modelDown: {fileID: 1134242421}
 --- !u!1 &1398671994
 GameObject:
   m_ObjectHideFlags: 0

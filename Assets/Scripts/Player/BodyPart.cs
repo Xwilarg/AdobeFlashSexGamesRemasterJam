@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FlashSexJam.Enemy;
+using UnityEngine;
 
 namespace FlashSexJam.Player
 {
@@ -10,11 +11,12 @@ namespace FlashSexJam.Player
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Enemy"))
+            if (collision.CompareTag("Enemy") && Owner.gameObject.activeInHierarchy)
             {
                 if (!Owner.TryBreakCloth(Type))
                 {
-                    Debug.Log("ohno");
+                    Owner.gameObject.SetActive(false);
+                    Instantiate(collision.GetComponent<EnemyController>().HScene, Owner.transform.position, Quaternion.identity);
                 }
             }
         }

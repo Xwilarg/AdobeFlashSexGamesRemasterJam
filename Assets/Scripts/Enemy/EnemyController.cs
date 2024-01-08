@@ -5,6 +5,10 @@ namespace FlashSexJam.Enemy
 {
     public class EnemyController : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject _hScene;
+        public GameObject HScene => _hScene;
+
         private Rigidbody2D _rb;
 
         private void Awake()
