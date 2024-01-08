@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 208508825}
+  _type: 1
 --- !u!60 &66932018
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 1247369714}
+  _type: 2
 --- !u!1 &88367352
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 0}
+  _type: 0
 --- !u!60 &125674355
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -620,6 +620,7 @@ GameObject:
   m_Component:
   - component: {fileID: 208508827}
   - component: {fileID: 208508826}
+  - component: {fileID: 208508828}
   m_Layer: 0
   m_Name: Demon Girl Top
   m_TagString: Untagged
@@ -694,6 +695,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1815728459}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &208508828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208508825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9772fa51720e294a9a7a8d2979d7027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: 1
 --- !u!1 &210260491
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &210260492
 Transform:
   m_ObjectHideFlags: 0
@@ -1346,7 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 1989088892}
+  _type: 1
 --- !u!1 &874646790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1134242419
 Transform:
   m_ObjectHideFlags: 0
@@ -1697,7 +1711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 1398671994}
+  _type: 2
 --- !u!60 &1192218769
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1867,6 +1881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1247369715}
   - component: {fileID: 1247369716}
+  - component: {fileID: 1247369717}
   m_Layer: 0
   m_Name: Demon Girl Skirt
   m_TagString: Untagged
@@ -1941,6 +1956,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1247369717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247369714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9772fa51720e294a9a7a8d2979d7027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: 2
 --- !u!1 &1292221223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2256,6 +2284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398671996}
   - component: {fileID: 1398671995}
+  - component: {fileID: 1398671997}
   m_Layer: 0
   m_Name: Demon Girl Skirt
   m_TagString: Untagged
@@ -2330,6 +2359,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1824771574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1398671997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398671994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9772fa51720e294a9a7a8d2979d7027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: 2
 --- !u!1 &1430165255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1470041348}
   - component: {fileID: 1470041347}
+  - component: {fileID: 1470041349}
   m_Layer: 0
   m_Name: Demon Girl Top
   m_TagString: Untagged
@@ -2447,6 +2490,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1824771574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1470041349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470041346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9772fa51720e294a9a7a8d2979d7027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: 1
 --- !u!1 &1526807311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,7 +2579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 1470041346}
+  _type: 1
 --- !u!60 &1618490175
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2682,7 +2738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 0}
+  _type: 0
 --- !u!1 &1684930250
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,7 +2784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 2126483599}
+  _type: 2
 --- !u!60 &1684930253
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2898,7 +2954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c869df7bbf8b24bb23cae6b62f7987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clothPart: {fileID: 0}
+  _type: 0
 --- !u!60 &1856842978
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2963,6 +3019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1989088893}
   - component: {fileID: 1989088894}
+  - component: {fileID: 1989088895}
   m_Layer: 0
   m_Name: Demon Girl Top
   m_TagString: Untagged
@@ -3037,6 +3094,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1989088895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989088892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9772fa51720e294a9a7a8d2979d7027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: 1
 --- !u!1 &2023646158
 GameObject:
   m_ObjectHideFlags: 0
@@ -3080,6 +3150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2126483601}
   - component: {fileID: 2126483600}
+  - component: {fileID: 2126483602}
   m_Layer: 0
   m_Name: Demon Girl Skirt
   m_TagString: Untagged
@@ -3154,6 +3225,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1815728459}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2126483602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126483599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9772fa51720e294a9a7a8d2979d7027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

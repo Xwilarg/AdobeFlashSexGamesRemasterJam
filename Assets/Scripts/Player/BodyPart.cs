@@ -7,22 +7,24 @@ namespace FlashSexJam.Player
         public PlayerController Owner { set; private get; }
 
         [SerializeField]
-        private GameObject _clothPart;
+        private BodyPartType _type;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Enemy"))
             {
-                if (_clothPart != null)
-                {
-                    Destroy(_clothPart);
-                    _clothPart = null;
-                }
-                else
+                if (!Owner.TryBreakCloth(_type))
                 {
                     Debug.Log("ohno");
                 }
             }
         }
+    }
+
+    public enum BodyPartType
+    {
+        Head,
+        UpperBody,
+        LowerBody
     }
 }
