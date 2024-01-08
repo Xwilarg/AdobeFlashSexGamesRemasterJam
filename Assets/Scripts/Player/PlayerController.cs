@@ -11,7 +11,7 @@ namespace FlashSexJam.Player
         private float _xMov;
 
         [SerializeField]
-        private GameObject _modelUp, _modelMid, _modelDown;
+        private PositionData _modelUp, _modelMid, _modelDown;
 
         private readonly Dictionary<BodyPartType, List<GameObject>> _clothes = new()
         {
@@ -22,16 +22,13 @@ namespace FlashSexJam.Player
 
         private void Awake()
         {
-            foreach (var bp in GetComponentsInChildren<BodyPart>())
+            var models = new[] { _modelUp, _modelMid, _modelDown };
+            foreach (var m in models)
             {
-                bp.Owner = this;
+                var (UpperCloth, LowerCloth) = m.Init(this);
+                _clothes[BodyPartType.UpperBody].Add(UpperCloth);
+                _clothes[BodyPartType.LowerBody].Add(LowerCloth);
             }
-            foreach (var c in GetComponentsInChildren<Cloth>())
-            {
-                _clothes[c.Owner].Add(c.gameObject);
-            }
-            _modelUp.SetActive(false);
-            _modelDown.SetActive(false);
         }
 
         private void Update()
@@ -58,13 +55,13 @@ namespace FlashSexJam.Player
         {
             var mov = value.ReadValue<Vector2>();
 
-            _modelUp.SetActive(false);
-            _modelMid.SetActive(false);
-            _modelDown.SetActive(false);
+            _modelUp.gameObject.SetActive(false);
+            _modelMid.gameObject.SetActive(false);
+            _modelDown.gameObject.SetActive(false);
 
-            if (mov.y > 0) _modelUp.SetActive(true);
-            else if (mov.y < 0) _modelDown.SetActive(true);
-            else _modelMid.SetActive(true);
+            if (mov.y > 0) _modelUp.gameObject.SetActive(true);
+            else if (mov.y < 0) _modelDown.gameObject.SetActive(true);
+            else _modelMid.gameObject.SetActive(true);
 
             _xMov = mov.x;
         }

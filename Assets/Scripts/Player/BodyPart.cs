@@ -6,14 +6,13 @@ namespace FlashSexJam.Player
     {
         public PlayerController Owner { set; private get; }
 
-        [SerializeField]
-        private BodyPartType _type;
+        public BodyPartType Type { set; private get; }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Enemy"))
             {
-                if (!Owner.TryBreakCloth(_type))
+                if (!Owner.TryBreakCloth(Type))
                 {
                     Debug.Log("ohno");
                 }
