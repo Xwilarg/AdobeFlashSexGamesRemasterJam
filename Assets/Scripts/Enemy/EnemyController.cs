@@ -9,6 +9,9 @@ namespace FlashSexJam.Enemy
         private GameObject _hScene;
         public GameObject HScene => _hScene;
 
+        [SerializeField]
+        private float _speedOffset;
+
         private Rigidbody2D _rb;
 
         private void Awake()
@@ -18,7 +21,7 @@ namespace FlashSexJam.Enemy
 
         private void Update()
         {
-            _rb.velocity = Vector3.left * GameManager.Instance.Speed;
+            _rb.velocity = Vector3.left * (GameManager.Instance.Speed + _speedOffset);
         }
     }
 }

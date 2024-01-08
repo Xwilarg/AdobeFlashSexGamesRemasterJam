@@ -45,7 +45,7 @@ namespace FlashSexJam.Player
             }
             foreach (var c in _clothes[bodyPart])
             {
-                Destroy(c.gameObject);
+                Destroy(c);
             }
             _clothes[bodyPart].Clear();
             return true;

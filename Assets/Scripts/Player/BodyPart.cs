@@ -1,4 +1,5 @@
 ﻿using FlashSexJam.Enemy;
+using FlashSexJam.Manager;
 using UnityEngine;
 
 namespace FlashSexJam.Player
@@ -17,6 +18,7 @@ namespace FlashSexJam.Player
                 {
                     Owner.gameObject.SetActive(false);
                     Instantiate(collision.GetComponent<EnemyController>().HScene, Owner.transform.position, Quaternion.identity);
+                    GameManager.Instance.Speed = 0f;
                 }
             }
         }

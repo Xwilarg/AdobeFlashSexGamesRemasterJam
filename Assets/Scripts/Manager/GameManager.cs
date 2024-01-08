@@ -16,7 +16,7 @@ namespace FlashSexJam.Manager
 
         private float _spawnTimer;
 
-        public float Speed { private set; get; }
+        public float Speed { set; get; }
 
         private ButtplugClient _client;
 
