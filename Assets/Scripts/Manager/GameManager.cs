@@ -38,13 +38,14 @@ namespace FlashSexJam.Manager
         {
             _spawnTimer -= Time.deltaTime * Speed; // Timer depends of which speed we are going to
             _progress += Time.deltaTime * Speed;
+            _progressBoss += Time.deltaTime * _info.BossSpeed;
 
             _progressPlayerBar.localScale = new(_progress / _info.DestinationDistance, 1f, 1f);
             _progressBossBar.localScale = new(_progressBoss / _info.DestinationDistance, 1f, 1f);
 
             if (_spawnTimer <= 0)
             {
-                Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], _spawnPoint.position + (Vector3.up * Random.Range(-2f, 2f)), Quaternion.identity);
+                Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], _spawnPoint.position + (Vector3.up * Random.Range(-4f, 4f)), Quaternion.identity);
 
                 ResetSpawnTimer();
             }
