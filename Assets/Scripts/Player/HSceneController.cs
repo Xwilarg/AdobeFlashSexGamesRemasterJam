@@ -1,4 +1,5 @@
 ﻿using FlashSexJam.Manager;
+using FlashSexJam.SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,15 +7,50 @@ namespace FlashSexJam.Player
 {
     public class HSceneController : MonoBehaviour
     {
+        [SerializeField]
+        private PlayerInfo _info;
+
         private PlayerController _pc;
-        private int _strokeCount;
+        private float _strokeCount;
 
         private GameObject _hSceneObj;
+
+        private float _orgasm, _energy;
 
         private void Awake()
         {
             _pc = GetComponentInChildren<PlayerController>();
             _pc.HScene = this;
+
+            _orgasm = _info.BaseOrgasm;
+            _energy = _info.BaseEnergy;
+        }
+
+        private void Update()
+        {
+            if (_strokeCount > 0f)
+            {
+                _strokeCount -= Time.deltaTime;
+                _orgasm -= Time.deltaTime;
+
+                if (_orgasm <= 0f)
+                {
+                    _orgasm = _info.BaseOrgasm;
+                    _energy -= _info.BaseEnergy / 2f;
+
+                    if (_energy <= 0f)
+                    {
+                        // TODO: Game Over
+                    }
+                }
+
+                UpdateUI();
+            }
+        }
+
+        private void UpdateUI()
+        {
+
         }
 
         public void PlayHScene(GameObject hSceneObj)
@@ -36,11 +72,11 @@ namespace FlashSexJam.Player
 
         public void OnStoke(InputAction.CallbackContext value)
         {
-            if (value.performed && _strokeCount > 0)
+            if (value.performed && _strokeCount > 0f)
             {
                 _strokeCount--;
 
-                if (_strokeCount == 0)
+                if (_strokeCount <= 0f)
                 {
                     StopHScene();
                 }

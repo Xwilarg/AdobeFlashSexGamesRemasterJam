@@ -1,4 +1,5 @@
 using FlashSexJam.Manager;
+using FlashSexJam.SO;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
