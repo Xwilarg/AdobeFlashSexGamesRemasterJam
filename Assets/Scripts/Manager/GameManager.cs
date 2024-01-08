@@ -14,7 +14,12 @@ namespace FlashSexJam.Manager
         [SerializeField]
         private Transform _spawnPoint;
 
+        [SerializeField]
+        private RectTransform _progressPlayerBar, _progressBossBar;
+
         private float _spawnTimer;
+
+        private float _progress, _progressBoss;
 
         public float Speed { private set; get; }
 
@@ -24,6 +29,7 @@ namespace FlashSexJam.Manager
         {
             Instance = this;
             Speed = _info.MinSpeed;
+            _progressBoss = -_info.BossNegativeOffset;
 
             ResetSpawnTimer();
         }
@@ -31,6 +37,10 @@ namespace FlashSexJam.Manager
         private void Update()
         {
             _spawnTimer -= Time.deltaTime * Speed; // Timer depends of which speed we are going to
+            _progress += Time.deltaTime * Speed;
+
+            _progressPlayerBar.localScale = new(_progress / _info.DestinationDistance, 1f, 1f);
+            _progressBossBar.localScale = new(_progressBoss / _info.DestinationDistance, 1f, 1f);
 
             if (_spawnTimer <= 0)
             {
