@@ -1,5 +1,4 @@
 ﻿using FlashSexJam.Enemy;
-using FlashSexJam.Manager;
 using UnityEngine;
 
 namespace FlashSexJam.Player
@@ -18,8 +17,7 @@ namespace FlashSexJam.Player
                 {
                     var go = Instantiate(collision.GetComponent<EnemyController>().HScene, Owner.transform.position, Quaternion.identity);
                     go.GetComponent<HScenePositionData>().BreakClothes(Owner);
-                    GameManager.Instance.Speed = 0f;
-                    Owner.gameObject.SetActive(false);
+                    Owner.HScene.PlayHScene(go);
                 }
                 Destroy(collision.gameObject);
             }

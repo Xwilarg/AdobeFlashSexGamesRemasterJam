@@ -10,6 +10,8 @@ namespace FlashSexJam.Player
     {
         private float _xMov;
 
+        public HSceneController HScene { set; get; }
+
         [SerializeField]
         private PositionData _modelUp, _modelMid, _modelDown;
 

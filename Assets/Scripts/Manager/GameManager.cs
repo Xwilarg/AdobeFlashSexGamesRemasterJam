@@ -16,7 +16,7 @@ namespace FlashSexJam.Manager
 
         private float _spawnTimer;
 
-        public float Speed { set; get; }
+        public float Speed { private set; get; }
 
         private ButtplugClient _client;
 
@@ -48,6 +48,16 @@ namespace FlashSexJam.Manager
         public void IncreaseSpeed(float value)
         {
             Speed = Mathf.Clamp(Speed + (value * _info.SpeedChangeMultiplier), _info.MinSpeed, _info.MaxSpeed);
+        }
+
+        public void StopSpeed()
+        {
+            Speed = 0;
+        }
+
+        public void ResetSpeed()
+        {
+            Speed = _info.MinSpeed;
         }
     }
 }
