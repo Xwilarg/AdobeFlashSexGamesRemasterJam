@@ -12,6 +12,7 @@ namespace FlashSexJam.Player
 
         public (GameObject UpperCloth, GameObject LowerCloth) Init(PlayerController pc)
         {
+            _head.Owner = pc;
             _upperBody.Owner = pc;
             _upperBody.Type = BodyPartType.UpperBody;
             _lowerBody.Owner = pc;
