@@ -1,4 +1,5 @@
 ﻿using FlashSexJam.Enemy;
+using FlashSexJam.Manager;
 using UnityEngine;
 
 namespace FlashSexJam.Player
@@ -11,6 +12,8 @@ namespace FlashSexJam.Player
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (GameManager.Instance.DidGameEnd) return;
+
             if (collision.CompareTag("Enemy") && Owner.gameObject.activeInHierarchy)
             {
                 if (!Owner.TryBreakCloth(Type))
@@ -20,6 +23,10 @@ namespace FlashSexJam.Player
                     Owner.HScene.PlayHScene(go);
                 }
                 Destroy(collision.gameObject);
+            }
+            else if (collision.CompareTag("Boss"))
+            {
+                GameManager.Instance.TriggerGameOver();
             }
         }
     }

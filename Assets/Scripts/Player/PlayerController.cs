@@ -36,7 +36,10 @@ namespace FlashSexJam.Player
 
         private void Update()
         {
-            GameManager.Instance.IncreaseSpeed(_xMov * Time.deltaTime);
+            if (!GameManager.Instance.DidGameEnd)
+            {
+                GameManager.Instance.IncreaseSpeed(_xMov * Time.deltaTime);
+            }
         }
 
         /// <returns>false if already naked</returns>

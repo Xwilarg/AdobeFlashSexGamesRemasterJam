@@ -17,11 +17,16 @@ namespace FlashSexJam.Manager
         [SerializeField]
         private RectTransform _progressPlayerBar, _progressBossBar;
 
+        [SerializeField]
+        private Transform _wallOfTentacles;
+
         private float _spawnTimer;
 
         private float _progress, _progressBoss;
 
         public float Speed { private set; get; }
+
+        public bool DidGameEnd { private set; get; }
 
         private ButtplugClient _client;
 
@@ -40,6 +45,8 @@ namespace FlashSexJam.Manager
             _progress += Time.deltaTime * Speed;
             _progressBoss += Time.deltaTime * _info.BossSpeed;
 
+            _wallOfTentacles.position = new(_progressBoss - _progress, _wallOfTentacles.position.y);
+
             _progressPlayerBar.localScale = new(_progress / _info.DestinationDistance, 1f, 1f);
             _progressBossBar.localScale = new(_progressBoss / _info.DestinationDistance, 1f, 1f);
 
@@ -49,6 +56,11 @@ namespace FlashSexJam.Manager
 
                 ResetSpawnTimer();
             }
+        }
+
+        public void TriggerGameOver()
+        {
+            DidGameEnd = true;
         }
 
         public void ResetSpawnTimer()

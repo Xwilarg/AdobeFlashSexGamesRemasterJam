@@ -31,7 +31,7 @@ namespace FlashSexJam.Player
 
         private void Update()
         {
-            if (_strokeCount > 0f)
+            if (_strokeCount > 0f && !GameManager.Instance.DidGameEnd)
             {
                 _strokeCount -= Time.deltaTime;
                 _orgasm -= Time.deltaTime;
@@ -43,7 +43,7 @@ namespace FlashSexJam.Player
 
                     if (_energy <= 0f)
                     {
-                        // TODO: Game Over
+                        GameManager.Instance.TriggerGameOver();
                     }
                 }
 
@@ -81,7 +81,7 @@ namespace FlashSexJam.Player
 
         public void OnStoke(InputAction.CallbackContext value)
         {
-            if (value.performed && _strokeCount > 0f)
+            if (value.performed && _strokeCount > 0f && !GameManager.Instance.DidGameEnd)
             {
                 _strokeCount--;
 
