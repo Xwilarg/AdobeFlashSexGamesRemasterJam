@@ -14,9 +14,13 @@ namespace FlashSexJam.Player
         {
             if (GameManager.Instance.DidGameEnd) return;
 
-            if (collision.CompareTag("Enemy") && Owner.gameObject.activeInHierarchy)
+            if (collision.CompareTag("Enemy") && Owner.gameObject.activeInHierarchy && !Owner.IsInvulnerable)
             {
-                if (!Owner.TryBreakCloth(Type))
+                if (Owner.TryBreakCloth(Type))
+                {
+                    Owner.ToggleInvulnerabilityFrames();
+                }
+                else
                 {
                     var go = Instantiate(collision.GetComponent<EnemyController>().HScene, Owner.transform.position, Quaternion.identity);
                     go.GetComponent<HScenePositionData>().BreakClothes(Owner);

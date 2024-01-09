@@ -76,6 +76,8 @@ namespace FlashSexJam.Player
             GameManager.Instance.ResetSpeed();
             _pc.gameObject.SetActive(true);
 
+            _pc.ToggleInvulnerabilityFrames();
+
             Destroy(_hSceneObj);
         }
 

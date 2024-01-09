@@ -1,5 +1,5 @@
 using FlashSexJam.Manager;
-using FlashSexJam.SO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +15,11 @@ namespace FlashSexJam.Player
 
         [SerializeField]
         private PositionData _modelUp, _modelMid, _modelDown;
+
+        [SerializeField]
+        private GameObject _positionContainers;
+
+        public bool IsInvulnerable { private set; get; }
 
         private readonly Dictionary<BodyPartType, List<GameObject>> _clothes = new()
         {
@@ -59,6 +64,22 @@ namespace FlashSexJam.Player
 
         public bool IsTopBodyBroken => !_clothes[BodyPartType.UpperBody].Any();
         public bool IsLowerBodyBroken => !_clothes[BodyPartType.LowerBody].Any();
+
+        public void ToggleInvulnerabilityFrames()
+        {
+            IsInvulnerable = true;
+            StartCoroutine(PlayInvulnerabilityFrames());
+        }
+        private IEnumerator PlayInvulnerabilityFrames()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                yield return new WaitForSeconds(.3f);
+                _positionContainers.SetActive(!_positionContainers.activeInHierarchy);
+            }
+            _positionContainers.SetActive(true);
+            IsInvulnerable = false;
+        }
 
         public void OnMove(InputAction.CallbackContext value)
         {
