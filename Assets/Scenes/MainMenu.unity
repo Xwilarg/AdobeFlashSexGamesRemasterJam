@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 662510921}
   - component: {fileID: 662510923}
   - component: {fileID: 662510922}
+  - component: {fileID: 662510924}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Credits
+  m_text: '{credits}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 256a21726bee6e149b2502d2f4a8e975, type: 2}
   m_sharedMaterial: {fileID: -1668107512341694187, guid: 256a21726bee6e149b2502d2f4a8e975, type: 2}
@@ -347,6 +348,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662510920}
   m_CullTransparentMesh: 1
+--- !u!114 &662510924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662510920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442ea30f7bf7f547b8eb15ec67db790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &848929570
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1289654439
 RectTransform:
   m_ObjectHideFlags: 0
@@ -962,6 +975,7 @@ GameObject:
   - component: {fileID: 1434428605}
   - component: {fileID: 1434428607}
   - component: {fileID: 1434428606}
+  - component: {fileID: 1434428608}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1008,7 +1022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: '{play}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 256a21726bee6e149b2502d2f4a8e975, type: 2}
   m_sharedMaterial: {fileID: -1668107512341694187, guid: 256a21726bee6e149b2502d2f4a8e975, type: 2}
@@ -1085,6 +1099,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434428604}
   m_CullTransparentMesh: 1
+--- !u!114 &1434428608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434428604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442ea30f7bf7f547b8eb15ec67db790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1595526772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1166,7 @@ GameObject:
   - component: {fileID: 1742709085}
   - component: {fileID: 1742709087}
   - component: {fileID: 1742709086}
+  - component: {fileID: 1742709088}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1186,8 +1213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Art:\nSweaterWeather \n\nProgramming:\nZirk\n\nFont Stopbuck by Khurasan
-    \r\n\nGame made inspired by \"Demon Girl\" by LineMarvel\n\nhttps://www.newgrounds.com/portal/view/290300"
+  m_text: "{creditsArt}:\nSweaterWeather \n\n{creditsProg}:\nZirk\n\n{creditsFont}\n\n{creditsInspire}\n\nhttps://www.newgrounds.com/portal/view/290300"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 256a21726bee6e149b2502d2f4a8e975, type: 2}
   m_sharedMaterial: {fileID: -1668107512341694187, guid: 256a21726bee6e149b2502d2f4a8e975, type: 2}
@@ -1264,6 +1290,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742709084}
   m_CullTransparentMesh: 1
+--- !u!114 &1742709088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742709084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442ea30f7bf7f547b8eb15ec67db790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1761686279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1568,6 +1606,7 @@ GameObject:
   - component: {fileID: 1927316432}
   - component: {fileID: 1927316434}
   - component: {fileID: 1927316433}
+  - component: {fileID: 1927316435}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -1614,7 +1653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Credits
+  m_text: '{credits}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 256a21726bee6e149b2502d2f4a8e975, type: 2}
   m_sharedMaterial: {fileID: -1668107512341694187, guid: 256a21726bee6e149b2502d2f4a8e975, type: 2}
@@ -1691,6 +1730,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927316431}
   m_CullTransparentMesh: 1
+--- !u!114 &1927316435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927316431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442ea30f7bf7f547b8eb15ec67db790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2128502098
 GameObject:
   m_ObjectHideFlags: 0
