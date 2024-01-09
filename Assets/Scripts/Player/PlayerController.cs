@@ -62,6 +62,8 @@ namespace FlashSexJam.Player
 
         public void OnMove(InputAction.CallbackContext value)
         {
+            if (GameManager.Instance.DidGameEnd) return;
+
             var mov = value.ReadValue<Vector2>();
 
             _modelUp.gameObject.SetActive(false);

@@ -1,6 +1,7 @@
 ﻿using FlashSexJam.SO;
 using Buttplug.Client;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FlashSexJam.Manager
 {
@@ -19,6 +20,15 @@ namespace FlashSexJam.Manager
 
         [SerializeField]
         private Transform _wallOfTentacles;
+
+        [SerializeField]
+        private GameObject _gameOverContainer;
+
+        [SerializeField]
+        private Image _gameOverBackground;
+
+        private float _gameOverTimer;
+        private const float _gameOverTimerRef = 3f;
 
         private float _spawnTimer;
 
@@ -56,11 +66,22 @@ namespace FlashSexJam.Manager
 
                 ResetSpawnTimer();
             }
+
+            if (DidGameEnd && _gameOverTimer < _gameOverTimerRef)
+            {
+                _gameOverTimer += Time.deltaTime;
+
+                var c = _gameOverBackground.color;
+                _gameOverBackground.color = new(c.r, c.g, c.b, Mathf.Clamp01(_gameOverTimer / _gameOverTimerRef));
+            }
         }
 
         public void TriggerGameOver()
         {
+            if (DidGameEnd) return; // Just in case
+
             DidGameEnd = true;
+            _gameOverContainer.SetActive(true);
         }
 
         public void ResetSpawnTimer()
