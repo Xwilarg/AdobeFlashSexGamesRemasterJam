@@ -19,6 +19,13 @@ namespace FlashSexJam.Player
         [SerializeField]
         private GameObject _positionContainers;
 
+        [SerializeField]
+        private GameObject _attackPrefab;
+
+        private Camera _cam;
+
+        private int _attackCount = 3;
+
         public bool IsInvulnerable { private set; get; }
 
         private readonly Dictionary<BodyPartType, List<GameObject>> _clothes = new()
@@ -30,6 +37,8 @@ namespace FlashSexJam.Player
 
         private void Awake()
         {
+            _cam = Camera.main;
+
             var models = new[] { _modelUp, _modelMid, _modelDown };
             foreach (var m in models)
             {
@@ -81,6 +90,16 @@ namespace FlashSexJam.Player
             IsInvulnerable = false;
         }
 
+        private Bounds CalculateBounds()
+        {
+            float screenAspect = Screen.width / (float)Screen.height;
+            float cameraHeight = _cam.orthographicSize * 2;
+            Bounds bounds = new(
+                _cam.transform.position,
+                new Vector3(cameraHeight * screenAspect, cameraHeight, 0));
+            return bounds;
+        }
+
         public void OnMove(InputAction.CallbackContext value)
         {
             if (GameManager.Instance.DidGameEnd) return;
@@ -97,6 +116,19 @@ namespace FlashSexJam.Player
 
             _xMov = mov.x;
         }
-    }
 
+        public void OnAttack(InputAction.CallbackContext value)
+        {
+            if (GameManager.Instance.DidGameEnd) return;
+
+            if (value.performed && gameObject.activeInHierarchy && _attackCount > 0)
+            {
+                _attackCount = 0;
+
+                var bounds = CalculateBounds();
+                var atk = Instantiate(_attackPrefab, new Vector2(bounds.min.x, 0f), Quaternion.identity);
+                atk.GetComponent<PlayerAttack>().MaxX = bounds.max.x;
+            }
+        }
+    }
 }

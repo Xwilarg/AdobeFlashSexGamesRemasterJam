@@ -1602,6 +1602,7 @@ MonoBehaviour:
   _modelMid: {fileID: 1154952461}
   _modelDown: {fileID: 1134242421}
   _positionContainers: {fileID: 547652429}
+  _attackPrefab: {fileID: 7300705520204920369, guid: 0d5fb269d27a92f40a8ea058cc44d587, type: 3}
 --- !u!1 &681942397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,6 +2866,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1322468670}
         m_TargetAssemblyTypeName: FlashSexJam.Player.HSceneController, ButtPlugAssemblyDef
         m_MethodName: OnStoke
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 593013219}
+        m_TargetAssemblyTypeName: FlashSexJam.Player.PlayerController, ButtPlugAssemblyDef
+        m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
