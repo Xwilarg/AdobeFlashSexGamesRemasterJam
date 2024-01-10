@@ -2,6 +2,7 @@ using FlashSexJam.Manager;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +22,9 @@ namespace FlashSexJam.Player
 
         [SerializeField]
         private GameObject _attackPrefab;
+
+        [SerializeField]
+        private TMP_Text _attackCountText;
 
         private Camera _cam;
 
@@ -46,6 +50,8 @@ namespace FlashSexJam.Player
                 _clothes[BodyPartType.UpperBody].Add(UpperCloth);
                 _clothes[BodyPartType.LowerBody].Add(LowerCloth);
             }
+
+            _attackCountText.text = _attackCount.ToString();
         }
 
         private void Update()
@@ -121,9 +127,10 @@ namespace FlashSexJam.Player
         {
             if (GameManager.Instance.DidGameEnd) return;
 
-            if (value.performed && gameObject.activeInHierarchy && _attackCount > 0)
+            if (value.performed && !IsInvulnerable && gameObject.activeInHierarchy && _attackCount > 0)
             {
-                _attackCount = 0;
+                _attackCount--;
+                _attackCountText.text = _attackCount.ToString();
 
                 var bounds = CalculateBounds();
                 var atk = Instantiate(_attackPrefab, new Vector2(bounds.min.x, 0f), Quaternion.identity);
