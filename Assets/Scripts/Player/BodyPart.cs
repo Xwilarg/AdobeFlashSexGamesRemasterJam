@@ -22,7 +22,13 @@ namespace FlashSexJam.Player
                 }
                 else
                 {
-                    var go = Instantiate(collision.GetComponent<EnemyController>().HScene, Owner.transform.position, Quaternion.identity);
+                    var prefab = collision.GetComponent<EnemyController>().GetHScene(Type);
+                    if (prefab == null)
+                    {
+                        Debug.LogWarning($"Animation for {Type} was null");
+                        return;
+                    }
+                    var go = Instantiate(prefab, Owner.transform.position, Quaternion.identity);
                     go.GetComponent<HScenePositionData>().BreakClothes(Owner);
                     Owner.HScene.PlayHScene(go);
                 }

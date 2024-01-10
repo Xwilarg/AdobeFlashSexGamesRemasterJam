@@ -1,4 +1,5 @@
 ﻿using FlashSexJam.Manager;
+using FlashSexJam.Player;
 using UnityEngine;
 
 namespace FlashSexJam.Enemy
@@ -6,8 +7,17 @@ namespace FlashSexJam.Enemy
     public class EnemyController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _hScene;
-        public GameObject HScene => _hScene;
+        private GameObject _hSceneHead, _hSceneUpperBody, _hSceneLowerBody;
+        public GameObject GetHScene(BodyPartType type)
+        {
+            return type switch
+            {
+                BodyPartType.Head => _hSceneHead,
+                BodyPartType.UpperBody => _hSceneUpperBody,
+                BodyPartType.LowerBody => _hSceneLowerBody,
+                _ => null
+            };
+        }
 
         [SerializeField]
         private float _speedOffset;

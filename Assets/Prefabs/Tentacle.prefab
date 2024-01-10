@@ -148,7 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93399cae62148194ca4758d9e8472162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hScene: {fileID: 3535461754944050207, guid: a952349eacf3bca4fa8b7faeabcdd1f3, type: 3}
+  _hSceneHead: {fileID: 3535461754944050207, guid: a952349eacf3bca4fa8b7faeabcdd1f3, type: 3}
+  _hSceneUpperBody: {fileID: 0}
+  _hSceneLowerBody: {fileID: 3535461754944050207, guid: 34fb68c64f3657d4ea893c083d3c5aa6, type: 3}
   _speedOffset: 2
 --- !u!61 &7554450814405431278
 BoxCollider2D:
