@@ -1,5 +1,4 @@
 ﻿using FlashSexJam.Persistency;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,10 +8,10 @@ namespace FlashSexJam.Achievement
     public class AchievementManager : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _achievementPanel;
+        private Transform _container;
 
         [SerializeField]
-        private TMP_Text _title;
+        private GameObject _prefab;
 
         public static AchievementManager Instance { get; private set; }
 
@@ -27,20 +26,15 @@ namespace FlashSexJam.Achievement
             {
                 return;
             }
+            var instance = Instantiate(_prefab, _container);
+
             var data = Achievements[achievement];
-            _title.text = data.Name;
-            _achievementPanel.SetActive(true);
+            instance.GetComponentInChildren<TMP_Text>().text = data.Name;
 
             PersistencyManager.Instance.SaveData.Unlock(achievement);
             PersistencyManager.Instance.Save();
 
-            StartCoroutine(WaitAndClosePopup());
-        }
-
-        private IEnumerator WaitAndClosePopup()
-        {
-            yield return new WaitForSeconds(5f);
-            _achievementPanel.SetActive(false);
+            Destroy(instance, 5f);
         }
 
         public Dictionary<AchievementID, Achievement> Achievements { get; } = new()
