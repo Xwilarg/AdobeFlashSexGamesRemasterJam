@@ -30,6 +30,9 @@ namespace FlashSexJam.Manager
         [SerializeField]
         private Image _gameOverBackground;
 
+        [SerializeField]
+        private GameObject _victoryContainer;
+
         private float _gameOverTimer;
         private const float _gameOverTimerRef = 3f;
 
@@ -80,7 +83,7 @@ namespace FlashSexJam.Manager
                 if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);
                 if (hasNoHScenes && hasClothes && hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryPerfect);
 
-                StartCoroutine(WaitAndDisplayVictory());
+                _victoryContainer.SetActive(true);
                 return;
             }
 
@@ -98,12 +101,6 @@ namespace FlashSexJam.Manager
                 var c = _gameOverBackground.color;
                 _gameOverBackground.color = new(c.r, c.g, c.b, Mathf.Clamp01(_gameOverTimer / _gameOverTimerRef));
             }
-        }
-
-        private IEnumerator WaitAndDisplayVictory()
-        {
-            yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("MainMenu"); // TODO: Proper Victory
         }
 
         public void TriggerGameOver()
