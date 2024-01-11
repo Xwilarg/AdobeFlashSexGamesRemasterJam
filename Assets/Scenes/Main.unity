@@ -1650,7 +1650,7 @@ MonoBehaviour:
   _modelDown: {fileID: 1134242421}
   _positionContainers: {fileID: 547652429}
   _attackPrefab: {fileID: 7300705520204920369, guid: 0d5fb269d27a92f40a8ea058cc44d587, type: 3}
-  _attackCountText: {fileID: 0}
+  _attackCountText: {fileID: 668073954}
 --- !u!1 &668073952
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,7 +53,7 @@ namespace FlashSexJam.Manager
         {
             Instance = this;
 
-            SceneManager.LoadScene("AchievementManager");
+            SceneManager.LoadScene("AchievementManager", LoadSceneMode.Additive);
 
             Speed = _info.MinSpeed;
             _progressBoss = -_info.BossNegativeOffset;
