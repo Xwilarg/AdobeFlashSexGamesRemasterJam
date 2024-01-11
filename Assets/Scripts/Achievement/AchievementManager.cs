@@ -1,4 +1,5 @@
 ﻿using FlashSexJam.Persistency;
+using FlashSexJam.Translation;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace FlashSexJam.Achievement
             var instance = Instantiate(_prefab, _container);
 
             var data = Achievements[achievement];
-            instance.GetComponentInChildren<TMP_Text>().text = data.Name;
+            instance.GetComponentInChildren<TMP_Text>().text = Translate.Instance.Tr(data.Name);
 
             PersistencyManager.Instance.SaveData.Unlock(achievement);
             PersistencyManager.Instance.Save();
@@ -39,11 +40,11 @@ namespace FlashSexJam.Achievement
 
         public Dictionary<AchievementID, Achievement> Achievements { get; } = new()
         {
-            { AchievementID.Victory, new() { Name = "One step toward purity", Description = "Complete a level" } },
-            { AchievementID.VictoryNoHScene, new() { Name = "Stainless", Description = "Complete a level without triggering any lewd scene" } },
-            { AchievementID.VictoryNoClothDamage, new() { Name = "Top fashion", Description = "Complete a level without loosing any cloth" } },
-            { AchievementID.VictoryFullPower, new() { Name = "3% of my real power", Description = "Complete a level without using your power" } },
-            { AchievementID.VictoryPerfect, new() { Name = "Katabasis", Description = "Complete a level without triggering any lewd scene nor loosing cloth, and without using your power" } }
+            { AchievementID.Victory, new() { Name = "achVictoryName", Description = "achVictoryDesc" } },
+            { AchievementID.VictoryNoHScene, new() { Name = "achVictoryNoHSceneName", Description = "achVictoryNoHSceneDesc" } },
+            { AchievementID.VictoryNoClothDamage, new() { Name = "achVictoryNoClothDamageName", Description = "achVictoryNoClothDamageDesc" } },
+            { AchievementID.VictoryFullPower, new() { Name = "achVictoryFullPowerName", Description = "achVictoryFullPowerDesc" } },
+            { AchievementID.VictoryPerfect, new() { Name = "achVictoryPerfectName", Description = "achVictoryPerfectDesc" } }
         };
     }
 

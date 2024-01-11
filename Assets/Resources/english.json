@@ -13,5 +13,16 @@
     "creditsArt": "Art",
     "creditsProg": "Programming",
     "creditsFont": "Font Stopbuck by Khurasan",
-    "creditsInspire": "Game inspired by \"Demon Girl\" from LineMarvel"
+    "creditsInspire": "Game inspired by \"Demon Girl\" from LineMarvel",
+
+    "achVictoryName": "One Step Toward Purity",
+    "achVictoryDesc": "Complete a level",
+    "achVictoryNoHSceneName": "Stainless",
+    "achVictoryNoHSceneDesc": "Complete a level without triggering any lewd scene",
+    "achVictoryNoClothDamageName": "Top Fashion",
+    "achVictoryNoClothDamageDesc": "Complete a level without loosing any cloth",
+    "achVictoryFullPowerName": "3% of my Real Power",
+    "achVictoryFullPowerDesc": "Complete a level without using your power",
+    "achVictoryPerfectName": "Katabasis",
+    "achVictoryPerfectDesc": "Complete a level without triggering any lewd scene nor loosing cloth, and without using your power"
 }
