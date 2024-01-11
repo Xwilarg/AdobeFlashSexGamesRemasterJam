@@ -2,6 +2,7 @@
 using Buttplug.Client;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace FlashSexJam.Manager
 {
@@ -43,6 +44,9 @@ namespace FlashSexJam.Manager
         private void Awake()
         {
             Instance = this;
+
+            SceneManager.LoadScene("AchievementManager");
+
             Speed = _info.MinSpeed;
             _progressBoss = -_info.BossNegativeOffset;
 
