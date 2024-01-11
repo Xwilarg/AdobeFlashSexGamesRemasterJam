@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using FlashSexJam.Achievement;
 using System.Collections;
+using FlashSexJam.Player;
 
 namespace FlashSexJam.Manager
 {
@@ -44,6 +45,8 @@ namespace FlashSexJam.Manager
 
         public bool DidGameEnd { private set; get; }
 
+        public PlayerController Player { set; private get; }
+
         private ButtplugClient _client;
 
         private void Awake()
@@ -73,9 +76,9 @@ namespace FlashSexJam.Manager
             {
                 DidGameEnd = true;
 
-                var hasClothes = false;
-                var hasPower = false;
-                var hasNoHScenes = false;
+                var hasClothes = Player.IsFullClothed;
+                var hasPower = Player.IsFullyPowered;
+                var hasNoHScenes = Player.GotHScene;
 
                 AchievementManager.Instance.Unlock(AchievementID.Victory);
                 if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);

@@ -32,6 +32,10 @@ namespace FlashSexJam.Player
 
         public bool IsInvulnerable { private set; get; }
 
+        public bool IsFullClothed => _clothes[BodyPartType.LowerBody].Any() && _clothes[BodyPartType.UpperBody].Any();
+        public bool IsFullyPowered => _attackCount == 3;
+        public bool GotHScene { set; get; }
+
         private readonly Dictionary<BodyPartType, List<GameObject>> _clothes = new()
         {
             { BodyPartType.Head, new() },
@@ -52,6 +56,11 @@ namespace FlashSexJam.Player
             }
 
             _attackCountText.text = _attackCount.ToString();
+        }
+
+        private void Start()
+        {
+            GameManager.Instance.Player = this;
         }
 
         private void Update()

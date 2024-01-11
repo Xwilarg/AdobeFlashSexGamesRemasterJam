@@ -69,6 +69,8 @@ namespace FlashSexJam.Player
             GameManager.Instance.StopSpeed();
             _pc.gameObject.SetActive(false);
             _strokeCount = Random.Range(20, 30);
+
+            _pc.GotHScene = true;
         }
 
         public void StopHScene()
