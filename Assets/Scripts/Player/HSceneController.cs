@@ -95,8 +95,12 @@ namespace FlashSexJam.Player
             _pc.GotHScene = true;
         }
 
-        public void StopHScene()
+        public IEnumerator StopHScene()
         {
+            while (_isOrgasming)
+            {
+                yield return new WaitForEndOfFrame();
+            }
             GameManager.Instance.ResetSpeed();
             _pc.gameObject.SetActive(true);
 
