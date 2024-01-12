@@ -135,7 +135,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7554450814405431278
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,4 +196,4 @@ MonoBehaviour:
   _hSceneHead: {fileID: 3535461754944050207, guid: a952349eacf3bca4fa8b7faeabcdd1f3, type: 3}
   _hSceneUpperBody: {fileID: 0}
   _hSceneLowerBody: {fileID: 3535461754944050207, guid: 34fb68c64f3657d4ea893c083d3c5aa6, type: 3}
-  _speedOffset: 1
+  _xSpeedOffset: 1

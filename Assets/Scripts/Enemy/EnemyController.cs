@@ -1,4 +1,5 @@
-﻿using FlashSexJam.Player;
+﻿using FlashSexJam.Manager;
+using FlashSexJam.Player;
 using UnityEngine;
 
 namespace FlashSexJam.Enemy
@@ -7,6 +8,10 @@ namespace FlashSexJam.Enemy
     {
         [SerializeField]
         private GameObject _hSceneHead, _hSceneUpperBody, _hSceneLowerBody;
+
+        [SerializeField]
+        private float _xSpeedOffset;
+
         public GameObject GetHScene(BodyPartType type)
         {
             return type switch
@@ -23,7 +28,18 @@ namespace FlashSexJam.Enemy
         protected virtual void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
+
+            var (Min, Max) = SpawnRange;
+            var yPos = Min == Max ? Min : Random.Range(Min, Max);
+            transform.Translate(Vector2.up * yPos);
         }
+
+        protected virtual void Update()
+        {
+            _rb.velocity = Vector3.left * (GameManager.Instance.Speed + _xSpeedOffset);
+        }
+
+        public abstract (float Min, float Max) SpawnRange { get; }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {

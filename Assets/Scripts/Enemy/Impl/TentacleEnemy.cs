@@ -1,18 +1,7 @@
-﻿using FlashSexJam.Manager;
-using UnityEngine;
-
-namespace FlashSexJam.Enemy.Impl
+﻿namespace FlashSexJam.Enemy.Impl
 {
     public class TentacleEnemy : EnemyController
     {
-
-        [SerializeField]
-        private float _speedOffset;
-
-
-        private void Update()
-        {
-            _rb.velocity = Vector3.left * (GameManager.Instance.Speed + _speedOffset);
-        }
+        public override (float Min, float Max) SpawnRange => (-3.5f, 3.5f);
     }
 }

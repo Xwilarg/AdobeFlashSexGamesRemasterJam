@@ -92,7 +92,7 @@ namespace FlashSexJam.Manager
 
             if (_spawnTimer <= 0)
             {
-                Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], _spawnPoint.position + (Vector3.up * Random.Range(-4f, 4f)), Quaternion.identity);
+                Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], _spawnPoint.position, Quaternion.identity);
 
                 ResetSpawnTimer();
             }
