@@ -5,7 +5,6 @@ namespace FlashSexJam.Enemy.Impl
 {
     public class LampEnemy : EnemyController
     {
-        [SerializeField]
         private Animator _lampAnim;
 
         public override (float Min, float Max) SpawnRange => (-4f, -4f);
@@ -14,6 +13,7 @@ namespace FlashSexJam.Enemy.Impl
         {
             base.Awake();
 
+            _lampAnim = GetComponentInChildren<Animator>();
             StartCoroutine(DoPatern());
         }
 

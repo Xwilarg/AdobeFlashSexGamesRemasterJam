@@ -10,7 +10,7 @@ namespace FlashSexJam.Enemy
         private GameObject _hSceneHead, _hSceneUpperBody, _hSceneLowerBody;
 
         [SerializeField]
-        private float _xSpeedOffset;
+        protected float _xSpeedOffset;
 
         public GameObject GetHScene(BodyPartType type)
         {
