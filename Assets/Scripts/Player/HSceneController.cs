@@ -14,6 +14,7 @@ namespace FlashSexJam.Player
 
         [SerializeField]
         private RectTransform _orgasmBar, _energyBar;
+        private Image _orgasmBarImage;
 
         [SerializeField]
         private Image _orgasmHeart;
@@ -31,6 +32,8 @@ namespace FlashSexJam.Player
         {
             _pc = GetComponentInChildren<PlayerController>();
             _pc.HScene = this;
+
+            _orgasmBarImage = _orgasmBar.GetComponent<Image>();
 
             _orgasm = _info.BaseOrgasm;
             _energy = _info.BaseEnergy;
@@ -55,7 +58,7 @@ namespace FlashSexJam.Player
 
                 if (_strokeCount <= 0f)
                 {
-                    StopHScene();
+                    StartCoroutine(StopHScene());
                 }
             }
         }
@@ -68,16 +71,19 @@ namespace FlashSexJam.Player
 
         private IEnumerator PlayOrgasmVfx()
         {
+            var pink = new Color(0.9811321f, 0.1990032f, 0.8889886f);
             for (int i = 0; i < 6; i++)
             {
-                _orgasmHeart.color = i % 2 == 0 ? new Color(0.9811321f, 0.1990032f, 0.8889886f) : Color.red;
-                yield return new WaitForSeconds(.1f);
+                _orgasmHeart.color = i % 2 == 0 ? pink : Color.red;
+                _orgasmBarImage.color = _orgasmHeart.color;
+                yield return new WaitForSeconds(.2f);
             }
 
             _orgasm = _info.BaseOrgasm;
             _energy -= _info.BaseEnergy / 2f;
             _isOrgasming = false;
             _orgasmHeart.color = Color.white;
+            _orgasmBarImage.color = pink;
             if (_energy <= 0f)
             {
                 GameManager.Instance.TriggerGameOver();
@@ -117,7 +123,7 @@ namespace FlashSexJam.Player
 
                 if (_strokeCount <= 0f)
                 {
-                    StopHScene();
+                    StartCoroutine(StopHScene());
                 }
             }
         }
