@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2335349353809936454}
   - component: {fileID: 3770582733356308011}
   - component: {fileID: 549839472796723103}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gas-Mid
-  m_TagString: Untagged
+  m_TagString: EnemyChildCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,9 +164,9 @@ GameObject:
   - component: {fileID: 8253511381047435023}
   - component: {fileID: -5704977543397921387}
   - component: {fileID: 7558032320112264479}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lamp
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -295,9 +295,9 @@ GameObject:
   - component: {fileID: 3812377396878413849}
   - component: {fileID: 8230345721587069435}
   - component: {fileID: 3953954636377473337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gas-Bot
-  m_TagString: Untagged
+  m_TagString: EnemyChildCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

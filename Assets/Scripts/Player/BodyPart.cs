@@ -10,29 +10,41 @@ namespace FlashSexJam.Player
 
         public BodyPartType Type { set; private get; }
 
+        private void EnemyCollide(GameObject other)
+        {
+            if (Owner.TryBreakCloth(Type))
+            {
+                Owner.ToggleInvulnerabilityFrames();
+            }
+            else
+            {
+                var prefab = other.GetComponent<EnemyController>().GetHScene(Type);
+                if (prefab == null)
+                {
+                    Debug.LogWarning($"Animation for {Type} was null");
+                    return;
+                }
+                var go = Instantiate(prefab, Owner.transform.position, Quaternion.identity);
+                go.GetComponent<HScenePositionData>().BreakClothes(Owner);
+                Owner.HScene.PlayHScene(go);
+            }
+            Destroy(other);
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (GameManager.Instance.DidGameEnd) return;
 
-            if (collision.CompareTag("Enemy") && Owner.gameObject.activeInHierarchy && !Owner.IsInvulnerable)
+            if (Owner.gameObject.activeInHierarchy && !Owner.IsInvulnerable)
             {
-                if (Owner.TryBreakCloth(Type))
+                if (collision.CompareTag("Enemy"))
                 {
-                    Owner.ToggleInvulnerabilityFrames();
+                    EnemyCollide(collision.gameObject);
                 }
-                else
+                else if (collision.CompareTag("EnemyChildCollider"))
                 {
-                    var prefab = collision.GetComponent<EnemyController>().GetHScene(Type);
-                    if (prefab == null)
-                    {
-                        Debug.LogWarning($"Animation for {Type} was null");
-                        return;
-                    }
-                    var go = Instantiate(prefab, Owner.transform.position, Quaternion.identity);
-                    go.GetComponent<HScenePositionData>().BreakClothes(Owner);
-                    Owner.HScene.PlayHScene(go);
+                    EnemyCollide(collision.transform.parent.gameObject);
                 }
-                Destroy(collision.gameObject);
             }
             else if (collision.CompareTag("Boss"))
             {
