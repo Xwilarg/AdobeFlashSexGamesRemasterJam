@@ -103,7 +103,7 @@ MonoBehaviour:
   _hSceneUpperBody: {fileID: 0}
   _hSceneLowerBody: {fileID: 3535461754944050207, guid: 887ce2a22cc14774b95ad7011ec2e38f, type: 3}
   _xSpeedOffset: 0
-  _lampAnim: {fileID: 670180140579890236}
+  _name: Lamp
 --- !u!50 &7558032320112264479
 Rigidbody2D:
   serializedVersion: 4

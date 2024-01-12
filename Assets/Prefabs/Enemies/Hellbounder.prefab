@@ -209,3 +209,4 @@ MonoBehaviour:
   _hSceneUpperBody: {fileID: 0}
   _hSceneLowerBody: {fileID: 0}
   _xSpeedOffset: 3
+  _name: Hellbounder

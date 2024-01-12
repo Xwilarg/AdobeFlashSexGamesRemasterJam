@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using FlashSexJam.Achievement;
 using System.Collections;
 using FlashSexJam.Player;
+using System.Collections.Generic;
 
 namespace FlashSexJam.Manager
 {
@@ -51,6 +52,8 @@ namespace FlashSexJam.Manager
         public PlayerController Player { set; private get; }
 
         private ButtplugClient _client;
+
+        private readonly List<int> _enemyHScenes = new();
 
         private void Awake()
         {
@@ -131,6 +134,16 @@ namespace FlashSexJam.Manager
             _maxSpeedTimer = 0f;
         }
 
+        public void PlayHScene(int id)
+        {
+            Speed = 0;
+            if (!_enemyHScenes.Contains(id))
+            {
+                _enemyHScenes.Add(id);
+                if (_enemyHScenes.Count == _info.SpawnableEnemies.Length)
+            }
+        }
+
         public void TriggerGameOver()
         {
             if (DidGameEnd) return; // Just in case
@@ -147,11 +160,6 @@ namespace FlashSexJam.Manager
         public void IncreaseSpeed(float value)
         {
             Speed = Mathf.Clamp(Speed + (value * _info.SpeedChangeMultiplier), _info.MinSpeed, _info.MaxSpeed);
-        }
-
-        public void StopSpeed()
-        {
-            Speed = 0;
         }
 
         public void ResetSpeed()

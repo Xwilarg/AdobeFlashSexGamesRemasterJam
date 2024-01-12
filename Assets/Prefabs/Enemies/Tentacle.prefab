@@ -197,3 +197,4 @@ MonoBehaviour:
   _hSceneUpperBody: {fileID: 0}
   _hSceneLowerBody: {fileID: 3535461754944050207, guid: 34fb68c64f3657d4ea893c083d3c5aa6, type: 3}
   _xSpeedOffset: 1
+  _name: Tentacle

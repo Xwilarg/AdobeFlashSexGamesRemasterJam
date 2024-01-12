@@ -19,7 +19,8 @@ namespace FlashSexJam.Player
             }
             else
             {
-                var prefab = other.GetComponent<EnemyController>().GetHScene(Type);
+                var controller = other.GetComponent<EnemyController>();
+                var prefab = controller.GetHScene(Type);
                 if (prefab == null)
                 {
                     Debug.LogWarning($"Animation for {Type} was null");
@@ -27,7 +28,7 @@ namespace FlashSexJam.Player
                 }
                 var go = Instantiate(prefab, Owner.transform.position, Quaternion.identity);
                 go.GetComponent<HScenePositionData>().BreakClothes(Owner);
-                Owner.HScene.PlayHScene(go);
+                Owner.HScene.PlayHScene(go, controller.Name.GetHashCode());
             }
             Destroy(other);
         }

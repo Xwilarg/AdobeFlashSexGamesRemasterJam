@@ -46,7 +46,8 @@ namespace FlashSexJam.Achievement
             { AchievementID.VictoryFullPower, new() { Name = "achVictoryFullPowerName", Description = "achVictoryFullPowerDesc" } },
             { AchievementID.VictoryPerfect, new() { Name = "achVictoryPerfectName", Description = "achVictoryPerfectDesc" } },
 
-            { AchievementID.MaxSpeed, new() { Name = "achMaxSpeedName", Description = "achMaxSpeedDesc" } }
+            { AchievementID.MaxSpeed, new() { Name = "achMaxSpeedName", Description = "achMaxSpeedDesc" } },
+            { AchievementID.AllHScenes, new() { Name = "achAllHScenesName", Description = "achAllHScenesDesc" } }
         };
     }
 
@@ -58,7 +59,9 @@ namespace FlashSexJam.Achievement
         VictoryFullPower,
         VictoryPerfect,
 
-        MaxSpeed
+        MaxSpeed,
+
+        AllHScenes
     }
 
     public record Achievement

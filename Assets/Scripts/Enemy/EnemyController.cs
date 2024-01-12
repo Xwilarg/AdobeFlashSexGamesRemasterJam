@@ -12,6 +12,10 @@ namespace FlashSexJam.Enemy
         [SerializeField]
         protected float _xSpeedOffset;
 
+        [SerializeField]
+        private string _name;
+        public string Name => _name;
+
         protected bool _doesMove = true;
 
         public GameObject GetHScene(BodyPartType type)

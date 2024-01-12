@@ -62,11 +62,11 @@ namespace FlashSexJam.Player
             _energyBar.localScale = new(_energy / _info.BaseEnergy, 1f, 1f);
         }
 
-        public void PlayHScene(GameObject hSceneObj)
+        public void PlayHScene(GameObject hSceneObj, int id)
         {
             _hSceneObj = hSceneObj;
 
-            GameManager.Instance.StopSpeed();
+            GameManager.Instance.PlayHScene(id);
             _pc.gameObject.SetActive(false);
             _strokeCount = Random.Range(20, 30);
 
