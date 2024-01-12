@@ -44,7 +44,9 @@ namespace FlashSexJam.Achievement
             { AchievementID.VictoryNoHScene, new() { Name = "achVictoryNoHSceneName", Description = "achVictoryNoHSceneDesc" } },
             { AchievementID.VictoryNoClothDamage, new() { Name = "achVictoryNoClothDamageName", Description = "achVictoryNoClothDamageDesc" } },
             { AchievementID.VictoryFullPower, new() { Name = "achVictoryFullPowerName", Description = "achVictoryFullPowerDesc" } },
-            { AchievementID.VictoryPerfect, new() { Name = "achVictoryPerfectName", Description = "achVictoryPerfectDesc" } }
+            { AchievementID.VictoryPerfect, new() { Name = "achVictoryPerfectName", Description = "achVictoryPerfectDesc" } },
+
+            { AchievementID.MaxSpeed, new() { Name = "achMaxSpeedName", Description = "achMaxSpeedDesc" } }
         };
     }
 
@@ -54,7 +56,9 @@ namespace FlashSexJam.Achievement
         VictoryNoHScene,
         VictoryNoClothDamage,
         VictoryFullPower,
-        VictoryPerfect
+        VictoryPerfect,
+
+        MaxSpeed
     }
 
     public record Achievement

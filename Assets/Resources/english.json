@@ -24,5 +24,7 @@
     "achVictoryFullPowerName": "3% of my Real Power",
     "achVictoryFullPowerDesc": "Complete a level without using your power",
     "achVictoryPerfectName": "Katabasis",
-    "achVictoryPerfectDesc": "Complete a level without triggering any lewd scene nor loosing cloth, and without using your power"
+    "achVictoryPerfectDesc": "Complete a level without triggering any lewd scene nor loosing cloth, and without using your power",
+    "achMaxSpeedName": "I am Speed",
+    "achMaxSpeedDesc": "Stay at max speed for 3 seconds without hitting an enemy"
 }

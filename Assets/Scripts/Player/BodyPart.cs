@@ -12,6 +12,7 @@ namespace FlashSexJam.Player
 
         private void EnemyCollide(GameObject other)
         {
+            GameManager.Instance.HitEnemy();
             if (Owner.TryBreakCloth(Type))
             {
                 Owner.ToggleInvulnerabilityFrames();

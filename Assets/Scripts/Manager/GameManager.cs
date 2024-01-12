@@ -41,6 +41,9 @@ namespace FlashSexJam.Manager
 
         private float _progress, _progressBoss;
 
+        private float _maxSpeedTimer;
+        private float _maxSpeedTimerRef = 3f;
+
         public float Speed { private set; get; }
 
         public bool DidGameEnd { private set; get; }
@@ -71,6 +74,23 @@ namespace FlashSexJam.Manager
 
             _progressPlayerBar.localScale = new(_progress / _info.DestinationDistance, 1f, 1f);
             _progressBossBar.localScale = new(_progressBoss / _info.DestinationDistance, 1f, 1f);
+
+            if (!DidGameEnd)
+            {
+                if (Speed == _info.MaxSpeed)
+                {
+                    _maxSpeedTimer += Time.deltaTime;
+                    if (_maxSpeedTimer >= _maxSpeedTimerRef)
+                    {
+                        _maxSpeedTimer = 0f;
+                        AchievementManager.Instance.Unlock(AchievementID.MaxSpeed);
+                    }
+                }
+                else
+                {
+                    _maxSpeedTimer = 0f;
+                }
+            }
 
             if (_progress >= _info.DestinationDistance)
             {
@@ -104,6 +124,11 @@ namespace FlashSexJam.Manager
                 var c = _gameOverBackground.color;
                 _gameOverBackground.color = new(c.r, c.g, c.b, Mathf.Clamp01(_gameOverTimer / _gameOverTimerRef));
             }
+        }
+
+        public void HitEnemy()
+        {
+            _maxSpeedTimer = 0f;
         }
 
         public void TriggerGameOver()

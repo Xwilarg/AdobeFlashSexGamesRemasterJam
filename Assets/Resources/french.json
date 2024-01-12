@@ -24,5 +24,7 @@
     "achVictoryFullPowerName": "3% de ma vraie puissance",
     "achVictoryFullPowerDesc": "Finir un niveau sans utiliser vos pouvoirs",
     "achVictoryPerfectName": "Catabase",
-    "achVictoryPerfectDesc": "Finir un niveau sans déclancher d'animation érotique, sans perdre de vêtements et sans utiliser vos pouvoirs"
+    "achVictoryPerfectDesc": "Finir un niveau sans déclancher d'animation érotique, sans perdre de vêtements et sans utiliser vos pouvoirs",
+    "achMaxSpeedName": "Je suis vitesse",
+    "achMaxSpeedDesc": "Restez à la vitesse maximal pour 3 secondes sans toucher d'ennemies"
 }
