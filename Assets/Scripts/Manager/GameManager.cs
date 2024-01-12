@@ -141,6 +141,9 @@ namespace FlashSexJam.Manager
             {
                 _enemyHScenes.Add(id);
                 if (_enemyHScenes.Count == _info.SpawnableEnemies.Length)
+                {
+                    AchievementManager.Instance.Unlock(AchievementID.AllHScenes);
+                }
             }
         }
 
