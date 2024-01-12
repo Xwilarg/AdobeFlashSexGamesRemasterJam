@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using FlashSexJam.Achievement;
-using System.Collections;
 using FlashSexJam.Player;
 using System.Collections.Generic;
 
@@ -21,7 +20,7 @@ namespace FlashSexJam.Manager
         private Transform _spawnPoint;
 
         [SerializeField]
-        private RectTransform _progressPlayerBar, _progressBossBar;
+        private RectTransform _progressPlayerBar, _progressBossBar, _goalProgressBar, _startProgressBar;
 
         [SerializeField]
         private Transform _wallOfTentacles;
@@ -75,8 +74,8 @@ namespace FlashSexJam.Manager
 
             _wallOfTentacles.position = new(_progressBoss - _progress, _wallOfTentacles.position.y);
 
-            _progressPlayerBar.localScale = new(_progress / _info.DestinationDistance, 1f, 1f);
-            _progressBossBar.localScale = new(_progressBoss / _info.DestinationDistance, 1f, 1f);
+            _progressPlayerBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progress / _info.DestinationDistance), _progressPlayerBar.transform.position.y, _progressPlayerBar.transform.position.z);
+            _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
 
             if (!DidGameEnd)
             {
