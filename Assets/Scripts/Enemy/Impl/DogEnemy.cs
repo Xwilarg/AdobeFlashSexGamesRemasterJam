@@ -29,14 +29,16 @@ namespace FlashSexJam.Enemy.Impl
 
             if (!_didJump && transform.position.x < 5f)
             {
+                _didJump = true;
                 StartCoroutine(Jump());
             }
-            if (transform.position.y <= _baseY)
+            if (_isJumping && transform.position.y <= _baseY)
             {
                 _isJumping = false;
                 _rb.gravityScale = 0f;
                 transform.position = new(transform.position.x, _baseY);
-                _baseXSpeedOffset = _xSpeedOffset;
+                _xSpeedOffset = _baseXSpeedOffset;
+                _anim.SetInteger("JumpState", 0);
             }
 
 
