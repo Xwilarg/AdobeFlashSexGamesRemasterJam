@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 125586790374958171}
   - component: {fileID: 2814102806717590492}
   - component: {fileID: -8904842385766972236}
-  - component: {fileID: -3888224243774409791}
   - component: {fileID: 7554450814405431278}
+  - component: {fileID: 9039428050280814436}
   m_Layer: 7
   m_Name: Tentacle
   m_TagString: Enemy
@@ -136,22 +136,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-3888224243774409791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4589485064582313205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93399cae62148194ca4758d9e8472162, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hSceneHead: {fileID: 3535461754944050207, guid: a952349eacf3bca4fa8b7faeabcdd1f3, type: 3}
-  _hSceneUpperBody: {fileID: 0}
-  _hSceneLowerBody: {fileID: 3535461754944050207, guid: 34fb68c64f3657d4ea893c083d3c5aa6, type: 3}
-  _speedOffset: 2
 --- !u!61 &7554450814405431278
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -197,3 +181,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.37, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &9039428050280814436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589485064582313205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c7a3d5da4312a4892475b35214ebff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hSceneHead: {fileID: 3535461754944050207, guid: a952349eacf3bca4fa8b7faeabcdd1f3, type: 3}
+  _hSceneUpperBody: {fileID: 0}
+  _hSceneLowerBody: {fileID: 3535461754944050207, guid: 34fb68c64f3657d4ea893c083d3c5aa6, type: 3}
+  _speedOffset: 1

@@ -1,10 +1,9 @@
-﻿using FlashSexJam.Manager;
-using FlashSexJam.Player;
+﻿using FlashSexJam.Player;
 using UnityEngine;
 
 namespace FlashSexJam.Enemy
 {
-    public class EnemyController : MonoBehaviour
+    public abstract class EnemyController : MonoBehaviour
     {
         [SerializeField]
         private GameObject _hSceneHead, _hSceneUpperBody, _hSceneLowerBody;
@@ -19,19 +18,11 @@ namespace FlashSexJam.Enemy
             };
         }
 
-        [SerializeField]
-        private float _speedOffset;
+        protected Rigidbody2D _rb;
 
-        private Rigidbody2D _rb;
-
-        private void Awake()
+        protected virtual void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
-        }
-
-        private void Update()
-        {
-            _rb.velocity = Vector3.left * (GameManager.Instance.Speed + _speedOffset);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
