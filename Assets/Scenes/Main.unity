@@ -1368,7 +1368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9803922, g: 0.19607845, b: 0.89019614, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3513,6 +3513,7 @@ MonoBehaviour:
   _info: {fileID: 11400000, guid: 7bcde7304c3003742baa179d77f3df31, type: 2}
   _orgasmBar: {fileID: 12065506}
   _energyBar: {fileID: 2035863300}
+  _orgasmHeart: {fileID: 430275676}
 --- !u!1 &1357460025
 GameObject:
   m_ObjectHideFlags: 0

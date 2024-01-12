@@ -1,7 +1,9 @@
 ﻿using FlashSexJam.Manager;
 using FlashSexJam.SO;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace FlashSexJam.Player
 {
@@ -13,12 +15,17 @@ namespace FlashSexJam.Player
         [SerializeField]
         private RectTransform _orgasmBar, _energyBar;
 
+        [SerializeField]
+        private Image _orgasmHeart;
+
         private PlayerController _pc;
         private float _strokeCount;
 
         private GameObject _hSceneObj;
 
         private float _orgasm, _energy;
+
+        private bool _isOrgasming;
 
         private void Awake()
         {
@@ -27,6 +34,8 @@ namespace FlashSexJam.Player
 
             _orgasm = _info.BaseOrgasm;
             _energy = _info.BaseEnergy;
+
+            UpdateUI();
         }
 
         private void Update()
@@ -36,15 +45,10 @@ namespace FlashSexJam.Player
                 _strokeCount -= Time.deltaTime;
                 _orgasm -= Time.deltaTime;
 
-                if (_orgasm <= 0f)
+                if (_orgasm <= 0f && !_isOrgasming)
                 {
-                    _orgasm = _info.BaseOrgasm;
-                    _energy -= _info.BaseEnergy / 2f;
-
-                    if (_energy <= 0f)
-                    {
-                        GameManager.Instance.TriggerGameOver();
-                    }
+                    _isOrgasming = true;
+                    StartCoroutine(PlayOrgasmVfx());
                 }
 
                 UpdateUI();
@@ -58,8 +62,26 @@ namespace FlashSexJam.Player
 
         private void UpdateUI()
         {
-            _orgasmBar.localScale = new(_orgasm / _info.BaseOrgasm, 1f, 1f);
-            _energyBar.localScale = new(_energy / _info.BaseEnergy, 1f, 1f);
+            _orgasmBar.localScale = new(Mathf.Clamp01(1f - (_orgasm / _info.BaseOrgasm)), 1f, 1f);
+            _energyBar.localScale = new(Mathf.Clamp01(_energy / _info.BaseEnergy), 1f, 1f);
+        }
+
+        private IEnumerator PlayOrgasmVfx()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                _orgasmHeart.color = i % 2 == 0 ? new Color(0.9811321f, 0.1990032f, 0.8889886f) : Color.red;
+                yield return new WaitForSeconds(.1f);
+            }
+
+            _orgasm = _info.BaseOrgasm;
+            _energy -= _info.BaseEnergy / 2f;
+            _isOrgasming = false;
+            _orgasmHeart.color = Color.white;
+            if (_energy <= 0f)
+            {
+                GameManager.Instance.TriggerGameOver();
+            }
         }
 
         public void PlayHScene(GameObject hSceneObj, int id)
