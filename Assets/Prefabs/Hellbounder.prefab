@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 7313501165733975715}
   - component: {fileID: 4707230192953323324}
   - component: {fileID: 3828077078528182363}
+  - component: {fileID: 2681422900640859975}
+  - component: {fileID: 861670160260428479}
+  - component: {fileID: 1179609553393441808}
   m_Layer: 0
   m_Name: Hellbounder
   m_TagString: Untagged
@@ -106,3 +109,103 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &2681422900640859975
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405431609623900855}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!60 &861670160260428479
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405431609623900855}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.68, y: 2.03}
+    newSize: {x: 3.68, y: 2.03}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.1338444, y: -0.9624164}
+      - {x: -1.4477882, y: -0.8619039}
+      - {x: -1.8570328, y: -0.7381818}
+      - {x: -1.4407425, y: 0.13554192}
+      - {x: -0.8194256, y: 0.6769161}
+      - {x: -0.15650749, y: 0.95159674}
+      - {x: 0.9798355, y: 0.9915314}
+      - {x: 1.4885654, y: 0.64068556}
+      - {x: 1.8444843, y: -0.034949064}
+      - {x: 1.262352, y: -0.09000158}
+      - {x: 1.2379208, y: -0.6596246}
+      - {x: 1.0576515, y: -1.0209608}
+  m_UseDelaunayMesh: 0
+--- !u!114 &1179609553393441808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405431609623900855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5aed89472643484abd51863269732fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hSceneHead: {fileID: 0}
+  _hSceneUpperBody: {fileID: 0}
+  _hSceneLowerBody: {fileID: 0}
+  _xSpeedOffset: 3
