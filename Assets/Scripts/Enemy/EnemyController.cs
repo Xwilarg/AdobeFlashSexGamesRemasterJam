@@ -12,6 +12,8 @@ namespace FlashSexJam.Enemy
         [SerializeField]
         protected float _xSpeedOffset;
 
+        protected bool _doesMove = true;
+
         public GameObject GetHScene(BodyPartType type)
         {
             return type switch
@@ -36,7 +38,10 @@ namespace FlashSexJam.Enemy
 
         protected virtual void Update()
         {
-            _rb.velocity = Vector3.left * (GameManager.Instance.Speed + _xSpeedOffset);
+            if (_doesMove)
+            {
+                _rb.velocity = Vector3.left * (GameManager.Instance.Speed + _xSpeedOffset);
+            }
 
             if (transform.position.x < -20f)
             {
