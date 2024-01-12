@@ -51,7 +51,7 @@ namespace FlashSexJam.Translation
                 sentence = sentence.Replace("{" + i + "}", arguments[i]);
             }
 
-            sentence = sentence.Replace('é', 'e').Replace('è', 'e').Replace('à', 'a').Replace('ç', 'c').Replace('ê', 'e').Replace('ë', 'e'); // Replace french accents because current font don't handle them
+            sentence = sentence.Replace('é', 'e').Replace('è', 'e').Replace('à', 'a').Replace('ç', 'c').Replace('ê', 'e').Replace('ë', 'e').Replace('ô', 'o'); // Replace french accents because current font don't handle them
 
             return sentence;
         }
