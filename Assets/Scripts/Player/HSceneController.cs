@@ -1,4 +1,5 @@
-﻿using FlashSexJam.Manager;
+﻿using FlashSexJam.Achievement;
+using FlashSexJam.Manager;
 using FlashSexJam.SO;
 using System.Collections;
 using UnityEngine;
@@ -107,6 +108,12 @@ namespace FlashSexJam.Player
             {
                 yield return new WaitForEndOfFrame();
             }
+
+            if (_orgasm / _info.BaseOrgasm <= .05f)
+            {
+                AchievementManager.Instance.Unlock(AchievementID.Edging);
+            }
+
             GameManager.Instance.ResetSpeed();
             _pc.gameObject.SetActive(true);
 

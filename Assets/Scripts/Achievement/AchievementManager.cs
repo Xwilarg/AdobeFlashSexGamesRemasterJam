@@ -47,7 +47,8 @@ namespace FlashSexJam.Achievement
             { AchievementID.VictoryPerfect, new() { Name = "achVictoryPerfectName", Description = "achVictoryPerfectDesc" } },
 
             { AchievementID.MaxSpeed, new() { Name = "achMaxSpeedName", Description = "achMaxSpeedDesc" } },
-            { AchievementID.AllHScenes, new() { Name = "achAllHScenesName", Description = "achAllHScenesDesc" } }
+            { AchievementID.AllHScenes, new() { Name = "achAllHScenesName", Description = "achAllHScenesDesc" } },
+            { AchievementID.Edging, new() { Name = "achEdgingName", Description = "achEdgingDesc" } }
         };
     }
 
@@ -61,7 +62,8 @@ namespace FlashSexJam.Achievement
 
         MaxSpeed,
 
-        AllHScenes
+        AllHScenes,
+        Edging
     }
 
     public record Achievement
