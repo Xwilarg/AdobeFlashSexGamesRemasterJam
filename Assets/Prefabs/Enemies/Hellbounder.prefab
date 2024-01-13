@@ -207,6 +207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hSceneHead: {fileID: 0}
   _hSceneUpperBody: {fileID: 0}
-  _hSceneLowerBody: {fileID: 0}
+  _hSceneLowerBody: {fileID: 3535461754944050207, guid: bae71dcf397c0eb4bb06c56332153940, type: 3}
   _xSpeedOffset: 3
   _name: Hellbounder
