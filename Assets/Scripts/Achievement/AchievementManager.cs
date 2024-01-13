@@ -49,7 +49,7 @@ namespace FlashSexJam.Achievement
             { AchievementID.MaxSpeed, new() { Name = "achMaxSpeedName", Description = "achMaxSpeedDesc" } },
             { AchievementID.AllHScenes, new() { Name = "achAllHScenesName", Description = "achAllHScenesDesc" } },
             { AchievementID.Edging, new() { Name = "achEdgingName", Description = "achEdgingDesc" } },
-            { AchievementID.Edging, new() { Name = "achCreditsName", Description = "achCreditsDesc" } }
+            { AchievementID.Credits, new() { Name = "achCreditsName", Description = "achCreditsDesc" } }
         };
     }
 
