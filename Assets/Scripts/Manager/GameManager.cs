@@ -18,7 +18,10 @@ namespace FlashSexJam.Manager
         private GameInfo _info;
 
         [SerializeField]
-        private RectTransform _progressPlayerBar, _progressBossBar, _goalProgressBar, _startProgressBar;
+        private Transform _bossBar;
+
+        [SerializeField]
+        private RectTransform _progressBossBar, _goalProgressBar, _startProgressBar;
 
         [SerializeField]
         private GameObject _gameOverContainer;
@@ -28,6 +31,9 @@ namespace FlashSexJam.Manager
 
         [SerializeField]
         private GameObject _victoryContainer;
+
+        [SerializeField]
+        private GameObject _playerUIProgPrefab;
 
         private float _gameOverTimer;
         private const float _gameOverTimerRef = 3f;
@@ -70,9 +76,9 @@ namespace FlashSexJam.Manager
             foreach (var player in _players.Values)
             {
                 player.WallOfTentacles.position = new(_progressBoss - _progress, player.WallOfTentacles.position.y);
-            }
 
-            _progressPlayerBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progress / _info.DestinationDistance), _progressPlayerBar.transform.position.y, _progressPlayerBar.transform.position.z);
+                player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
+            }
             _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
 
             if (!DidGameEnd)
@@ -137,7 +143,8 @@ namespace FlashSexJam.Manager
                 Cam = cam,
                 PC = pc,
                 Spawner = tentacles,
-                WallOfTentacles = tentacles
+                WallOfTentacles = tentacles,
+                UIProg = Instantiate(_playerUIProgPrefab, _bossBar).transform
             });
 
             UpdateCameras();
@@ -145,6 +152,7 @@ namespace FlashSexJam.Manager
 
         public void UnregisterPlayer(PlayerController pc)
         {
+            Destroy(_players[pc.gameObject.GetInstanceID()].UIProg.gameObject);
             _players.Remove(pc.gameObject.GetInstanceID());
 
             UpdateCameras();
@@ -203,6 +211,7 @@ namespace FlashSexJam.Manager
         public class PlayerData
         {
             public PlayerController PC;
+            public Transform UIProg;
             public Transform Spawner;
             public Transform WallOfTentacles;
             public Camera Cam;
