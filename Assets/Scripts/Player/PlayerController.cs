@@ -26,6 +26,12 @@ namespace FlashSexJam.Player
         [SerializeField]
         private TMP_Text _attackCountText;
 
+        [SerializeField]
+        private Transform _spawnPoint;
+
+        [SerializeField]
+        private Transform _wallOfTentacles;
+
         private Camera _cam;
 
         private int _attackCount = 3;
@@ -60,7 +66,7 @@ namespace FlashSexJam.Player
 
         private void Start()
         {
-            GameManager.Instance.Player = this;
+            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this);
         }
 
         private void Update()

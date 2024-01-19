@@ -17,13 +17,7 @@ namespace FlashSexJam.Manager
         private GameInfo _info;
 
         [SerializeField]
-        private Transform _spawnPoint;
-
-        [SerializeField]
         private RectTransform _progressPlayerBar, _progressBossBar, _goalProgressBar, _startProgressBar;
-
-        [SerializeField]
-        private Transform _wallOfTentacles;
 
         [SerializeField]
         private GameObject _gameOverContainer;
@@ -48,11 +42,22 @@ namespace FlashSexJam.Manager
 
         public bool DidGameEnd { private set; get; }
 
-        public PlayerController Player { set; private get; }
+        private readonly List<PlayerController> _players = new();
+
+        private readonly List<Transform> _spawnPoint = new();
+
+        private readonly List<Transform> _wallTentacles = new();
 
         private ButtplugClient _client;
 
         private readonly List<int> _enemyHScenes = new();
+
+        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc)
+        {
+            _spawnPoint.Add(enemySpawn);
+            _players.Add(pc);
+            _wallTentacles.Add(tentacles);
+        }
 
         private void Awake()
         {
@@ -72,7 +77,10 @@ namespace FlashSexJam.Manager
             _progress += Time.deltaTime * Speed;
             _progressBoss += Time.deltaTime * _info.BossSpeed;
 
-            _wallOfTentacles.position = new(_progressBoss - _progress, _wallOfTentacles.position.y);
+            foreach (var t in _wallTentacles)
+            {
+                t.position = new(_progressBoss - _progress, t.position.y);
+            }
 
             _progressPlayerBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progress / _info.DestinationDistance), _progressPlayerBar.transform.position.y, _progressPlayerBar.transform.position.z);
             _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
@@ -98,9 +106,10 @@ namespace FlashSexJam.Manager
             {
                 DidGameEnd = true;
 
-                var hasClothes = Player.IsFullClothed;
-                var hasPower = Player.IsFullyPowered;
-                var hasNoHScenes = Player.GotHScene;
+                // We base achievements on the first player
+                var hasClothes = _players[0].IsFullClothed;
+                var hasPower = _players[0].IsFullyPowered;
+                var hasNoHScenes = _players[0].GotHScene;
 
                 AchievementManager.Instance.Unlock(AchievementID.Victory);
                 if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
@@ -114,7 +123,10 @@ namespace FlashSexJam.Manager
 
             if (_spawnTimer <= 0)
             {
-                Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], _spawnPoint.position, Quaternion.identity);
+                foreach (var spawn in _spawnPoint)
+                {
+                    Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], spawn.position, Quaternion.identity);
+                }
 
                 ResetSpawnTimer();
             }
