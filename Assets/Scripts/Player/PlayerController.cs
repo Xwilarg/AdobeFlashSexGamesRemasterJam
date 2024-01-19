@@ -32,6 +32,7 @@ namespace FlashSexJam.Player
         [SerializeField]
         private Transform _wallOfTentacles;
 
+        [SerializeField]
         private Camera _cam;
 
         private int _attackCount = 3;
@@ -51,8 +52,6 @@ namespace FlashSexJam.Player
 
         private void Awake()
         {
-            _cam = Camera.main;
-
             var models = new[] { _modelUp, _modelMid, _modelDown };
             foreach (var m in models)
             {
@@ -66,7 +65,12 @@ namespace FlashSexJam.Player
 
         private void Start()
         {
-            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this);
+            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam);
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.Instance.UnregisterPlayer(this);
         }
 
         private void Update()

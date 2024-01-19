@@ -569,6 +569,7 @@ MonoBehaviour:
   _attackCountText: {fileID: 190877309150259458}
   _spawnPoint: {fileID: 1676326350285613828}
   _wallOfTentacles: {fileID: 2202572124111230438}
+  _cam: {fileID: 1414846467196921830}
 --- !u!50 &5016397024581379685
 Rigidbody2D:
   serializedVersion: 4
@@ -4069,8 +4070,8 @@ Canvas:
   m_GameObject: {fileID: 7687224695061189533}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1414846467196921830}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -4080,7 +4081,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1030456481
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2538577294542620896

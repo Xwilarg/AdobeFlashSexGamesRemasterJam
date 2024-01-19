@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using FlashSexJam.Achievement;
 using FlashSexJam.Player;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FlashSexJam.Manager
 {
@@ -42,22 +43,11 @@ namespace FlashSexJam.Manager
 
         public bool DidGameEnd { private set; get; }
 
-        private readonly List<PlayerController> _players = new();
-
-        private readonly List<Transform> _spawnPoint = new();
-
-        private readonly List<Transform> _wallTentacles = new();
+        private readonly Dictionary<int, PlayerData> _players = new();
 
         private ButtplugClient _client;
 
         private readonly List<int> _enemyHScenes = new();
-
-        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc)
-        {
-            _spawnPoint.Add(enemySpawn);
-            _players.Add(pc);
-            _wallTentacles.Add(tentacles);
-        }
 
         private void Awake()
         {
@@ -77,9 +67,9 @@ namespace FlashSexJam.Manager
             _progress += Time.deltaTime * Speed;
             _progressBoss += Time.deltaTime * _info.BossSpeed;
 
-            foreach (var t in _wallTentacles)
+            foreach (var player in _players.Values)
             {
-                t.position = new(_progressBoss - _progress, t.position.y);
+                player.WallOfTentacles.position = new(_progressBoss - _progress, player.WallOfTentacles.position.y);
             }
 
             _progressPlayerBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progress / _info.DestinationDistance), _progressPlayerBar.transform.position.y, _progressPlayerBar.transform.position.z);
@@ -107,9 +97,9 @@ namespace FlashSexJam.Manager
                 DidGameEnd = true;
 
                 // We base achievements on the first player
-                var hasClothes = _players[0].IsFullClothed;
-                var hasPower = _players[0].IsFullyPowered;
-                var hasNoHScenes = _players[0].GotHScene;
+                var hasClothes = _players.Values.All(x => x.PC.IsFullClothed);
+                var hasPower = _players.Values.All(x => x.PC.IsFullyPowered);
+                var hasNoHScenes = _players.Values.All(x => x.PC.GotHScene);
 
                 AchievementManager.Instance.Unlock(AchievementID.Victory);
                 if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
@@ -123,9 +113,9 @@ namespace FlashSexJam.Manager
 
             if (_spawnTimer <= 0)
             {
-                foreach (var spawn in _spawnPoint)
+                foreach (var player in _players.Values)
                 {
-                    Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], spawn.position, Quaternion.identity);
+                    Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
                 }
 
                 ResetSpawnTimer();
@@ -137,6 +127,35 @@ namespace FlashSexJam.Manager
 
                 var c = _gameOverBackground.color;
                 _gameOverBackground.color = new(c.r, c.g, c.b, Mathf.Clamp01(_gameOverTimer / _gameOverTimerRef));
+            }
+        }
+
+        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam)
+        {
+            _players.Add(pc.gameObject.GetInstanceID(), new()
+            {
+                Cam = cam,
+                PC = pc,
+                Spawner = tentacles,
+                WallOfTentacles = tentacles
+            });
+
+            UpdateCameras();
+        }
+
+        public void UnregisterPlayer(PlayerController pc)
+        {
+            _players.Remove(pc.gameObject.GetInstanceID());
+
+            UpdateCameras();
+        }
+
+        private void UpdateCameras()
+        {
+            var max = 1f / _players.Count;
+            for (int i = 0; i < _players.Count; i++)
+            {
+                _players.Values.ElementAt(i).Cam.rect = new(0f, max * i, 1f, max);
             }
         }
 
@@ -179,6 +198,14 @@ namespace FlashSexJam.Manager
         public void ResetSpeed()
         {
             Speed = _info.MinSpeed;
+        }
+
+        public class PlayerData
+        {
+            public PlayerController PC;
+            public Transform Spawner;
+            public Transform WallOfTentacles;
+            public Camera Cam;
         }
     }
 }
