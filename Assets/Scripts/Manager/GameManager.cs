@@ -143,10 +143,12 @@ namespace FlashSexJam.Manager
             {
                 Cam = cam,
                 PC = pc,
-                Spawner = tentacles,
+                Spawner = enemySpawn,
                 WallOfTentacles = tentacles,
                 UIProg = Instantiate(_playerUIProgPrefab, _bossBar).transform,
-                Speed = _info.MinSpeed
+                Speed = _info.MinSpeed,
+                Progress = 0f,
+                SpawnTimer = 0f
             };
             _players.Add(pc.gameObject.GetInstanceID(), data);
             ResetSpawnTimer(data);
