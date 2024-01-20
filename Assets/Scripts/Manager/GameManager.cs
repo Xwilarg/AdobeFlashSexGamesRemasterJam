@@ -40,9 +40,7 @@ namespace FlashSexJam.Manager
         private float _gameOverTimer;
         private const float _gameOverTimerRef = 3f;
 
-        private float _spawnTimer;
-
-        private float _progress, _progressBoss;
+        private float _progressBoss;
 
         private float _maxSpeedTimer;
         private float _maxSpeedTimerRef = 3f;
@@ -62,8 +60,6 @@ namespace FlashSexJam.Manager
             SceneManager.LoadScene("AchievementManager", LoadSceneMode.Additive);
 
             _progressBoss = -_info.BossNegativeOffset;
-
-            ResetSpawnTimer();
         }
 
         private void Update()
@@ -71,65 +67,65 @@ namespace FlashSexJam.Manager
             if (!_players.Any()) return;
 
             _progressBoss += Time.deltaTime * _info.BossSpeed;
-
-            foreach (var player in _players.Values)
-            {
-                _spawnTimer -= Time.deltaTime * player.Speed; // Timer depends of which speed we are going to
-                _progress += Time.deltaTime * player.Speed;
-
-                player.WallOfTentacles.position = new(_progressBoss - _progress, player.WallOfTentacles.position.y);
-
-                player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
-            }
             _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
 
-            if (!DidGameEnd)
+            foreach (var keyValue in _players)
             {
-                if (_players.First().Value.Speed == _info.MaxSpeed)
+                var id = keyValue.Key;
+                var player = keyValue.Value;
+
+                player.SpawnTimer -= Time.deltaTime * player.Speed; // Timer depends of which speed we are going to
+                player.Progress += Time.deltaTime * player.Speed;
+
+                player.WallOfTentacles.position = new(_progressBoss - player.Progress, player.WallOfTentacles.position.y);
+
+                player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, player.Progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
+
+                if (!DidGameEnd)
                 {
-                    _maxSpeedTimer += Time.deltaTime;
-                    if (_maxSpeedTimer >= _maxSpeedTimerRef)
+                    if (_players.First().Value.Speed == _info.MaxSpeed)
+                    {
+                        _maxSpeedTimer += Time.deltaTime;
+                        if (_maxSpeedTimer >= _maxSpeedTimerRef)
+                        {
+                            _maxSpeedTimer = 0f;
+                            AchievementManager.Instance.Unlock(AchievementID.MaxSpeed);
+                        }
+                    }
+                    else
                     {
                         _maxSpeedTimer = 0f;
-                        AchievementManager.Instance.Unlock(AchievementID.MaxSpeed);
                     }
                 }
-                else
+
+                if (player.Progress >= _info.DestinationDistance)
                 {
-                    _maxSpeedTimer = 0f;
-                }
-            }
+                    DidGameEnd = true;
 
-            if (_progress >= _info.DestinationDistance)
-            {
-                DidGameEnd = true;
+                    var targetPlayer = _players.First().Value;
 
-                var targetPlayer = _players.First().Value;
+                    // We base achievements on the first player
+                    var hasClothes = targetPlayer.PC.IsFullClothed;
+                    var hasPower = targetPlayer.PC.IsFullyPowered;
+                    var hasNoHScenes = targetPlayer.PC.GotHScene;
 
-                // We base achievements on the first player
-                var hasClothes = targetPlayer.PC.IsFullClothed;
-                var hasPower = targetPlayer.PC.IsFullyPowered;
-                var hasNoHScenes = targetPlayer.PC.GotHScene;
+                    AchievementManager.Instance.Unlock(AchievementID.Victory);
+                    if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
+                    if (hasClothes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoClothDamage);
+                    if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);
+                    if (hasNoHScenes && hasClothes && hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryPerfect);
 
-                AchievementManager.Instance.Unlock(AchievementID.Victory);
-                if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
-                if (hasClothes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoClothDamage);
-                if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);
-                if (hasNoHScenes && hasClothes && hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryPerfect);
-
-                _victoryContainer.SetActive(true);
-                return;
-            }
-
-            if (_spawnTimer <= 0)
-            {
-                foreach (var player in _players)
-                {
-                    var go = Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], player.Value.Spawner.position, Quaternion.identity);
-                    go.GetComponent<EnemyController>().PlayerID = player.Key;
+                    _victoryContainer.SetActive(true);
+                    return;
                 }
 
-                ResetSpawnTimer();
+                if (player.SpawnTimer <= 0)
+                {
+                        var go = Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
+                        go.GetComponent<EnemyController>().PlayerID = id;
+
+                    ResetSpawnTimer(player);
+                }
             }
 
             if (DidGameEnd && _gameOverTimer < _gameOverTimerRef)
@@ -143,7 +139,7 @@ namespace FlashSexJam.Manager
 
         public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam)
         {
-            _players.Add(pc.gameObject.GetInstanceID(), new()
+            var data = new PlayerData()
             {
                 Cam = cam,
                 PC = pc,
@@ -151,7 +147,9 @@ namespace FlashSexJam.Manager
                 WallOfTentacles = tentacles,
                 UIProg = Instantiate(_playerUIProgPrefab, _bossBar).transform,
                 Speed = _info.MinSpeed
-            });
+            };
+            _players.Add(pc.gameObject.GetInstanceID(), data);
+            ResetSpawnTimer(data);
 
             UpdateCameras();
         }
@@ -201,9 +199,9 @@ namespace FlashSexJam.Manager
             _gameOverContainer.SetActive(true);
         }
 
-        public void ResetSpawnTimer()
+        public void ResetSpawnTimer(PlayerData pData)
         {
-            _spawnTimer = Random.Range(_info.SpawnIntervalMin, _info.SpawnIntervalMax);
+            pData.SpawnTimer = Random.Range(_info.SpawnIntervalMin, _info.SpawnIntervalMax);
         }
 
         public void IncreaseSpeed(int id, float value)
@@ -231,6 +229,7 @@ namespace FlashSexJam.Manager
             public float Speed;
 
             public float Progress;
+            public float SpawnTimer;
         }
     }
 }
