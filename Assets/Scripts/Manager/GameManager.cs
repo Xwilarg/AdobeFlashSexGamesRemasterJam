@@ -7,6 +7,8 @@ using FlashSexJam.Achievement;
 using FlashSexJam.Player;
 using System.Collections.Generic;
 using System.Linq;
+using Codice.CM.Common;
+using FlashSexJam.Enemy;
 
 namespace FlashSexJam.Manager
 {
@@ -45,8 +47,6 @@ namespace FlashSexJam.Manager
         private float _maxSpeedTimer;
         private float _maxSpeedTimerRef = 3f;
 
-        public float Speed { private set; get; }
-
         public bool DidGameEnd { private set; get; }
 
         private readonly Dictionary<int, PlayerData> _players = new();
@@ -61,7 +61,6 @@ namespace FlashSexJam.Manager
 
             SceneManager.LoadScene("AchievementManager", LoadSceneMode.Additive);
 
-            Speed = _info.MinSpeed;
             _progressBoss = -_info.BossNegativeOffset;
 
             ResetSpawnTimer();
@@ -69,12 +68,15 @@ namespace FlashSexJam.Manager
 
         private void Update()
         {
-            _spawnTimer -= Time.deltaTime * Speed; // Timer depends of which speed we are going to
-            _progress += Time.deltaTime * Speed;
+            if (!_players.Any()) return;
+
             _progressBoss += Time.deltaTime * _info.BossSpeed;
 
             foreach (var player in _players.Values)
             {
+                _spawnTimer -= Time.deltaTime * player.Speed; // Timer depends of which speed we are going to
+                _progress += Time.deltaTime * player.Speed;
+
                 player.WallOfTentacles.position = new(_progressBoss - _progress, player.WallOfTentacles.position.y);
 
                 player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
@@ -83,7 +85,7 @@ namespace FlashSexJam.Manager
 
             if (!DidGameEnd)
             {
-                if (Speed == _info.MaxSpeed)
+                if (_players.First().Value.Speed == _info.MaxSpeed)
                 {
                     _maxSpeedTimer += Time.deltaTime;
                     if (_maxSpeedTimer >= _maxSpeedTimerRef)
@@ -102,10 +104,12 @@ namespace FlashSexJam.Manager
             {
                 DidGameEnd = true;
 
+                var targetPlayer = _players.First().Value;
+
                 // We base achievements on the first player
-                var hasClothes = _players.Values.All(x => x.PC.IsFullClothed);
-                var hasPower = _players.Values.All(x => x.PC.IsFullyPowered);
-                var hasNoHScenes = _players.Values.All(x => x.PC.GotHScene);
+                var hasClothes = targetPlayer.PC.IsFullClothed;
+                var hasPower = targetPlayer.PC.IsFullyPowered;
+                var hasNoHScenes = targetPlayer.PC.GotHScene;
 
                 AchievementManager.Instance.Unlock(AchievementID.Victory);
                 if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
@@ -119,9 +123,10 @@ namespace FlashSexJam.Manager
 
             if (_spawnTimer <= 0)
             {
-                foreach (var player in _players.Values)
+                foreach (var player in _players)
                 {
-                    Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
+                    var go = Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], player.Value.Spawner.position, Quaternion.identity);
+                    go.GetComponent<EnemyController>().PlayerID = player.Key;
                 }
 
                 ResetSpawnTimer();
@@ -144,7 +149,8 @@ namespace FlashSexJam.Manager
                 PC = pc,
                 Spawner = tentacles,
                 WallOfTentacles = tentacles,
-                UIProg = Instantiate(_playerUIProgPrefab, _bossBar).transform
+                UIProg = Instantiate(_playerUIProgPrefab, _bossBar).transform,
+                Speed = _info.MinSpeed
             });
 
             UpdateCameras();
@@ -172,9 +178,11 @@ namespace FlashSexJam.Manager
             _maxSpeedTimer = 0f;
         }
 
-        public void PlayHScene(int id)
+        public void PlayHScene(int playerId, int id)
         {
-            Speed = 0;
+            var player = _players[playerId];
+
+            player.Speed = 0;
             if (!_enemyHScenes.Contains(id))
             {
                 _enemyHScenes.Add(id);
@@ -198,15 +206,19 @@ namespace FlashSexJam.Manager
             _spawnTimer = Random.Range(_info.SpawnIntervalMin, _info.SpawnIntervalMax);
         }
 
-        public void IncreaseSpeed(float value)
+        public void IncreaseSpeed(int id, float value)
         {
-            Speed = Mathf.Clamp(Speed + (value * _info.SpeedChangeMultiplier), _info.MinSpeed, _info.MaxSpeed);
+            var player = _players[id];
+            player.Speed = Mathf.Clamp(player.Speed + (value * _info.SpeedChangeMultiplier), _info.MinSpeed, _info.MaxSpeed);
         }
 
-        public void ResetSpeed()
+        public void ResetSpeed(int id)
         {
-            Speed = _info.MinSpeed;
+            var player = _players[id];
+            player.Speed = _info.MinSpeed;
         }
+
+        public float GetSpeed(int id) => _players[id].Speed;
 
         public class PlayerData
         {
@@ -215,6 +227,10 @@ namespace FlashSexJam.Manager
             public Transform Spawner;
             public Transform WallOfTentacles;
             public Camera Cam;
+
+            public float Speed;
+
+            public float Progress;
         }
     }
 }

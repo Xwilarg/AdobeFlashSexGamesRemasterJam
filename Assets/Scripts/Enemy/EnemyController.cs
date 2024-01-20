@@ -18,6 +18,8 @@ namespace FlashSexJam.Enemy
 
         protected bool _doesMove = true;
 
+        public int PlayerID { set; private get; }
+
         public GameObject GetHScene(BodyPartType type)
         {
             return type switch
@@ -44,7 +46,7 @@ namespace FlashSexJam.Enemy
         {
             if (_doesMove)
             {
-                _rb.velocity = Vector3.left * (GameManager.Instance.Speed + _xSpeedOffset);
+                _rb.velocity = Vector3.left * (GameManager.Instance.GetSpeed(PlayerID) + _xSpeedOffset);
             }
 
             if (transform.position.x < -20f)

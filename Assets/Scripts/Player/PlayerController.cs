@@ -43,6 +43,8 @@ namespace FlashSexJam.Player
         public bool IsFullyPowered => _attackCount == 3;
         public bool GotHScene { set; get; }
 
+        public int PlayerID => gameObject.GetInstanceID();
+
         private readonly Dictionary<BodyPartType, List<GameObject>> _clothes = new()
         {
             { BodyPartType.Head, new() },
@@ -77,7 +79,7 @@ namespace FlashSexJam.Player
         {
             if (!GameManager.Instance.DidGameEnd)
             {
-                GameManager.Instance.IncreaseSpeed(_xMov * Time.deltaTime);
+                GameManager.Instance.IncreaseSpeed(PlayerID, _xMov * Time.deltaTime);
             }
         }
 

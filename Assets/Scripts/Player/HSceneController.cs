@@ -95,7 +95,7 @@ namespace FlashSexJam.Player
         {
             _hSceneObj = hSceneObj;
 
-            GameManager.Instance.PlayHScene(id);
+            GameManager.Instance.PlayHScene(_pc.PlayerID, id);
             _pc.gameObject.SetActive(false);
             _strokeCount = Random.Range(20, 30);
 
@@ -114,7 +114,7 @@ namespace FlashSexJam.Player
                 AchievementManager.Instance.Unlock(AchievementID.Edging);
             }
 
-            GameManager.Instance.ResetSpeed();
+            GameManager.Instance.ResetSpeed(_pc.PlayerID);
             _pc.gameObject.SetActive(true);
 
             _pc.ToggleInvulnerabilityFrames();

@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMultiplier: 0.75
+  _attachedPlayer: {fileID: 1521136288578836621}
 --- !u!1 &874436131884928626
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMultiplier: 0.5
+  _attachedPlayer: {fileID: 1521136288578836621}
 --- !u!1 &1408078515939464390
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMultiplier: 0.75
+  _attachedPlayer: {fileID: 1521136288578836621}
 --- !u!1 &1805767356171949895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,6 +2334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMultiplier: 0.5
+  _attachedPlayer: {fileID: 1521136288578836621}
 --- !u!1 &5440168246328914137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,6 +2960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMultiplier: 1
+  _attachedPlayer: {fileID: 1521136288578836621}
 --- !u!1 &6159497121459763136
 GameObject:
   m_ObjectHideFlags: 0
@@ -4255,6 +4260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedMultiplier: 1
+  _attachedPlayer: {fileID: 1521136288578836621}
 --- !u!1 &8124142228075290639
 GameObject:
   m_ObjectHideFlags: 0
