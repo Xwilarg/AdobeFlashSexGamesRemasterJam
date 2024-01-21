@@ -173,6 +173,9 @@ namespace FlashSexJam.Manager
 
         public void ResetGame()
         {
+            _victoryContainer.SetActive(false);
+            _progressBoss = -_info.BossNegativeOffset;
+
             foreach (var player in  _players.Values)
             {
                 player.PC.ResetPlayer();
