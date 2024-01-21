@@ -27,7 +27,7 @@ namespace FlashSexJam.Player
                     return;
                 }
                 var go = Instantiate(prefab, Owner.transform.position, Quaternion.identity);
-                go.GetComponent<HScenePositionData>().BreakClothes(Owner);
+                go.GetComponent<HScenePositionData>().InitClothes(Owner);
                 Owner.HScene.PlayHScene(go, controller.Name.GetHashCode());
             }
             Destroy(other);

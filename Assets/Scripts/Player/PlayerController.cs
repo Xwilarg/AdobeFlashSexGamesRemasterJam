@@ -35,6 +35,8 @@ namespace FlashSexJam.Player
         [SerializeField]
         private Camera _cam;
 
+        public Color Color { set; get; }
+
         private int _attackCount = 3;
 
         public bool IsInvulnerable { private set; get; }
@@ -54,6 +56,13 @@ namespace FlashSexJam.Player
 
         private void Awake()
         {
+            _attackCountText.text = _attackCount.ToString();
+        }
+
+        private void Start()
+        {
+            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam);
+
             var models = new[] { _modelUp, _modelMid, _modelDown };
             foreach (var m in models)
             {
@@ -61,13 +70,6 @@ namespace FlashSexJam.Player
                 _clothes[BodyPartType.UpperBody].Add(UpperCloth);
                 _clothes[BodyPartType.LowerBody].Add(LowerCloth);
             }
-
-            _attackCountText.text = _attackCount.ToString();
-        }
-
-        private void Start()
-        {
-            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam);
         }
 
         private void OnDestroy()

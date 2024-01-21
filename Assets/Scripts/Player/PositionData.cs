@@ -18,6 +18,9 @@ namespace FlashSexJam.Player
             _lowerBody.Owner = pc;
             _lowerBody.Type = BodyPartType.LowerBody;
 
+            _upperBodyCloth.GetComponent<SpriteRenderer>().color = pc.Color;
+            _lowerBodyCloth.GetComponent<SpriteRenderer>().color = pc.Color;
+
             return (_upperBodyCloth, _lowerBodyCloth);
         }
     }
