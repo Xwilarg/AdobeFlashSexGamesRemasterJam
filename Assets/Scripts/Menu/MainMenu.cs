@@ -29,5 +29,10 @@ namespace FlashSexJam.Menu
         {
             AchievementManager.Instance.Unlock(AchievementID.Credits);
         }
+
+        public void SetPlayerCount(int value)
+        {
+            GlobalData.PlayerCount = value;
+        }
     }
 }
