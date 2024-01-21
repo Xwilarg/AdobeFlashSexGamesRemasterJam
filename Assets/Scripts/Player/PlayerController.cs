@@ -87,6 +87,7 @@ namespace FlashSexJam.Player
 
         public void ResetPlayer()
         {
+            gameObject.SetActive(true);
             HScene.StopHSceneNow();
             foreach (var c in _clothes)
             {
