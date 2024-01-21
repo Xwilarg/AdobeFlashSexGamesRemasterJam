@@ -43,6 +43,9 @@ namespace FlashSexJam.Manager
         [SerializeField]
         private GameObject _playerContainerPrefab;
 
+        [SerializeField]
+        private GameObject _nextLevel;
+
         private int _levelIndex;
 
         public LevelInfo LevelInfo => _info.Levels[_levelIndex];
@@ -131,6 +134,10 @@ namespace FlashSexJam.Manager
                     if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);
                     if (hasNoHScenes && hasClothes && hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryPerfect);
 
+                    if (_levelIndex == _info.Levels.Length - 1)
+                    {
+                        _nextLevel.SetActive(false);
+                    }
                     _victoryContainer.SetActive(true);
                     return;
                 }
@@ -151,6 +158,17 @@ namespace FlashSexJam.Manager
                 var c = _gameOverBackground.color;
                 _gameOverBackground.color = new(c.r, c.g, c.b, Mathf.Clamp01(_gameOverTimer / _gameOverTimerRef));
             }
+        }
+
+        public void NextLevel()
+        {
+            _levelIndex++;
+            ResetGame();
+        }
+
+        public void BackToMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
         }
 
         public void ResetGame()

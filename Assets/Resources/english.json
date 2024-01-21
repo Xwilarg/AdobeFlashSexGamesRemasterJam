@@ -11,6 +11,9 @@
     "gameOver": "Game Over",
     "victory": "Victory",
 
+    "nextLevel": "Next Level",
+    "backToMenu": "Back to Menu",
+
     "creditsArt": "Art",
     "creditsProg": "Programming",
     "creditsFont": "Font Stopbuck by Khurasan",

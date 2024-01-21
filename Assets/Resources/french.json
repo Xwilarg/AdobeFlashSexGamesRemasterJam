@@ -11,6 +11,9 @@
     "gameOver": "Game Over",
     "victory": "Victoire",
 
+    "nextLevel": "Niveau suivant",
+    "backToMenu": "Retour au menu",
+
     "creditsArt": "Art",
     "creditsProg": "Programmation",
     "creditsFont": "Police Stopbuck par Khurasan",
