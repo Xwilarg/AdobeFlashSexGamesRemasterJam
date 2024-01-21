@@ -11,11 +11,17 @@ namespace FlashSexJam.SO
 
         public float SpawnIntervalMin, SpawnIntervalMax;
 
-        public GameObject[] SpawnableEnemies;
-
         public float DestinationDistance;
 
         public float BossSpeed;
         public float BossNegativeOffset;
+
+        public LevelInfo[] Levels;
+    }
+
+    [System.Serializable]
+    public class LevelInfo
+    {
+        public GameObject[] SpawnableEnemies;
     }
 }

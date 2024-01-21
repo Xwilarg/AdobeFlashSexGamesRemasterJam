@@ -43,6 +43,10 @@ namespace FlashSexJam.Manager
         [SerializeField]
         private GameObject _playerContainerPrefab;
 
+        private int _levelIndex;
+
+        public LevelInfo LevelInfo => _info.Levels[_levelIndex];
+
         private float _gameOverTimer;
         private const float _gameOverTimerRef = 3f;
 
@@ -133,7 +137,7 @@ namespace FlashSexJam.Manager
 
                 if (player.SpawnTimer <= 0)
                 {
-                        var go = Instantiate(_info.SpawnableEnemies[Random.Range(0, _info.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
+                        var go = Instantiate(LevelInfo.SpawnableEnemies[Random.Range(0, LevelInfo.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
                         go.GetComponent<EnemyController>().PlayerID = id;
 
                     ResetSpawnTimer(player);
@@ -198,7 +202,7 @@ namespace FlashSexJam.Manager
             if (!_enemyHScenes.Contains(id))
             {
                 _enemyHScenes.Add(id);
-                if (_enemyHScenes.Count == _info.SpawnableEnemies.Length)
+                if (_enemyHScenes.Count == LevelInfo.SpawnableEnemies.Length)
                 {
                     AchievementManager.Instance.Unlock(AchievementID.AllHScenes);
                 }
