@@ -153,6 +153,18 @@ namespace FlashSexJam.Manager
             }
         }
 
+        public void ResetGame()
+        {
+            foreach (var player in  _players.Values)
+            {
+                player.PC.ResetPlayer();
+
+                player.Speed = _info.MinSpeed;
+                player.Progress = 0f;
+                player.SpawnTimer = 0f;
+            }
+        }
+
         public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam)
         {
             pc.Color = _players.Any() ? new(0f, 0.1529f, 0.4509f) : new(0.4509f, 0.0235f, 0f);

@@ -115,11 +115,17 @@ namespace FlashSexJam.Player
             }
 
             GameManager.Instance.ResetSpeed(_pc.PlayerID);
-            _pc.gameObject.SetActive(true);
 
             _pc.ToggleInvulnerabilityFrames();
 
+            StopHSceneNow();
+
+        }
+
+        public void StopHSceneNow()
+        {
             Destroy(_hSceneObj);
+            _pc.gameObject.SetActive(true);
         }
 
         public void OnStoke(InputAction.CallbackContext value)

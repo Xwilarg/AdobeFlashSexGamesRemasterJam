@@ -41,7 +41,7 @@ namespace FlashSexJam.Player
 
         public bool IsInvulnerable { private set; get; }
 
-        public bool IsFullClothed => _clothes[BodyPartType.LowerBody].Any() && _clothes[BodyPartType.UpperBody].Any();
+        public bool IsFullClothed => !IsTopBodyBroken && !IsLowerBodyBroken;
         public bool IsFullyPowered => _attackCount == 3;
         public bool GotHScene { set; get; }
 
@@ -85,6 +85,19 @@ namespace FlashSexJam.Player
             }
         }
 
+        public void ResetPlayer()
+        {
+            HScene.StopHSceneNow();
+            foreach (var c in _clothes)
+            {
+                foreach (var v in c.Value)
+                {
+                    v.SetActive(true);
+                }
+            }
+            _attackCount = 3;
+        }
+
         /// <returns>false if already naked</returns>
         public bool TryBreakCloth(BodyPartType bodyPart)
         {
@@ -94,14 +107,13 @@ namespace FlashSexJam.Player
             }
             foreach (var c in _clothes[bodyPart])
             {
-                Destroy(c);
+                c.SetActive(false);
             }
-            _clothes[bodyPart].Clear();
             return true;
         }
 
-        public bool IsTopBodyBroken => !_clothes[BodyPartType.UpperBody].Any();
-        public bool IsLowerBodyBroken => !_clothes[BodyPartType.LowerBody].Any();
+        public bool IsTopBodyBroken => !_clothes[BodyPartType.UpperBody].Any(x => x.activeInHierarchy);
+        public bool IsLowerBodyBroken => !_clothes[BodyPartType.LowerBody].Any(x => x.activeInHierarchy);
 
         public void ToggleInvulnerabilityFrames()
         {
