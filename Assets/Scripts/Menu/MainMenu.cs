@@ -32,7 +32,7 @@ namespace FlashSexJam.Menu
 
         public void SetPlayerCount(int value)
         {
-            GlobalData.PlayerCount = value;
+            GlobalData.PlayerCount = value; 
         }
     }
 }

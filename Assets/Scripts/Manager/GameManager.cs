@@ -7,8 +7,8 @@ using FlashSexJam.Achievement;
 using FlashSexJam.Player;
 using System.Collections.Generic;
 using System.Linq;
-using Codice.CM.Common;
 using FlashSexJam.Enemy;
+using UnityEngine.InputSystem;
 
 namespace FlashSexJam.Manager
 {
@@ -37,6 +37,12 @@ namespace FlashSexJam.Manager
         [SerializeField]
         private GameObject _playerUIProgPrefab;
 
+        [SerializeField]
+        private PlayerInputManager _inputManager;
+
+        [SerializeField]
+        private GameObject _playerContainerPrefab;
+
         private float _gameOverTimer;
         private const float _gameOverTimerRef = 3f;
 
@@ -56,6 +62,12 @@ namespace FlashSexJam.Manager
         private void Awake()
         {
             Instance = this;
+
+            if (GlobalData.PlayerCount == 1) // Only one player, we disable the ability for anyone else to join and spawn the player
+            {
+                _inputManager.enabled = false;
+                Instantiate(_playerContainerPrefab);
+            }
 
             SceneManager.LoadScene("AchievementManager", LoadSceneMode.Additive);
 
