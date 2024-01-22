@@ -152,11 +152,11 @@ namespace FlashSexJam.Player
             _modelMid.gameObject.SetActive(false);
             _modelDown.gameObject.SetActive(false);
 
-            if (mov.y > 0) _modelUp.gameObject.SetActive(true);
-            else if (mov.y < 0) _modelDown.gameObject.SetActive(true);
+            if (mov.y > 0f) _modelUp.gameObject.SetActive(true);
+            else if (mov.y < 0f) _modelDown.gameObject.SetActive(true);
             else _modelMid.gameObject.SetActive(true);
 
-            _xMov = mov.x;
+            _xMov = mov.y == 0f ? mov.x : 0f; // We can only change speed on base position
         }
 
         public void OnAttack(InputAction.CallbackContext value)
