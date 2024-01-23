@@ -54,8 +54,7 @@ namespace FlashSexJam.Manager
 
         private float _progressBoss;
 
-        private float _maxSpeedTimer;
-        private float _maxSpeedTimerRef = 3f;
+        private const float _maxSpeedTimerRef = 3f;
 
         private bool _didWin;
         public bool DidGameEnd(int playerId)
@@ -113,16 +112,16 @@ namespace FlashSexJam.Manager
                 {
                     if (player.Speed == _info.MaxSpeed)
                     {
-                        _maxSpeedTimer += Time.deltaTime; // TODO: Move to playerdata
-                        if (_maxSpeedTimer >= _maxSpeedTimerRef)
+                        player.MaxSpeedTimer += Time.deltaTime;
+                        if (player.MaxSpeedTimer >= _maxSpeedTimerRef)
                         {
-                            _maxSpeedTimer = 0f;
+                            player.MaxSpeedTimer = 0f;
                             AchievementManager.Instance.Unlock(AchievementID.MaxSpeed);
                         }
                     }
                     else
                     {
-                        _maxSpeedTimer = 0f;
+                        player.MaxSpeedTimer = 0f;
                     }
                 }
 
@@ -218,7 +217,8 @@ namespace FlashSexJam.Manager
                 GameOverContainer = gameOverContainer,
                 GameOverImage = gameOverImage,
                 GameOverTimer = 0f,
-                DidLost = false
+                DidLost = false,
+                MaxSpeedTimer = 0f
             };
             _players.Add(pc.gameObject.GetInstanceID(), data);
             ResetSpawnTimer(data);
@@ -242,9 +242,9 @@ namespace FlashSexJam.Manager
             }
         }
 
-        public void HitEnemy()
+        public void HitEnemy(int id)
         {
-            _maxSpeedTimer = 0f;
+            _players[id].MaxSpeedTimer = 0f;
         }
 
         public void PlayHScene(int playerId, int id)
@@ -308,6 +308,8 @@ namespace FlashSexJam.Manager
 
             public float Progress;
             public float SpawnTimer;
+
+            public float MaxSpeedTimer;
         }
     }
 
