@@ -256,10 +256,13 @@ namespace FlashSexJam.Manager
 
         private void UpdateCameras()
         {
-            var max = 1f / _players.Count;
+            var yMax = _players.Count > 1 ? .5f : 1f;
+            var xMax = _players.Count > 2 ? .5f : 1f;
             for (int i = 0; i < _players.Count; i++)
             {
-                _players.Values.ElementAt(i).Cam.rect = new(0f, max * i, 1f, max);
+                var y = i % 2;
+                var x = i / 2;
+                _players.Values.ElementAt(i).Cam.rect = new(xMax * x, yMax * y, xMax, yMax);
             }
         }
 
