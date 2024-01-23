@@ -217,7 +217,7 @@ namespace FlashSexJam.Manager
                 WallOfTentacles = tentacles,
                 UIProg = Instantiate(_playerUIProgPrefab, _bossBar).transform,
                 Speed = _info.MinSpeed,
-                Progress = 0f,
+                Progress = _players.Any() ? _players.Min(x => x.Value.Progress) : 0f,
                 SpawnTimer = 0f
             };
             _players.Add(pc.gameObject.GetInstanceID(), data);
