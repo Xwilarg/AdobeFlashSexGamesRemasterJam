@@ -207,14 +207,26 @@ namespace FlashSexJam.Manager
 
         public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam, GameObject gameOverContainer, Image gameOverImage)
         {
-            pc.Color = _players.Any() ? new(0f, 0.1529f, 0.4509f) : new(0.4509f, 0.0235f, 0f);
+            var colors = new[]
+            {
+                new Color(0.4509f, 0.0235f, 0f),
+                new Color(0f, 0.4428f, 0.4509f),
+                new Color(0.2501f, 0.4509f, 0f),
+                new Color(0.2233f, 0f, 0.4509f)
+            };
+            pc.Color = colors[_players.Count];
+            var ui = Instantiate(_playerUIProgPrefab, _bossBar);
+            for (int i = 0; i < ui.transform.childCount; i++)
+            {
+                ui.transform.GetChild(i).GetComponent<Image>().color = pc.Color;
+            }
             var data = new PlayerData()
             {
                 Cam = cam,
                 PC = pc,
                 Spawner = enemySpawn,
                 WallOfTentacles = tentacles,
-                UIProg = Instantiate(_playerUIProgPrefab, _bossBar).transform,
+                UIProg = ui.transform,
                 Speed = _info.MinSpeed,
                 Progress = _players.Any() ? _players.Min(x => x.Value.Progress) : 0f,
                 SpawnTimer = 0f,
