@@ -35,7 +35,7 @@ namespace FlashSexJam.Player
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (GameManager.Instance.DidGameEnd) return;
+            if (GameManager.Instance.DidGameEnd(Owner.PlayerID)) return;
 
             if (Owner.gameObject.activeInHierarchy && !Owner.IsInvulnerable)
             {

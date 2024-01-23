@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace FlashSexJam.Player
 {
@@ -38,6 +39,12 @@ namespace FlashSexJam.Player
         [SerializeField]
         private Transform _parentContainer;
 
+        [SerializeField]
+        private GameObject _gameOverContainer;
+
+        [SerializeField]
+        private Image _gameOverImage;
+
         public Color Color { set; get; }
 
         private int _attackCount = 3;
@@ -65,7 +72,7 @@ namespace FlashSexJam.Player
         private void Start()
         {
             _parentContainer.Translate(Vector2.up * 100f * GameManager.Instance.PlayerCount);
-            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam);
+            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam, _gameOverContainer, _gameOverImage);
 
             var models = new[] { _modelUp, _modelMid, _modelDown };
             foreach (var m in models)
@@ -83,7 +90,7 @@ namespace FlashSexJam.Player
 
         private void Update()
         {
-            if (!GameManager.Instance.DidGameEnd)
+            if (!GameManager.Instance.DidGameEnd(PlayerID))
             {
                 GameManager.Instance.IncreaseSpeed(PlayerID, _xMov * Time.deltaTime);
             }
@@ -148,7 +155,7 @@ namespace FlashSexJam.Player
 
         public void OnMove(InputAction.CallbackContext value)
         {
-            if (GameManager.Instance.DidGameEnd) return;
+            if (GameManager.Instance.DidGameEnd(PlayerID)) return;
 
             var mov = value.ReadValue<Vector2>();
 
@@ -165,7 +172,7 @@ namespace FlashSexJam.Player
 
         public void OnAttack(InputAction.CallbackContext value)
         {
-            if (GameManager.Instance.DidGameEnd) return;
+            if (GameManager.Instance.DidGameEnd(PlayerID)) return;
 
             if (value.performed && !IsInvulnerable && gameObject.activeInHierarchy && _attackCount > 0)
             {

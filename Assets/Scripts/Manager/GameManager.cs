@@ -28,12 +28,6 @@ namespace FlashSexJam.Manager
         private RectTransform _progressBossBar, _goalProgressBar, _startProgressBar;
 
         [SerializeField]
-        private GameObject _gameOverContainer;
-
-        [SerializeField]
-        private Image _gameOverBackground;
-
-        [SerializeField]
         private GameObject _victoryContainer;
 
         [SerializeField]
@@ -56,7 +50,6 @@ namespace FlashSexJam.Manager
 
         public LevelInfo LevelInfo => _info.Levels[_levelIndex];
 
-        private float _gameOverTimer;
         private const float _gameOverTimerRef = 3f;
 
         private float _progressBoss;
@@ -64,8 +57,11 @@ namespace FlashSexJam.Manager
         private float _maxSpeedTimer;
         private float _maxSpeedTimerRef = 3f;
 
-        private GameOverState _gameState;
-        public bool DidGameEnd => _gameState != GameOverState.None;
+        private bool _didWin;
+        public bool DidGameEnd(int playerId)
+        {
+            return _didWin || _players[playerId].DidLost;
+        }
 
         private readonly Dictionary<int, PlayerData> _players = new();
 
@@ -113,11 +109,11 @@ namespace FlashSexJam.Manager
 
                 player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, player.Progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
 
-                if (!DidGameEnd)
+                if (!DidGameEnd(id))
                 {
-                    if (_players.First().Value.Speed == _info.MaxSpeed)
+                    if (player.Speed == _info.MaxSpeed)
                     {
-                        _maxSpeedTimer += Time.deltaTime;
+                        _maxSpeedTimer += Time.deltaTime; // TODO: Move to playerdata
                         if (_maxSpeedTimer >= _maxSpeedTimerRef)
                         {
                             _maxSpeedTimer = 0f;
@@ -132,11 +128,11 @@ namespace FlashSexJam.Manager
 
                 if (player.Progress < _progressBoss)
                 {
-                    TriggerGameOver();
+                    TriggerGameOver(id);
                 }
                 else if (player.Progress >= _info.DestinationDistance)
                 {
-                    _gameState = GameOverState.Victory;
+                    _didWin = true;
 
                     var targetPlayer = _players.First().Value;
 
@@ -169,14 +165,14 @@ namespace FlashSexJam.Manager
 
                     ResetSpawnTimer(player);
                 }
-            }
 
-            if (_gameState == GameOverState.Lost && _gameOverTimer < _gameOverTimerRef)
-            {
-                _gameOverTimer += Time.deltaTime;
+                if (player.DidLost && player.GameOverTimer < _gameOverTimerRef)
+                {
+                    player.GameOverTimer += Time.deltaTime;
 
-                var c = _gameOverBackground.color;
-                _gameOverBackground.color = new(c.r, c.g, c.b, Mathf.Clamp01(_gameOverTimer / _gameOverTimerRef));
+                    var c = player.GameOverImage.color;
+                    player.GameOverImage.color = new(c.r, c.g, c.b, Mathf.Clamp01(player.GameOverTimer / _gameOverTimerRef));
+                }
             }
         }
 
@@ -206,7 +202,7 @@ namespace FlashSexJam.Manager
             }
         }
 
-        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam)
+        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam, GameObject gameOverContainer, Image gameOverImage)
         {
             pc.Color = _players.Any() ? new(0f, 0.1529f, 0.4509f) : new(0.4509f, 0.0235f, 0f);
             var data = new PlayerData()
@@ -218,7 +214,11 @@ namespace FlashSexJam.Manager
                 UIProg = Instantiate(_playerUIProgPrefab, _bossBar).transform,
                 Speed = _info.MinSpeed,
                 Progress = _players.Any() ? _players.Min(x => x.Value.Progress) : 0f,
-                SpawnTimer = 0f
+                SpawnTimer = 0f,
+                GameOverContainer = gameOverContainer,
+                GameOverImage = gameOverImage,
+                GameOverTimer = 0f,
+                DidLost = false
             };
             _players.Add(pc.gameObject.GetInstanceID(), data);
             ResetSpawnTimer(data);
@@ -262,12 +262,13 @@ namespace FlashSexJam.Manager
             }
         }
 
-        public void TriggerGameOver()
+        public void TriggerGameOver(int id)
         {
-            if (DidGameEnd) return; // Just in case
+            var pData = _players[id];
+            if (pData.DidLost) return; // Just in case
 
-            _gameState = GameOverState.Lost;
-            _gameOverContainer.SetActive(true);
+            pData.DidLost = true;
+            pData.GameOverContainer.SetActive(true);
         }
 
         public void ResetSpawnTimer(PlayerData pData)
@@ -296,6 +297,12 @@ namespace FlashSexJam.Manager
             public Transform Spawner;
             public Transform WallOfTentacles;
             public Camera Cam;
+
+            public GameObject GameOverContainer;
+            public Image GameOverImage;
+            public float GameOverTimer;
+
+            public bool DidLost;
 
             public float Speed;
 

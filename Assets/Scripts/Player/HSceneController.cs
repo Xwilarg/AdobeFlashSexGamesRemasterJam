@@ -44,7 +44,7 @@ namespace FlashSexJam.Player
 
         private void Update()
         {
-            if (_strokeCount > 0f && !GameManager.Instance.DidGameEnd)
+            if (_strokeCount > 0f && !GameManager.Instance.DidGameEnd(_pc.PlayerID))
             {
                 _strokeCount -= Time.deltaTime;
                 _orgasm -= Time.deltaTime;
@@ -87,7 +87,7 @@ namespace FlashSexJam.Player
             _orgasmBarImage.color = pink;
             if (_energy <= 0f)
             {
-                GameManager.Instance.TriggerGameOver();
+                GameManager.Instance.TriggerGameOver(_pc.PlayerID);
             }
         }
 
@@ -130,7 +130,7 @@ namespace FlashSexJam.Player
 
         public void OnStoke(InputAction.CallbackContext value)
         {
-            if (value.performed && _strokeCount > 0f && !GameManager.Instance.DidGameEnd)
+            if (value.performed && _strokeCount > 0f && !GameManager.Instance.DidGameEnd(_pc.PlayerID))
             {
                 _strokeCount--;
 
