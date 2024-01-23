@@ -144,7 +144,7 @@ TextureImporter:
         width: 970
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,7 +165,7 @@ TextureImporter:
         width: 44
         height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -186,7 +186,7 @@ TextureImporter:
         width: 27
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -207,7 +207,7 @@ TextureImporter:
         width: 25
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,6 +215,48 @@ TextureImporter:
       bones: []
       spriteID: 37c599a6ff6953348a9f98f07aaa5110
       internalID: -7985145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Progress Bar Sprites_0
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 30
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e3362ad45cdda149b9e7e39648b67f1
+      internalID: 1456314303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Progress Bar Sprites_1
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 30
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a4904dae88aec14a9e610fcd69aa233
+      internalID: -1999502927
       vertices: []
       indices: 
       edges: []
@@ -233,6 +275,8 @@ TextureImporter:
       DG_Progress: 2013212549
       Goal: 63576551
       Progress Bar: -167941839
+      Progress Bar Sprites_0: 1456314303
+      Progress Bar Sprites_1: -1999502927
       wall_progress: -7985145
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
