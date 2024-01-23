@@ -35,6 +35,9 @@ namespace FlashSexJam.Player
         [SerializeField]
         private Camera _cam;
 
+        [SerializeField]
+        private Transform _parentContainer;
+
         public Color Color { set; get; }
 
         private int _attackCount = 3;
@@ -61,6 +64,7 @@ namespace FlashSexJam.Player
 
         private void Start()
         {
+            _parentContainer.Translate(Vector2.up * 100f * GameManager.Instance.PlayerCount);
             GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam);
 
             var models = new[] { _modelUp, _modelMid, _modelDown };

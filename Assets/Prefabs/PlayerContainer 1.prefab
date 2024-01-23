@@ -572,6 +572,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1676326350285613828}
   _wallOfTentacles: {fileID: 2202572124111230438}
   _cam: {fileID: 1414846467196921830}
+  _parentContainer: {fileID: 350995797531113725}
 --- !u!50 &5016397024581379685
 Rigidbody2D:
   serializedVersion: 4

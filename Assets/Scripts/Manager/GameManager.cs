@@ -72,6 +72,8 @@ namespace FlashSexJam.Manager
 
         private readonly List<int> _enemyHScenes = new();
 
+        public int PlayerCount => _players.Count;
+
         private void Awake()
         {
             Instance = this;
