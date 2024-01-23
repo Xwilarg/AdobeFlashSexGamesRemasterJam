@@ -18,10 +18,4 @@ namespace FlashSexJam.SO
 
         public LevelInfo[] Levels;
     }
-
-    [System.Serializable]
-    public class LevelInfo
-    {
-        public GameObject[] SpawnableEnemies;
-    }
 }
