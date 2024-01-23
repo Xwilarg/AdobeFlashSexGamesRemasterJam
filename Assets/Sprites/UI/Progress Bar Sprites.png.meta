@@ -261,6 +261,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: NunNude
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 27
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1723354b561a42840879d9b3b3768ff5
+      internalID: -1006990173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NunClothes
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 27
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b07231b93ffa69f4098dc62daf19df47
+      internalID: 1618513494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheBeast
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 13
+        width: 61
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95e906d9f1c937947995f393eb50eff1
+      internalID: -1780895937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -274,9 +337,12 @@ TextureImporter:
     nameFileIdTable:
       DG_Progress: 2013212549
       Goal: 63576551
+      NunClothes: 1618513494
+      NunNude: -1006990173
       Progress Bar: -167941839
       Progress Bar Sprites_0: 1456314303
       Progress Bar Sprites_1: -1999502927
+      TheBeast: -1780895937
       wall_progress: -7985145
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
