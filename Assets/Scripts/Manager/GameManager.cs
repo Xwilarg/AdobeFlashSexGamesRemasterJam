@@ -16,9 +16,11 @@ namespace FlashSexJam.Manager
     {
         public static GameManager Instance { get; private set; }
 
+        [Header("Info")]
         [SerializeField]
         private GameInfo _info;
 
+        [Header("UI")]
         [SerializeField]
         private Transform _bossBar;
 
@@ -46,6 +48,10 @@ namespace FlashSexJam.Manager
         [SerializeField]
         private GameObject _nextLevel;
 
+        [Header("Debug (EDITOR ONLY)")]
+        [SerializeField]
+        private int _startLevelOverrides;
+
         private int _levelIndex;
 
         public LevelInfo LevelInfo => _info.Levels[_levelIndex];
@@ -69,6 +75,10 @@ namespace FlashSexJam.Manager
         private void Awake()
         {
             Instance = this;
+
+#if UNITY_EDITOR
+            _levelIndex = _startLevelOverrides;
+#endif
 
             if (GlobalData.PlayerCount == 1) // Only one player, we disable the ability for anyone else to join and spawn the player
             {
@@ -144,8 +154,11 @@ namespace FlashSexJam.Manager
 
                 if (player.SpawnTimer <= 0)
                 {
+                    if (LevelInfo.SpawnableEnemies.Any())
+                    {
                         var go = Instantiate(LevelInfo.SpawnableEnemies[Random.Range(0, LevelInfo.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
                         go.GetComponent<EnemyController>().PlayerID = id;
+                    }
 
                     ResetSpawnTimer(player);
                 }

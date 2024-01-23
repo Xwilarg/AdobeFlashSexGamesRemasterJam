@@ -446,6 +446,7 @@ MonoBehaviour:
   _inputManager: {fileID: 583909729}
   _playerContainerPrefab: {fileID: 6159497121459763136, guid: dcebdcfa1b7341e4b93ed7124945a4e0, type: 3}
   _nextLevel: {fileID: 842896370}
+  _startLevelOverrides: 4
 --- !u!4 &583909728
 Transform:
   m_ObjectHideFlags: 0
