@@ -56,10 +56,14 @@ namespace FlashSexJam.Manager
 
         private const float _maxSpeedTimerRef = 3f;
 
-        private bool _didWin;
+        private bool _didWin, _didStart;
+
+        public bool DoesPlayerExists(int playerId)
+            => _players.ContainsKey(playerId);
+
         public bool DidGameEnd(int playerId)
         {
-            return _didWin || _players[playerId].DidLost;
+            return _didWin || !_didStart || _players[playerId].DidLost;
         }
 
         private readonly Dictionary<int, PlayerData> _players = new();
@@ -91,7 +95,7 @@ namespace FlashSexJam.Manager
 
         private void Update()
         {
-            if (!_players.Any()) return;
+            if (!_players.Any() ||!_didStart) return;
 
             _progressBoss += Time.deltaTime * _info.BossSpeed;
             _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
@@ -224,6 +228,11 @@ namespace FlashSexJam.Manager
             ResetSpawnTimer(data);
 
             UpdateCameras();
+
+            if (_players.Count == GlobalData.PlayerCount)
+            {
+                _didStart = true;
+            }
         }
 
         public void UnregisterPlayer(PlayerController pc)

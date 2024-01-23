@@ -155,7 +155,7 @@ namespace FlashSexJam.Player
 
         public void OnMove(InputAction.CallbackContext value)
         {
-            if (GameManager.Instance.DidGameEnd(PlayerID)) return;
+            if (!GameManager.Instance.DoesPlayerExists(PlayerID) || GameManager.Instance.DidGameEnd(PlayerID)) return;
 
             var mov = value.ReadValue<Vector2>();
 
@@ -172,7 +172,7 @@ namespace FlashSexJam.Player
 
         public void OnAttack(InputAction.CallbackContext value)
         {
-            if (GameManager.Instance.DidGameEnd(PlayerID)) return;
+            if (!GameManager.Instance.DoesPlayerExists(PlayerID) || GameManager.Instance.DidGameEnd(PlayerID)) return;
 
             if (value.performed && !IsInvulnerable && gameObject.activeInHierarchy && _attackCount > 0)
             {
