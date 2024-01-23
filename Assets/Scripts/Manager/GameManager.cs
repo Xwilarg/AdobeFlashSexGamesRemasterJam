@@ -64,7 +64,8 @@ namespace FlashSexJam.Manager
         private float _maxSpeedTimer;
         private float _maxSpeedTimerRef = 3f;
 
-        public bool DidGameEnd { private set; get; }
+        private GameOverState _gameState;
+        public bool DidGameEnd => _gameState != GameOverState.None;
 
         private readonly Dictionary<int, PlayerData> _players = new();
 
@@ -129,9 +130,13 @@ namespace FlashSexJam.Manager
                     }
                 }
 
-                if (player.Progress >= _info.DestinationDistance)
+                if (player.Progress < _progressBoss)
                 {
-                    DidGameEnd = true;
+                    TriggerGameOver();
+                }
+                else if (player.Progress >= _info.DestinationDistance)
+                {
+                    _gameState = GameOverState.Victory;
 
                     var targetPlayer = _players.First().Value;
 
@@ -166,7 +171,7 @@ namespace FlashSexJam.Manager
                 }
             }
 
-            if (DidGameEnd && _gameOverTimer < _gameOverTimerRef)
+            if (_gameState == GameOverState.Lost && _gameOverTimer < _gameOverTimerRef)
             {
                 _gameOverTimer += Time.deltaTime;
 
@@ -261,7 +266,7 @@ namespace FlashSexJam.Manager
         {
             if (DidGameEnd) return; // Just in case
 
-            DidGameEnd = true;
+            _gameState = GameOverState.Lost;
             _gameOverContainer.SetActive(true);
         }
 
@@ -297,5 +302,12 @@ namespace FlashSexJam.Manager
             public float Progress;
             public float SpawnTimer;
         }
+    }
+
+    public enum GameOverState
+    {
+        None,
+        Victory,
+        Lost
     }
 }

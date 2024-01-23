@@ -48,10 +48,6 @@ namespace FlashSexJam.Player
                     EnemyCollide(collision.transform.parent.gameObject);
                 }
             }
-            else if (collision.CompareTag("Boss"))
-            {
-                GameManager.Instance.TriggerGameOver();
-            }
         }
     }
 
