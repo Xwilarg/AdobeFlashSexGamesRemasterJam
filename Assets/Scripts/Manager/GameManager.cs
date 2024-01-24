@@ -23,6 +23,7 @@ namespace FlashSexJam.Manager
         [Header("UI")]
         [SerializeField]
         private Transform _bossBarGame;
+        [SerializeField]
         private Transform _bossBarBoss;
 
         [SerializeField]
@@ -112,8 +113,11 @@ namespace FlashSexJam.Manager
         {
             if (!_players.Any() ||!_didStart) return;
 
-            _progressBoss += Time.deltaTime * _info.BossSpeed;
-            _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
+            if (!LevelInfo.IsBossLevel)
+            {
+                _progressBoss += Time.deltaTime * _info.BossSpeed;
+                _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
+            }
 
             foreach (var keyValue in _players)
             {
@@ -121,11 +125,14 @@ namespace FlashSexJam.Manager
                 var player = keyValue.Value;
 
                 player.SpawnTimer -= Time.deltaTime * player.Speed; // Timer depends of which speed we are going to
-                player.Progress += Time.deltaTime * player.Speed;
 
-                player.WallOfTentacles.position = new(_progressBoss - player.Progress, player.WallOfTentacles.position.y);
 
-                player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, player.Progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
+                if (!LevelInfo.IsBossLevel)
+                {
+                    player.WallOfTentacles.position = new(_progressBoss - player.Progress, player.WallOfTentacles.position.y);
+                    player.Progress += Time.deltaTime * player.Speed;
+                    player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, player.Progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
+                }
 
                 if (!DidGameEnd(id))
                 {
@@ -233,7 +240,11 @@ namespace FlashSexJam.Manager
                 new Color(0.2233f, 0f, 0.4509f)
             };
             pc.Color = colors[_players.Count];
-            var ui = Instantiate(_playerUIProgPrefab, _bossBarGame);
+            var ui = Instantiate(_playerUIProgPrefab, LevelInfo.IsBossLevel ? _bossBarBoss : _bossBarGame);
+            if (LevelInfo.IsBossLevel)
+            {
+                ui.transform.Translate(Vector2.right * 10f * _players.Count);
+            }
             for (int i = 0; i < ui.transform.childCount; i++)
             {
                 ui.transform.GetChild(i).GetComponent<Image>().color = pc.Color;

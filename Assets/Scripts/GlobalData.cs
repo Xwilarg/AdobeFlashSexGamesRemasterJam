@@ -2,6 +2,6 @@
 {
     public static class GlobalData
     {
-        public static int PlayerCount = 1;
+        public static int PlayerCount = 2;
     }
 }
