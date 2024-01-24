@@ -1,6 +1,7 @@
 ﻿using FlashSexJam.Enemy;
 using FlashSexJam.Manager;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 namespace FlashSexJam.Player
 {
@@ -10,6 +11,12 @@ namespace FlashSexJam.Player
 
         public BodyPartType Type { set; private get; }
 
+        private void StartHScene(GameObject prefab, EnemyController controller)
+        {
+            var go = Instantiate(prefab, Owner.transform.position, Quaternion.identity);
+            go.GetComponent<HScenePositionData>().InitClothes(Owner);
+            Owner.HScene.PlayHScene(go, controller.Name.GetHashCode());
+        }
         private void EnemyCollide(GameObject other)
         {
             GameManager.Instance.HitEnemy(Owner.PlayerID);
@@ -23,12 +30,41 @@ namespace FlashSexJam.Player
                 var prefab = controller.GetHScene(Type);
                 if (prefab == null)
                 {
-                    Debug.LogWarning($"Animation for {Type} was null");
-                    return;
+                    if (!Owner.IsTopBodyBroken)
+                    {
+                        Owner.TryBreakCloth(BodyPartType.UpperBody);
+                        Owner.ToggleInvulnerabilityFrames();
+                    }
+                    else if (!Owner.IsLowerBodyBroken)
+                    {
+                        Owner.TryBreakCloth(BodyPartType.LowerBody);
+                        Owner.ToggleInvulnerabilityFrames();
+                    }
+                    else
+                    {
+                        var parts = new[] { BodyPartType.Head, BodyPartType.UpperBody, BodyPartType.LowerBody };
+                        foreach (var p in parts)
+                        {
+                            prefab = controller.GetHScene(p);
+                            if (prefab != null)
+                            {
+                                break;
+                            }
+                        }
+                        if (prefab == null)
+                        {
+                            Debug.LogError($"No H scene available");
+                        }
+                        else
+                        {
+                            StartHScene(prefab, controller);
+                        }
+                    }
                 }
-                var go = Instantiate(prefab, Owner.transform.position, Quaternion.identity);
-                go.GetComponent<HScenePositionData>().InitClothes(Owner);
-                Owner.HScene.PlayHScene(go, controller.Name.GetHashCode());
+                else
+                {
+                    StartHScene(prefab, controller);
+                }
             }
             Destroy(other);
         }
