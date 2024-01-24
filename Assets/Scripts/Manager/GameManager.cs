@@ -42,6 +42,9 @@ namespace FlashSexJam.Manager
         [SerializeField]
         private GameObject _nextLevel;
 
+        [SerializeField]
+        private GameObject _waitingForPlayers;
+
         [Header("Debug (EDITOR ONLY)")]
         [SerializeField]
         private int _startLevelOverrides;
@@ -247,6 +250,7 @@ namespace FlashSexJam.Manager
             if (_players.Count == GlobalData.PlayerCount)
             {
                 _didStart = true;
+                _waitingForPlayers.SetActive(false);
             }
         }
 
