@@ -23,16 +23,14 @@
     "creditsFont": "Font Stopbuck by Khurasan",
     "creditsInspire": "Game inspired by \"Demon Girl\" from LineMarvel",
 
-    "achVictoryName": "One Step Toward Purity",
-    "achVictoryDesc": "Complete a level",
     "achVictoryNoHSceneName": "Stainless",
     "achVictoryNoHSceneDesc": "Complete a level without triggering any lewd scene",
     "achVictoryNoClothDamageName": "Top Fashion",
     "achVictoryNoClothDamageDesc": "Complete a level without loosing any cloth",
     "achVictoryFullPowerName": "3% of my Real Power",
-    "achVictoryFullPowerDesc": "Complete a level without using your power",
+    "achVictoryFullPowerDesc": "Complete a level without using spells",
     "achVictoryPerfectName": "Katabasis",
-    "achVictoryPerfectDesc": "Complete a level without triggering any lewd scene nor loosing cloth, and without using your power",
+    "achVictoryPerfectDesc": "Complete a level without triggering any lewd scene nor loosing cloth, and without using your spells",
     "achMaxSpeedName": "I am Speed",
     "achMaxSpeedDesc": "Stay at max speed for 3 seconds without hitting an enemy",
     "achAllHScenesName": "Stretching the Possibilities",
@@ -40,5 +38,7 @@
     "achEdgingName": "Staying on the Edge",
     "achEdgingDesc": "Exit a lewd scene with the orgasm bar at more than 95%",
     "achCreditsName": "The Great Apostles",
-    "achCreditsDesc": "Open the credits"
+    "achCreditsDesc": "Open the credits",
+    "achAllAlive4PName": "We Don't Forget Anyone!",
+    "achAllAlive4PDesc": "Complete a level with 4 players without anyone dying"
 }

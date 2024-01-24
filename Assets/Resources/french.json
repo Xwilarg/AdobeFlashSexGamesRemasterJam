@@ -23,8 +23,6 @@
     "creditsFont": "Police Stopbuck par Khurasan",
     "creditsInspire": "Jeu inspiré de \"Demon Girl\" par LineMarvel",
 
-    "achVictoryName": "Premier pas vers la purité",
-    "achVictoryDesc": "Finir un niveau",
     "achVictoryNoHSceneName": "Sans tâche",
     "achVictoryNoHSceneDesc": "Finir un niveau sans déclancher une animation érotique",
     "achVictoryNoClothDamageName": "Au top de la mode",
@@ -40,5 +38,7 @@
     "achEdgingName": "Au bord de la limite",
     "achEdgingDesc": "Partir d'une scène érotique avec la barre d'orgasme à plus de 95%",
     "achCreditsName": "Les grands apôtres",
-    "achCreditsDesc": "Ouvrir les crédits"
+    "achCreditsDesc": "Ouvrir les crédits",
+    "achAllAlive4PName": "On n'oublies personne !",
+    "achAllAlive4PDesc": "Finir un niveau avec 4 joueurs sans que personne ne meurt"
 }

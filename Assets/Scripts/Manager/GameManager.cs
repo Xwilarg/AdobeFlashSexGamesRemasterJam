@@ -166,7 +166,7 @@ namespace FlashSexJam.Manager
                     var hasPower = targetPlayer.PC.IsFullyPowered;
                     var hasNoHScenes = targetPlayer.PC.GotHScene;
 
-                    AchievementManager.Instance.Unlock(AchievementID.Victory);
+                    if (_players.Count == 4 && _players.All(x => !x.Value.DidLost)) AchievementManager.Instance.Unlock(AchievementID.AllAlive4P);
                     if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
                     if (hasClothes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoClothDamage);
                     if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);

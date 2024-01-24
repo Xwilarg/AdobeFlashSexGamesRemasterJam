@@ -40,11 +40,12 @@ namespace FlashSexJam.Achievement
 
         public Dictionary<AchievementID, Achievement> Achievements { get; } = new()
         {
-            { AchievementID.Victory, new() { Name = "achVictoryName", Description = "achVictoryDesc" } },
             { AchievementID.VictoryNoHScene, new() { Name = "achVictoryNoHSceneName", Description = "achVictoryNoHSceneDesc" } },
             { AchievementID.VictoryNoClothDamage, new() { Name = "achVictoryNoClothDamageName", Description = "achVictoryNoClothDamageDesc" } },
             { AchievementID.VictoryFullPower, new() { Name = "achVictoryFullPowerName", Description = "achVictoryFullPowerDesc" } },
             { AchievementID.VictoryPerfect, new() { Name = "achVictoryPerfectName", Description = "achVictoryPerfectDesc" } },
+
+            { AchievementID.AllAlive4P, new() { Name = "achAllAlive4PName", Description = "achAllAlive4PDesc" } },
 
             { AchievementID.MaxSpeed, new() { Name = "achMaxSpeedName", Description = "achMaxSpeedDesc" } },
             { AchievementID.AllHScenes, new() { Name = "achAllHScenesName", Description = "achAllHScenesDesc" } },
@@ -55,7 +56,6 @@ namespace FlashSexJam.Achievement
 
     public enum AchievementID
     {
-        Victory,
         VictoryNoHScene,
         VictoryNoClothDamage,
         VictoryFullPower,
@@ -66,7 +66,9 @@ namespace FlashSexJam.Achievement
         AllHScenes,
         Edging,
 
-        Credits
+        Credits,
+
+        AllAlive4P
     }
 
     public record Achievement
