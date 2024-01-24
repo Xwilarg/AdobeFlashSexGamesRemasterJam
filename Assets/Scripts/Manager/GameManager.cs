@@ -79,6 +79,8 @@ namespace FlashSexJam.Manager
 
         public int PlayerCount => _players.Count;
 
+        public bool AreAllNudes => _players.All(x => x.Value.PC.IsTopBodyBroken && x.Value.PC.IsTopBodyBroken);
+
         private void Awake()
         {
             Instance = this;

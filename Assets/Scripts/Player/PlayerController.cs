@@ -1,3 +1,4 @@
+using FlashSexJam.Achievement;
 using FlashSexJam.Manager;
 using System.Collections;
 using System.Collections.Generic;
@@ -120,6 +121,10 @@ namespace FlashSexJam.Player
             foreach (var c in _clothes[bodyPart])
             {
                 c.SetActive(false);
+            }
+            if (GameManager.Instance.PlayerCount == 4 && GameManager.Instance.AreAllNudes)
+            {
+                AchievementManager.Instance.Unlock(AchievementID.AllNude4P);
             }
             return true;
         }

@@ -46,6 +46,7 @@ namespace FlashSexJam.Achievement
             { AchievementID.VictoryPerfect, new() { Name = "achVictoryPerfectName", Description = "achVictoryPerfectDesc" } },
 
             { AchievementID.AllAlive4P, new() { Name = "achAllAlive4PName", Description = "achAllAlive4PDesc" } },
+            { AchievementID.AllNude4P, new() { Name = "achAllNude4PName", Description = "achAllNude4PDesc" } },
 
             { AchievementID.MaxSpeed, new() { Name = "achMaxSpeedName", Description = "achMaxSpeedDesc" } },
             { AchievementID.AllHScenes, new() { Name = "achAllHScenesName", Description = "achAllHScenesDesc" } },
@@ -68,7 +69,8 @@ namespace FlashSexJam.Achievement
 
         Credits,
 
-        AllAlive4P
+        AllAlive4P,
+        AllNude4P
     }
 
     public record Achievement
