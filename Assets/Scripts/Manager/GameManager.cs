@@ -22,7 +22,8 @@ namespace FlashSexJam.Manager
 
         [Header("UI")]
         [SerializeField]
-        private Transform _bossBar;
+        private Transform _bossBarGame;
+        private Transform _bossBarBoss;
 
         [SerializeField]
         private RectTransform _progressBossBar, _goalProgressBar, _startProgressBar;
@@ -84,6 +85,17 @@ namespace FlashSexJam.Manager
 #if UNITY_EDITOR
             _levelIndex = _startLevelOverrides;
 #endif
+
+            if (LevelInfo.IsBossLevel)
+            {
+                _bossBarGame.gameObject.SetActive(false);
+                _bossBarBoss.gameObject.SetActive(true);
+            }
+            else
+            {
+                _bossBarGame.gameObject.SetActive(true);
+                _bossBarBoss.gameObject.SetActive(false);
+            }
 
             if (GlobalData.PlayerCount == 1) // Only one player, we disable the ability for anyone else to join and spawn the player
             {
@@ -221,7 +233,7 @@ namespace FlashSexJam.Manager
                 new Color(0.2233f, 0f, 0.4509f)
             };
             pc.Color = colors[_players.Count];
-            var ui = Instantiate(_playerUIProgPrefab, _bossBar);
+            var ui = Instantiate(_playerUIProgPrefab, _bossBarGame);
             for (int i = 0; i < ui.transform.childCount; i++)
             {
                 ui.transform.GetChild(i).GetComponent<Image>().color = pc.Color;
