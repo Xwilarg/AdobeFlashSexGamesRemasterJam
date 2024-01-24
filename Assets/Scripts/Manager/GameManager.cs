@@ -173,8 +173,11 @@ namespace FlashSexJam.Manager
                 {
                     player.GameOverTimer += Time.deltaTime;
 
-                    var c = player.GameOverImage.color;
-                    player.GameOverImage.color = new(c.r, c.g, c.b, Mathf.Clamp01(player.GameOverTimer / _gameOverTimerRef));
+                    foreach (var i in player.GameOverImage)
+                    {
+                        var c = i.color;
+                        i.color = new(c.r, c.g, c.b, Mathf.Clamp01(player.GameOverTimer / _gameOverTimerRef));
+                    }
                 }
             }
         }
@@ -205,7 +208,7 @@ namespace FlashSexJam.Manager
             }
         }
 
-        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam, GameObject gameOverContainer, Image gameOverImage)
+        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam, GameObject gameOverContainer, Image[] gameOverImage)
         {
             var colors = new[]
             {
@@ -323,7 +326,7 @@ namespace FlashSexJam.Manager
             public Camera Cam;
 
             public GameObject GameOverContainer;
-            public Image GameOverImage;
+            public Image[] GameOverImage;
             public float GameOverTimer;
 
             public bool DidLost;

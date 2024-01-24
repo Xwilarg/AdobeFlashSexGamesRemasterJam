@@ -43,7 +43,7 @@ namespace FlashSexJam.Player
         private GameObject _gameOverContainer;
 
         [SerializeField]
-        private Image _gameOverImage;
+        private Image[] _gameOverImage;
 
         public Color Color { set; get; }
 
