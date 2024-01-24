@@ -172,7 +172,7 @@ namespace FlashSexJam.Player
 
         public void OnAttack(InputAction.CallbackContext value)
         {
-            if (!GameManager.Instance.DoesPlayerExists(PlayerID) || GameManager.Instance.DidGameEnd(PlayerID)) return;
+            if (!GameManager.Instance.DoesPlayerExists(PlayerID) || GameManager.Instance.DidGameEnd(PlayerID) || GameManager.Instance.LevelInfo.IsBossLevel) return;
 
             if (value.performed && !IsInvulnerable && gameObject.activeInHierarchy && _attackCount > 0)
             {
