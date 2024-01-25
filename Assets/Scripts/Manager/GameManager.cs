@@ -33,7 +33,7 @@ namespace FlashSexJam.Manager
         private GameObject _victoryContainer;
 
         [SerializeField]
-        private GameObject _playerUIProgPrefab;
+        private GameObject _playerUIProgPrefab, _playerUIDownPrefab;
 
         [SerializeField]
         private PlayerInputManager _inputManager;
@@ -128,16 +128,13 @@ namespace FlashSexJam.Manager
 
                 player.SpawnTimer -= Time.deltaTime * player.Speed; // Timer depends of which speed we are going to
 
-
-                if (!LevelInfo.IsBossLevel)
-                {
-                    player.WallOfTentacles.position = new(_progressBoss - player.Progress, player.WallOfTentacles.position.y);
-                    player.Progress += Time.deltaTime * player.Speed;
-                    player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, player.Progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
-                }
-
                 if (!DidGameEnd(id))
                 {
+                    if (!LevelInfo.IsBossLevel)
+                    {
+                        player.Progress += Time.deltaTime * player.Speed;
+                    }
+
                     if (player.Speed == _info.MaxSpeed)
                     {
                         player.MaxSpeedTimer += Time.deltaTime;
@@ -151,35 +148,41 @@ namespace FlashSexJam.Manager
                     {
                         player.MaxSpeedTimer = 0f;
                     }
-                }
 
-                if (player.Progress < _progressBoss)
-                {
-                    TriggerGameOver(id);
-                }
-                else if (player.Progress >= _info.DestinationDistance)
-                {
-                    _didWin = true;
-
-                    var targetPlayer = _players.First().Value;
-
-                    // We base achievements on the first player
-                    var hasClothes = targetPlayer.PC.IsFullClothed;
-                    var hasPower = targetPlayer.PC.IsFullyPowered;
-                    var hasNoHScenes = targetPlayer.PC.GotHScene;
-
-                    if (_players.Count == 4 && _players.All(x => !x.Value.DidLost)) AchievementManager.Instance.Unlock(AchievementID.AllAlive4P);
-                    if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
-                    if (hasClothes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoClothDamage);
-                    if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);
-                    if (hasNoHScenes && hasClothes && hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryPerfect);
-
-                    if (_levelIndex == _info.Levels.Length - 1)
+                    if (player.Progress < _progressBoss)
                     {
-                        _nextLevel.SetActive(false);
+                        TriggerGameOver(id);
                     }
-                    _victoryContainer.SetActive(true);
-                    return;
+                    else if (player.Progress >= _info.DestinationDistance)
+                    {
+                        _didWin = true;
+
+                        var targetPlayer = _players.First().Value;
+
+                        // We base achievements on the first player
+                        var hasClothes = targetPlayer.PC.IsFullClothed;
+                        var hasPower = targetPlayer.PC.IsFullyPowered;
+                        var hasNoHScenes = targetPlayer.PC.GotHScene;
+
+                        if (_players.Count == 4 && _players.All(x => !x.Value.DidLost)) AchievementManager.Instance.Unlock(AchievementID.AllAlive4P);
+                        if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
+                        if (hasClothes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoClothDamage);
+                        if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);
+                        if (hasNoHScenes && hasClothes && hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryPerfect);
+
+                        if (_levelIndex == _info.Levels.Length - 1)
+                        {
+                            _nextLevel.SetActive(false);
+                        }
+                        _victoryContainer.SetActive(true);
+                        return;
+                    }
+                }
+
+                if (!LevelInfo.IsBossLevel)
+                {
+                    player.WallOfTentacles.position = new(_progressBoss - player.Progress, player.WallOfTentacles.position.y);
+                    player.UIProg.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, player.Progress / _info.DestinationDistance), player.UIProg.position.y, player.UIProg.position.z);
                 }
 
                 if (player.SpawnTimer <= 0)
@@ -222,9 +225,21 @@ namespace FlashSexJam.Manager
             _victoryContainer.SetActive(false);
             _progressBoss = -_info.BossNegativeOffset;
 
-            foreach (var player in  _players.Values)
+            foreach (var player in _players.Values)
             {
                 player.PC.ResetPlayer();
+
+                var ui = Instantiate(_playerUIProgPrefab, LevelInfo.IsBossLevel ? _bossBarBoss : _bossBarGame);
+                if (LevelInfo.IsBossLevel)
+                {
+                    ui.transform.Translate(Vector2.right * 10f * _players.Count);
+                }
+                for (int i = 0; i < ui.transform.childCount; i++)
+                {
+                    ui.transform.GetChild(i).GetComponent<Image>().color = player.PC.Color;
+                }
+                Destroy(player.UIProg.gameObject);
+                player.UIProg = ui.transform;
 
                 player.Speed = _info.MinSpeed;
                 player.Progress = 0f;
@@ -325,6 +340,15 @@ namespace FlashSexJam.Manager
 
             pData.DidLost = true;
             pData.GameOverContainer.SetActive(true);
+
+            if (!LevelInfo.IsBossLevel)
+            {
+                var go = Instantiate(_playerUIDownPrefab, _bossBarGame);
+                go.transform.position = pData.UIProg.position;
+                go.transform.GetChild(0).GetComponent<Image>().color = pData.PC.Color;
+                Destroy(pData.UIProg.gameObject);
+                pData.UIProg = go.transform;
+            }
         }
 
         public void ResetSpawnTimer(PlayerData pData)

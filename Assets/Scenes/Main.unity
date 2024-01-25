@@ -442,11 +442,12 @@ MonoBehaviour:
   _startProgressBar: {fileID: 653038675580216953}
   _victoryContainer: {fileID: 5816641732494407572}
   _playerUIProgPrefab: {fileID: 4688393558845209187, guid: 1a566d64a62a2ff489903db3098d58ae, type: 3}
+  _playerUIDownPrefab: {fileID: 4688393558845209187, guid: 665574f70d47da54f9fd426bb986d402, type: 3}
   _inputManager: {fileID: 583909729}
   _playerContainerPrefab: {fileID: 6159497121459763136, guid: dcebdcfa1b7341e4b93ed7124945a4e0, type: 3}
   _nextLevel: {fileID: 842896370}
   _waitingForPlayers: {fileID: 1473079000}
-  _startLevelOverrides: 4
+  _startLevelOverrides: 0
 --- !u!4 &583909728
 Transform:
   m_ObjectHideFlags: 0
