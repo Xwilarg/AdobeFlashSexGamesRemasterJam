@@ -270,7 +270,7 @@ TextureImporter:
         width: 19
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -291,7 +291,7 @@ TextureImporter:
         width: 19
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -312,7 +312,7 @@ TextureImporter:
         width: 61
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -320,6 +320,69 @@ TextureImporter:
       bones: []
       spriteID: 95e906d9f1c937947995f393eb50eff1
       internalID: -1780895937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DG_Down
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 35
+        width: 32
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f5209fa3d3feb743874aa02f842c99c
+      internalID: -1463842867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DG_Down_Clothes
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 35
+        width: 32
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea4ecf73dd9b22f46b1087d45be994ac
+      internalID: 2082232400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DG_Down_Cum
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 34
+        width: 32
+        height: 13
+      alignment: 9
+      pivot: {x: 0.50000095, y: 0.61959076}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e806fa333e28424f9d260483f4b73c3
+      internalID: 1242763357
       vertices: []
       indices: 
       edges: []
@@ -335,6 +398,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      DG_Down: -1463842867
+      DG_Down_Clothes: 2082232400
+      DG_Down_Cum: 1242763357
       DG_Progress: 2013212549
       Goal: 63576551
       NunClothes: 1618513494
