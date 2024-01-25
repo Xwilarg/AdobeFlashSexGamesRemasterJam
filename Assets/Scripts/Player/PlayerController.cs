@@ -114,7 +114,7 @@ namespace FlashSexJam.Player
         /// <returns>false if already naked</returns>
         public bool TryBreakCloth(BodyPartType bodyPart)
         {
-            if (!_clothes[bodyPart].Any())
+            if (!_clothes[bodyPart].Any(x => x.activeInHierarchy))
             {
                 return false;
             }
