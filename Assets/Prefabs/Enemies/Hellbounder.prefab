@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5aed89472643484abd51863269732fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hSceneHead: {fileID: 0}
+  _hSceneHead: {fileID: 3535461754944050207, guid: 66d0d11d1a8a975439c3aae0ace91aed, type: 3}
   _hSceneUpperBody: {fileID: 0}
   _hSceneLowerBody: {fileID: 3535461754944050207, guid: bae71dcf397c0eb4bb06c56332153940, type: 3}
   _xSpeedOffset: 3
