@@ -101,6 +101,11 @@ namespace FlashSexJam.Player
         {
             gameObject.SetActive(true);
             HScene.StopHSceneNow();
+
+            _modelUp.gameObject.SetActive(false);
+            _modelMid.gameObject.SetActive(true);
+            _modelDown.gameObject.SetActive(false);
+
             foreach (var c in _clothes)
             {
                 foreach (var v in c.Value)

@@ -63,6 +63,8 @@ namespace FlashSexJam.Manager
 
         private bool _didWin, _didStart;
 
+        private Transform _enemiesContainer;
+
         public bool DoesPlayerExists(int playerId)
             => _players.ContainsKey(playerId);
 
@@ -109,6 +111,8 @@ namespace FlashSexJam.Manager
             SceneManager.LoadScene("AchievementManager", LoadSceneMode.Additive);
 
             _progressBoss = -_info.BossNegativeOffset;
+
+            _enemiesContainer = new GameObject("Enemies").transform;
         }
 
         private void Update()
@@ -190,6 +194,7 @@ namespace FlashSexJam.Manager
                     if (LevelInfo.SpawnableEnemies.Any())
                     {
                         var go = Instantiate(LevelInfo.SpawnableEnemies[Random.Range(0, LevelInfo.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
+                        go.transform.parent = _enemiesContainer;
                         go.GetComponent<EnemyController>().PlayerID = id;
                     }
 
@@ -225,6 +230,11 @@ namespace FlashSexJam.Manager
             _victoryContainer.SetActive(false);
             _progressBoss = -_info.BossNegativeOffset;
             _didWin = false;
+
+            for (int i = 0; i < _enemiesContainer.childCount; i++)
+            {
+                Destroy(_enemiesContainer.GetChild(i).gameObject);
+            }
 
             foreach (var player in _players.Values)
             {
