@@ -224,6 +224,7 @@ namespace FlashSexJam.Manager
         {
             _victoryContainer.SetActive(false);
             _progressBoss = -_info.BossNegativeOffset;
+            _didWin = false;
 
             foreach (var player in _players.Values)
             {
@@ -244,6 +245,8 @@ namespace FlashSexJam.Manager
                 player.Speed = _info.MinSpeed;
                 player.Progress = 0f;
                 player.SpawnTimer = 0f;
+                player.DidLost = false;
+                player.MaxSpeedTimer = 0f;
             }
         }
 

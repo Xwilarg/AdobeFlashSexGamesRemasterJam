@@ -18,7 +18,7 @@ MonoBehaviour:
   SpawnIntervalMin: 5
   SpawnIntervalMax: 10
   DestinationDistance: 200
-  BossSpeed: 5
+  BossSpeed: 2
   BossNegativeOffset: 20
   Levels:
   - {fileID: 11400000, guid: 4b98e9fb7493a604487a1699971c56c0, type: 2}

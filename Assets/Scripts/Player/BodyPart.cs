@@ -1,7 +1,6 @@
 ﻿using FlashSexJam.Enemy;
 using FlashSexJam.Manager;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 namespace FlashSexJam.Player
 {
