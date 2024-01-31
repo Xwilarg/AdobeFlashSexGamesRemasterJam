@@ -260,7 +260,7 @@ namespace FlashSexJam.Manager
             }
         }
 
-        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam, GameObject gameOverContainer, Image[] gameOverImage)
+        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam, GameObject gameOverContainer, Image[] gameOverImage, NunBoss boss)
         {
             var colors = new[]
             {
@@ -279,10 +279,14 @@ namespace FlashSexJam.Manager
             {
                 ui.transform.GetChild(i).GetComponent<Image>().color = pc.Color;
             }
+
+            boss.gameObject.SetActive(LevelInfo.IsBossLevel);
+
             var data = new PlayerData()
             {
                 Cam = cam,
                 PC = pc,
+                Boss = boss,
                 Spawner = enemySpawn,
                 WallOfTentacles = tentacles,
                 UIProg = ui.transform,
@@ -390,6 +394,8 @@ namespace FlashSexJam.Manager
             public Transform Spawner;
             public Transform WallOfTentacles;
             public Camera Cam;
+
+            public NunBoss Boss;
 
             public GameObject GameOverContainer;
             public Image[] GameOverImage;
