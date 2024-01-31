@@ -280,7 +280,7 @@ namespace FlashSexJam.Manager
                 Destroy(player.UIProg.gameObject);
                 player.UIProg = ui.transform;
 
-                player.Speed = _info.MinSpeed;
+                player.Speed = LevelInfo.IsBossLevel ? _info.DefaultBossLevelSpeed : _info.MinSpeed;
                 player.Progress = 0f;
                 player.SpawnTimer = 0f;
                 player.DidLost = false;
@@ -319,7 +319,7 @@ namespace FlashSexJam.Manager
                 Spawner = enemySpawn,
                 WallOfTentacles = tentacles,
                 UIProg = ui.transform,
-                Speed = _info.MinSpeed,
+                Speed = LevelInfo.IsBossLevel ? _info.DefaultBossLevelSpeed : _info.MinSpeed,
                 Progress = _players.Any() ? _players.Min(x => x.Value.Progress) : 0f,
                 SpawnTimer = 0f,
                 GameOverContainer = gameOverContainer,
@@ -368,7 +368,10 @@ namespace FlashSexJam.Manager
         {
             var player = _players[playerId];
 
-            player.Speed = 0;
+            if (!LevelInfo.IsBossLevel)
+            {
+                player.Speed = 0;
+            }
             if (!_enemyHScenes.Contains(id))
             {
                 _enemyHScenes.Add(id);
@@ -404,14 +407,20 @@ namespace FlashSexJam.Manager
 
         public void IncreaseSpeed(int id, float value)
         {
-            var player = _players[id];
-            player.Speed = Mathf.Clamp(player.Speed + (value * _info.SpeedChangeMultiplier), _info.MinSpeed, _info.MaxSpeed);
+            if (!LevelInfo.IsBossLevel)
+            {
+                var player = _players[id];
+                player.Speed = Mathf.Clamp(player.Speed + (value * _info.SpeedChangeMultiplier), _info.MinSpeed, _info.MaxSpeed);
+            }
         }
 
         public void ResetSpeed(int id)
         {
-            var player = _players[id];
-            player.Speed = _info.MinSpeed;
+            if (!LevelInfo.IsBossLevel)
+            {
+                var player = _players[id];
+                player.Speed = _info.MinSpeed;
+            }
         }
 
         public float GetSpeed(int id) => _players[id].Speed;
