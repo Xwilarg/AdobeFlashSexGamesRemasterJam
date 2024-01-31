@@ -14,10 +14,13 @@ namespace FlashSexJam.World
 
         private void Update()
         {
-            transform.Translate(Vector3.left * Time.deltaTime * GameManager.Instance.GetSpeed(_attachedPlayer.PlayerID) * _speedMultiplier);
-            if (transform.position.x < -30f)
+            if (!GameManager.Instance.LevelInfo.IsBossLevel)
             {
-                transform.Translate(Vector3.right * 60f);
+                transform.Translate(Vector3.left * Time.deltaTime * GameManager.Instance.GetSpeed(_attachedPlayer.PlayerID) * _speedMultiplier);
+                if (transform.position.x < -30f)
+                {
+                    transform.Translate(Vector3.right * 60f);
+                }
             }
         }
     }

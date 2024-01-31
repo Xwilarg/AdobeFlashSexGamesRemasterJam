@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FlashSexJam.Enemy;
 using UnityEngine.InputSystem;
+using FlashSexJam.Enemy.Boss;
 
 namespace FlashSexJam.Manager
 {
@@ -79,6 +80,9 @@ namespace FlashSexJam.Manager
 
         private readonly List<int> _enemyHScenes = new();
 
+        private float _bossAttackTimer;
+        private float _bossAttackTimerRef = 2f;
+
         public int PlayerCount => _players.Count;
 
         public bool AreAllNudes => _players.All(x => x.Value.PC.IsTopBodyBroken && x.Value.PC.IsTopBodyBroken);
@@ -113,13 +117,28 @@ namespace FlashSexJam.Manager
             _progressBoss = -_info.BossNegativeOffset;
 
             _enemiesContainer = new GameObject("Enemies").transform;
+
+            _bossAttackTimer = _bossAttackTimerRef;
         }
 
         private void Update()
         {
             if (!_players.Any() ||!_didStart) return;
 
-            if (!LevelInfo.IsBossLevel)
+            if (LevelInfo.IsBossLevel)
+            {
+                _bossAttackTimer -= Time.deltaTime;
+                if (_bossAttackTimer <= 0f)
+                {
+                    _bossAttackTimer = _bossAttackTimerRef;
+
+                    foreach (var p in _players)
+                    {
+                        p.Value.Boss.Attack();
+                    }
+                }
+            }
+            else
             {
                 _progressBoss += Time.deltaTime * _info.BossSpeed;
                 _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
