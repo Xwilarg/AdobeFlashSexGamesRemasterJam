@@ -52,6 +52,12 @@ namespace FlashSexJam.Player
                 if (_orgasm <= 0f && !_isOrgasming)
                 {
                     _isOrgasming = true;
+
+                    if (!_pc.IsTopBodyBroken && !_pc.IsLowerBodyBroken)
+                    {
+                        AchievementManager.Instance.Unlock(AchievementID.OrgasmFullCloth);
+                    }
+
                     StartCoroutine(PlayOrgasmVfx());
                 }
 
