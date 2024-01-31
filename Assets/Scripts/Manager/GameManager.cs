@@ -134,7 +134,7 @@ namespace FlashSexJam.Manager
 
                     foreach (var p in _players)
                     {
-                        p.Value.Boss.Attack();
+                        StartCoroutine(p.Value.Boss.Attack());
                     }
                 }
             }
@@ -212,9 +212,7 @@ namespace FlashSexJam.Manager
                 {
                     if (LevelInfo.SpawnableEnemies.Any())
                     {
-                        var go = Instantiate(LevelInfo.SpawnableEnemies[Random.Range(0, LevelInfo.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
-                        go.transform.parent = _enemiesContainer;
-                        go.GetComponent<EnemyController>().PlayerID = id;
+                        SpawnEnemy(LevelInfo.SpawnableEnemies[Random.Range(0, LevelInfo.SpawnableEnemies.Length)], player, id);
                     }
 
                     ResetSpawnTimer(player);
@@ -231,6 +229,17 @@ namespace FlashSexJam.Manager
                     }
                 }
             }
+        }
+
+        public GameObject SpawnEnemy(GameObject prefab, int playerId)
+            => SpawnEnemy(prefab, _players[playerId], playerId);
+        public GameObject SpawnEnemy(GameObject prefab, PlayerData player, int playerId)
+        {
+            var go = Instantiate(prefab, player.Spawner.position, Quaternion.identity);
+            go.transform.parent = _enemiesContainer;
+            go.GetComponent<EnemyController>().PlayerID = playerId;
+
+            return go;
         }
 
         public void NextLevel()
@@ -299,6 +308,7 @@ namespace FlashSexJam.Manager
                 ui.transform.GetChild(i).GetComponent<Image>().color = pc.Color;
             }
 
+            boss.PlayerId = pc.PlayerID;
             boss.gameObject.SetActive(LevelInfo.IsBossLevel);
 
             var data = new PlayerData()
