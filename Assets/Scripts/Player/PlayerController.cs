@@ -53,7 +53,12 @@ namespace FlashSexJam.Player
 
         public Color Color { set; get; }
 
-        private int _attackCount = 3;
+        private int _attackCount;
+        public void GetAttackPowerup()
+        {
+            _attackCount++;
+            _attackCountText.text = _attackCount.ToString();
+        }
 
         public bool IsInvulnerable { private set; get; }
 
@@ -70,13 +75,14 @@ namespace FlashSexJam.Player
             { BodyPartType.LowerBody, new() }
         };
 
-        private void Awake()
-        {
-            _attackCountText.text = _attackCount.ToString();
-        }
-
         private void Start()
         {
+            if (!GameManager.Instance.LevelInfo.IsBossLevel)
+            {
+                _attackCount = 3;
+            }
+            _attackCountText.text = _attackCount.ToString();
+
             _parentContainer.Translate(Vector2.up * 100f * GameManager.Instance.PlayerCount);
             GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam, _gameOverContainer, _gameOverImage, _boss);
 
@@ -187,16 +193,23 @@ namespace FlashSexJam.Player
 
         public void OnAttack(InputAction.CallbackContext value)
         {
-            if (!GameManager.Instance.DoesPlayerExists(PlayerID) || GameManager.Instance.DidGameEnd(PlayerID) || GameManager.Instance.LevelInfo.IsBossLevel) return;
+            if (!GameManager.Instance.DoesPlayerExists(PlayerID) || GameManager.Instance.DidGameEnd(PlayerID)) return;
 
             if (value.performed && !IsInvulnerable && gameObject.activeInHierarchy && _attackCount > 0)
             {
+                if (GameManager.Instance.LevelInfo.IsBossLevel)
+                {
+
+                }
+                else
+                {
+                    var bounds = CalculateBounds();
+                    var atk = Instantiate(_attackPrefab, new Vector2(bounds.min.x, 0f), Quaternion.identity);
+                    atk.GetComponent<PlayerAttack>().MaxX = bounds.max.x;
+                }
+
                 _attackCount--;
                 _attackCountText.text = _attackCount.ToString();
-
-                var bounds = CalculateBounds();
-                var atk = Instantiate(_attackPrefab, new Vector2(bounds.min.x, 0f), Quaternion.identity);
-                atk.GetComponent<PlayerAttack>().MaxX = bounds.max.x;
             }
         }
     }

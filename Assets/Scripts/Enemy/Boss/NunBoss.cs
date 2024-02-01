@@ -10,6 +10,9 @@ namespace FlashSexJam.Enemy.Boss
         private GameObject _enemy;
 
         [SerializeField]
+        private GameObject _grenade;
+
+        [SerializeField]
         private Transform _lowerSpawn;
 
         private Animator _anim;
@@ -27,8 +30,14 @@ namespace FlashSexJam.Enemy.Boss
 
             yield return new WaitForSeconds(.68f);
 
-            var go = GameManager.Instance.SpawnEnemy(_enemy, PlayerId);
-            go.GetComponent<EnemyController>().OverridesSpawnPos = false;
+            var isGrenade = Random.Range(0, 5) == 0;
+            var prefab = isGrenade ? _grenade : _enemy;
+
+            var go = GameManager.Instance.SpawnEnemy(prefab, PlayerId);
+            if (!isGrenade)
+            {
+                go.GetComponent<EnemyController>().OverridesSpawnPos = false;
+            }
             go.transform.position = _lowerSpawn.position;
         }
     }

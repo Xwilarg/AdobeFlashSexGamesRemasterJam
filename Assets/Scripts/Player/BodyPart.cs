@@ -74,7 +74,12 @@ namespace FlashSexJam.Player
 
             if (Owner.gameObject.activeInHierarchy && !Owner.IsInvulnerable)
             {
-                if (collision.CompareTag("Enemy"))
+                if (collision.CompareTag("Grenade"))
+                {
+                    Owner.GetAttackPowerup();
+                    Destroy(collision.gameObject);
+                }
+                else if (collision.CompareTag("Enemy"))
                 {
                     EnemyCollide(collision.gameObject);
                 }

@@ -182,16 +182,19 @@ namespace FlashSexJam.Manager
 
                         var targetPlayer = _players.First().Value;
 
-                        // We base achievements on the first player
-                        var hasClothes = targetPlayer.PC.IsFullClothed;
-                        var hasPower = targetPlayer.PC.IsFullyPowered;
-                        var hasNoHScenes = targetPlayer.PC.GotHScene;
+                        if (!LevelInfo.IsBossLevel)
+                        {
+                            // We base achievements on the first player
+                            var hasClothes = targetPlayer.PC.IsFullClothed;
+                            var hasPower = targetPlayer.PC.IsFullyPowered;
+                            var hasNoHScenes = targetPlayer.PC.GotHScene;
 
-                        if (_players.Count == 4 && _players.All(x => !x.Value.DidLost)) AchievementManager.Instance.Unlock(AchievementID.AllAlive4P);
-                        if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
-                        if (hasClothes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoClothDamage);
-                        if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);
-                        if (hasNoHScenes && hasClothes && hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryPerfect);
+                            if (_players.Count == 4 && _players.All(x => !x.Value.DidLost)) AchievementManager.Instance.Unlock(AchievementID.AllAlive4P);
+                            if (hasNoHScenes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoHScene);
+                            if (hasClothes) AchievementManager.Instance.Unlock(AchievementID.VictoryNoClothDamage);
+                            if (hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryFullPower);
+                            if (hasNoHScenes && hasClothes && hasPower) AchievementManager.Instance.Unlock(AchievementID.VictoryPerfect);
+                        }
 
                         if (_levelIndex == _info.Levels.Length - 1)
                         {
@@ -237,7 +240,12 @@ namespace FlashSexJam.Manager
         {
             var go = Instantiate(prefab, player.Spawner.position, Quaternion.identity);
             go.transform.parent = _enemiesContainer;
-            go.GetComponent<EnemyController>().PlayerID = playerId;
+
+            var ec = go.GetComponent<EnemyController>();
+            if (ec != null)
+            {
+                ec.PlayerID = playerId;
+            }
 
             return go;
         }
@@ -423,6 +431,7 @@ namespace FlashSexJam.Manager
             }
         }
 
+        public float GetBossSpeed() => _players.First().Value.Speed;
         public float GetSpeed(int id) => _players[id].Speed;
 
         public class PlayerData
