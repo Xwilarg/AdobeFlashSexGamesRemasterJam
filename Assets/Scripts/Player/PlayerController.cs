@@ -25,7 +25,7 @@ namespace FlashSexJam.Player
         private GameObject _positionContainers;
 
         [SerializeField]
-        private GameObject _attackPrefab;
+        private GameObject _attackPrefab, _grenadePrefab;
 
         [SerializeField]
         private TMP_Text _attackCountText;
@@ -199,7 +199,12 @@ namespace FlashSexJam.Player
             {
                 if (GameManager.Instance.LevelInfo.IsBossLevel)
                 {
+                    float y = 0;
+                    if (_modelUp.gameObject.activeInHierarchy) y = _modelUp.transform.position.y;
+                    else if (_modelDown.gameObject.activeInHierarchy) y = _modelDown.transform.position.y;
+                    else y = _modelMid.transform.position.y;
 
+                    var grenade = Instantiate(_grenadePrefab, new Vector2(transform.position.x, y), Quaternion.identity);
                 }
                 else
                 {
