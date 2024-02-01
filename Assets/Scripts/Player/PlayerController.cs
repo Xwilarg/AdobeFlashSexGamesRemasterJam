@@ -1,4 +1,6 @@
 using FlashSexJam.Achievement;
+using FlashSexJam.Enemy;
+using FlashSexJam.Enemy.Boss;
 using FlashSexJam.Manager;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,6 +48,9 @@ namespace FlashSexJam.Player
         [SerializeField]
         private Image[] _gameOverImage;
 
+        [SerializeField]
+        private NunBoss _boss;
+
         public Color Color { set; get; }
 
         private int _attackCount = 3;
@@ -73,7 +78,7 @@ namespace FlashSexJam.Player
         private void Start()
         {
             _parentContainer.Translate(Vector2.up * 100f * GameManager.Instance.PlayerCount);
-            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam, _gameOverContainer, _gameOverImage);
+            GameManager.Instance.RegisterPlayer(_spawnPoint, _wallOfTentacles, this, _cam, _gameOverContainer, _gameOverImage, _boss);
 
             var models = new[] { _modelUp, _modelMid, _modelDown };
             foreach (var m in models)

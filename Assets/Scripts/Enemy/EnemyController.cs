@@ -20,6 +20,8 @@ namespace FlashSexJam.Enemy
 
         public int PlayerID { set; private get; }
 
+        public bool OverridesSpawnPos { set; private get; } = true;
+
         public GameObject GetHScene(BodyPartType type)
         {
             return type switch
@@ -37,9 +39,12 @@ namespace FlashSexJam.Enemy
         {
             _rb = GetComponent<Rigidbody2D>();
 
-            var (Min, Max) = SpawnRange;
-            var yPos = Min == Max ? Min : Random.Range(Min, Max);
-            transform.Translate(Vector2.up * yPos);
+            if (OverridesSpawnPos)
+            {
+                var (Min, Max) = SpawnRange;
+                var yPos = Min == Max ? Min : Random.Range(Min, Max);
+                transform.Translate(Vector2.up * yPos);
+            }
         }
 
         protected virtual void Update()

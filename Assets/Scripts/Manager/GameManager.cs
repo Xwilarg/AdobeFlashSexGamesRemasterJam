@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FlashSexJam.Enemy;
 using UnityEngine.InputSystem;
+using FlashSexJam.Enemy.Boss;
 
 namespace FlashSexJam.Manager
 {
@@ -79,6 +80,9 @@ namespace FlashSexJam.Manager
 
         private readonly List<int> _enemyHScenes = new();
 
+        private float _bossAttackTimer;
+        private float _bossAttackTimerRef = 2f;
+
         public int PlayerCount => _players.Count;
 
         public bool AreAllNudes => _players.All(x => x.Value.PC.IsTopBodyBroken && x.Value.PC.IsTopBodyBroken);
@@ -113,13 +117,28 @@ namespace FlashSexJam.Manager
             _progressBoss = -_info.BossNegativeOffset;
 
             _enemiesContainer = new GameObject("Enemies").transform;
+
+            _bossAttackTimer = _bossAttackTimerRef;
         }
 
         private void Update()
         {
             if (!_players.Any() ||!_didStart) return;
 
-            if (!LevelInfo.IsBossLevel)
+            if (LevelInfo.IsBossLevel)
+            {
+                _bossAttackTimer -= Time.deltaTime;
+                if (_bossAttackTimer <= 0f)
+                {
+                    _bossAttackTimer = _bossAttackTimerRef;
+
+                    foreach (var p in _players)
+                    {
+                        StartCoroutine(p.Value.Boss.Attack());
+                    }
+                }
+            }
+            else
             {
                 _progressBoss += Time.deltaTime * _info.BossSpeed;
                 _progressBossBar.transform.position = new(Mathf.Lerp(_startProgressBar.position.x, _goalProgressBar.position.x, _progressBoss / _info.DestinationDistance), _progressBossBar.transform.position.y, _progressBossBar.transform.position.z);
@@ -193,9 +212,7 @@ namespace FlashSexJam.Manager
                 {
                     if (LevelInfo.SpawnableEnemies.Any())
                     {
-                        var go = Instantiate(LevelInfo.SpawnableEnemies[Random.Range(0, LevelInfo.SpawnableEnemies.Length)], player.Spawner.position, Quaternion.identity);
-                        go.transform.parent = _enemiesContainer;
-                        go.GetComponent<EnemyController>().PlayerID = id;
+                        SpawnEnemy(LevelInfo.SpawnableEnemies[Random.Range(0, LevelInfo.SpawnableEnemies.Length)], player, id);
                     }
 
                     ResetSpawnTimer(player);
@@ -212,6 +229,17 @@ namespace FlashSexJam.Manager
                     }
                 }
             }
+        }
+
+        public GameObject SpawnEnemy(GameObject prefab, int playerId)
+            => SpawnEnemy(prefab, _players[playerId], playerId);
+        public GameObject SpawnEnemy(GameObject prefab, PlayerData player, int playerId)
+        {
+            var go = Instantiate(prefab, player.Spawner.position, Quaternion.identity);
+            go.transform.parent = _enemiesContainer;
+            go.GetComponent<EnemyController>().PlayerID = playerId;
+
+            return go;
         }
 
         public void NextLevel()
@@ -252,7 +280,7 @@ namespace FlashSexJam.Manager
                 Destroy(player.UIProg.gameObject);
                 player.UIProg = ui.transform;
 
-                player.Speed = _info.MinSpeed;
+                player.Speed = LevelInfo.IsBossLevel ? _info.DefaultBossLevelSpeed : _info.MinSpeed;
                 player.Progress = 0f;
                 player.SpawnTimer = 0f;
                 player.DidLost = false;
@@ -260,7 +288,7 @@ namespace FlashSexJam.Manager
             }
         }
 
-        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam, GameObject gameOverContainer, Image[] gameOverImage)
+        public void RegisterPlayer(Transform enemySpawn, Transform tentacles, PlayerController pc, Camera cam, GameObject gameOverContainer, Image[] gameOverImage, NunBoss boss)
         {
             var colors = new[]
             {
@@ -279,14 +307,19 @@ namespace FlashSexJam.Manager
             {
                 ui.transform.GetChild(i).GetComponent<Image>().color = pc.Color;
             }
+
+            boss.PlayerId = pc.PlayerID;
+            boss.gameObject.SetActive(LevelInfo.IsBossLevel);
+
             var data = new PlayerData()
             {
                 Cam = cam,
                 PC = pc,
+                Boss = boss,
                 Spawner = enemySpawn,
                 WallOfTentacles = tentacles,
                 UIProg = ui.transform,
-                Speed = _info.MinSpeed,
+                Speed = LevelInfo.IsBossLevel ? _info.DefaultBossLevelSpeed : _info.MinSpeed,
                 Progress = _players.Any() ? _players.Min(x => x.Value.Progress) : 0f,
                 SpawnTimer = 0f,
                 GameOverContainer = gameOverContainer,
@@ -335,7 +368,10 @@ namespace FlashSexJam.Manager
         {
             var player = _players[playerId];
 
-            player.Speed = 0;
+            if (!LevelInfo.IsBossLevel)
+            {
+                player.Speed = 0;
+            }
             if (!_enemyHScenes.Contains(id))
             {
                 _enemyHScenes.Add(id);
@@ -371,14 +407,20 @@ namespace FlashSexJam.Manager
 
         public void IncreaseSpeed(int id, float value)
         {
-            var player = _players[id];
-            player.Speed = Mathf.Clamp(player.Speed + (value * _info.SpeedChangeMultiplier), _info.MinSpeed, _info.MaxSpeed);
+            if (!LevelInfo.IsBossLevel)
+            {
+                var player = _players[id];
+                player.Speed = Mathf.Clamp(player.Speed + (value * _info.SpeedChangeMultiplier), _info.MinSpeed, _info.MaxSpeed);
+            }
         }
 
         public void ResetSpeed(int id)
         {
-            var player = _players[id];
-            player.Speed = _info.MinSpeed;
+            if (!LevelInfo.IsBossLevel)
+            {
+                var player = _players[id];
+                player.Speed = _info.MinSpeed;
+            }
         }
 
         public float GetSpeed(int id) => _players[id].Speed;
@@ -390,6 +432,8 @@ namespace FlashSexJam.Manager
             public Transform Spawner;
             public Transform WallOfTentacles;
             public Camera Cam;
+
+            public NunBoss Boss;
 
             public GameObject GameOverContainer;
             public Image[] GameOverImage;
