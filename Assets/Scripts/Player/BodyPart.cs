@@ -21,7 +21,7 @@ namespace FlashSexJam.Player
             GameManager.Instance.HitEnemy(Owner.PlayerID);
             if (Owner.TryBreakCloth(Type))
             {
-                Owner.ToggleInvulnerabilityFrames();
+                Owner.ToggleClothDamage(Type);
             }
             else
             {
@@ -32,12 +32,12 @@ namespace FlashSexJam.Player
                     if (!Owner.IsTopBodyBroken)
                     {
                         Owner.TryBreakCloth(BodyPartType.UpperBody);
-                        Owner.ToggleInvulnerabilityFrames();
+                        Owner.ToggleClothDamage(Type);
                     }
                     else if (!Owner.IsLowerBodyBroken)
                     {
                         Owner.TryBreakCloth(BodyPartType.LowerBody);
-                        Owner.ToggleInvulnerabilityFrames();
+                        Owner.ToggleClothDamage(Type);
                     }
                     else
                     {

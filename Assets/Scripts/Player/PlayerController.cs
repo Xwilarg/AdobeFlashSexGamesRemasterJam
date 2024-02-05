@@ -22,6 +22,9 @@ namespace FlashSexJam.Player
         private PositionData _modelUp, _modelMid, _modelDown;
 
         [SerializeField]
+        private PlayerHurt _hurt;
+
+        [SerializeField]
         private GameObject _positionContainers;
 
         [SerializeField]
@@ -148,11 +151,32 @@ namespace FlashSexJam.Player
         public bool IsTopBodyBroken => !_clothes[BodyPartType.UpperBody].Any(x => x.activeInHierarchy);
         public bool IsLowerBodyBroken => !_clothes[BodyPartType.LowerBody].Any(x => x.activeInHierarchy);
 
+        public void ToggleClothDamage(BodyPartType type)
+        {
+            IsInvulnerable = true;
+            StartCoroutine(PlayHurtAnim(type));
+        }
+
         public void ToggleInvulnerabilityFrames()
         {
             IsInvulnerable = true;
             StartCoroutine(PlayInvulnerabilityFrames());
         }
+
+        private IEnumerator PlayHurtAnim(BodyPartType type)
+        {
+            _hurt.gameObject.SetActive(true);
+            _positionContainers.SetActive(false);
+            _hurt.PlayDamageAnim(type);
+
+            yield return new WaitForSeconds(.8f);
+
+            _hurt.gameObject.SetActive(false);
+            _positionContainers.SetActive(true);
+
+            yield return PlayInvulnerabilityFrames();
+        }
+
         private IEnumerator PlayInvulnerabilityFrames()
         {
             for (int i = 0; i < 6; i++)
