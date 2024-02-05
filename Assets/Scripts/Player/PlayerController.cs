@@ -228,7 +228,7 @@ namespace FlashSexJam.Player
                     else if (_modelDown.gameObject.activeInHierarchy) y = _modelDown.transform.position.y;
                     else y = _modelMid.transform.position.y;
 
-                    var grenade = Instantiate(_grenadePrefab, new Vector2(transform.position.x, y), Quaternion.identity);
+                    Instantiate(_grenadePrefab, new Vector2(transform.position.x, y), Quaternion.identity);
                 }
                 else
                 {
