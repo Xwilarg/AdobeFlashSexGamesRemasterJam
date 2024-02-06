@@ -84,6 +84,8 @@ namespace FlashSexJam.Manager
         private float _bossAttackTimer;
         private float _bossAttackTimerRef = 2f;
 
+        private float _startTime;
+
         public int PlayerCount => _players.Count;
 
         public bool AreAllNudes => _players.All(x => x.Value.PC.IsTopBodyBroken && x.Value.PC.IsTopBodyBroken);
@@ -175,6 +177,12 @@ namespace FlashSexJam.Manager
 
                     if (player.Progress < _progressBoss)
                     {
+                        var time = Time.unscaledTime - _startTime;
+                        if (time < 10f)
+                        {
+                            AchievementManager.Instance.Unlock(AchievementID.DieQuick);
+                        }
+
                         TriggerGameOver(id);
                     }
                     else if (player.Progress >= _info.DestinationDistance)
@@ -346,6 +354,8 @@ namespace FlashSexJam.Manager
             {
                 _didStart = true;
                 _waitingForPlayers.SetActive(false);
+
+                _startTime = Time.unscaledTime;
             }
         }
 

@@ -48,6 +48,7 @@ namespace FlashSexJam.Achievement
             { AchievementID.AllAlive4P, new() { Name = "achAllAlive4PName", Description = "achAllAlive4PDesc" } },
             { AchievementID.AllNude4P, new() { Name = "achAllNude4PName", Description = "achAllNude4PDesc" } },
 
+            { AchievementID.DieQuick, new() { Name = "achDieQuickName", Description = "achDieQuickDesc" } },
             { AchievementID.MaxSpeed, new() { Name = "achMaxSpeedName", Description = "achMaxSpeedDesc" } },
             { AchievementID.AllHScenes, new() { Name = "achAllHScenesName", Description = "achAllHScenesDesc" } },
             { AchievementID.Edging, new() { Name = "achEdgingName", Description = "achEdgingDesc" } },
@@ -73,7 +74,8 @@ namespace FlashSexJam.Achievement
         AllAlive4P,
         AllNude4P,
 
-        OrgasmFullCloth
+        OrgasmFullCloth,
+        DieQuick
     }
 
     public record Achievement
