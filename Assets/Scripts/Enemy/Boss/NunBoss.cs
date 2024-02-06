@@ -13,7 +13,7 @@ namespace FlashSexJam.Enemy.Boss
         private GameObject _grenade;
 
         [SerializeField]
-        private Transform _lowerSpawn;
+        private Transform _lowerSpawn, _midSpawn;
 
         private Animator _anim;
 
@@ -26,7 +26,18 @@ namespace FlashSexJam.Enemy.Boss
 
         public IEnumerator Attack()
         {
-            _anim.SetTrigger("LowAttack");
+            Vector3 spawnPos;
+            var rand = Random.Range(0, 2);
+            if (rand == 0)
+            {
+                _anim.SetTrigger("LowAttack");
+                spawnPos = _lowerSpawn.position;
+            }
+            else
+            {
+                _anim.SetTrigger("MidAttack");
+                spawnPos = _midSpawn.position;
+            }
 
             yield return new WaitForSeconds(.68f);
 
@@ -38,7 +49,7 @@ namespace FlashSexJam.Enemy.Boss
             {
                 go.GetComponent<EnemyController>().OverridesSpawnPos = false;
             }
-            go.transform.position = _lowerSpawn.position;
+            go.transform.position = spawnPos;
         }
     }
 }
