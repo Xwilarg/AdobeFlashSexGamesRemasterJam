@@ -10,6 +10,7 @@ using System.Linq;
 using FlashSexJam.Enemy;
 using UnityEngine.InputSystem;
 using FlashSexJam.Enemy.Boss;
+using Codice.CM.Common;
 
 namespace FlashSexJam.Manager
 {
@@ -288,7 +289,7 @@ namespace FlashSexJam.Manager
                 Destroy(player.UIProg.gameObject);
                 player.UIProg = ui.transform;
 
-                player.Speed = LevelInfo.IsBossLevel ? _info.DefaultBossLevelSpeed : _info.MinSpeed;
+                player.Speed = LevelInfo.IsBossLevel ? _info.DefaultBossLevelSpeed : _info.DefaultLevelSpeed;
                 player.Progress = 0f;
                 player.SpawnTimer = 0f;
                 player.DidLost = false;
@@ -327,7 +328,7 @@ namespace FlashSexJam.Manager
                 Spawner = enemySpawn,
                 WallOfTentacles = tentacles,
                 UIProg = ui.transform,
-                Speed = LevelInfo.IsBossLevel ? _info.DefaultBossLevelSpeed : _info.MinSpeed,
+                Speed = LevelInfo.IsBossLevel ? _info.DefaultBossLevelSpeed : _info.DefaultLevelSpeed,
                 Progress = _players.Any() ? _players.Min(x => x.Value.Progress) : 0f,
                 SpawnTimer = 0f,
                 GameOverContainer = gameOverContainer,
@@ -427,7 +428,7 @@ namespace FlashSexJam.Manager
             if (!LevelInfo.IsBossLevel)
             {
                 var player = _players[id];
-                player.Speed = _info.MinSpeed;
+                player.Speed = _info.DefaultLevelSpeed;
             }
         }
 

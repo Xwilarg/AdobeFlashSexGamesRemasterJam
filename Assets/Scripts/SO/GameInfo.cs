@@ -6,7 +6,7 @@ namespace FlashSexJam.SO
     public class GameInfo : ScriptableObject
     {
         public float MinSpeed, MaxSpeed;
-        public float DefaultBossLevelSpeed;
+        public float DefaultLevelSpeed, DefaultBossLevelSpeed;
 
         public float SpeedChangeMultiplier;
 

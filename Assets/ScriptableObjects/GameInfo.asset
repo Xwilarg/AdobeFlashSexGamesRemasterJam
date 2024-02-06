@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c557267260ec7b14db5796e5a378ed82, type: 3}
   m_Name: GameInfo
   m_EditorClassIdentifier: 
-  MinSpeed: 1
+  MinSpeed: -2
   MaxSpeed: 12.5
+  DefaultLevelSpeed: 1
   DefaultBossLevelSpeed: 2
   SpeedChangeMultiplier: 3
   SpawnIntervalMin: 5
