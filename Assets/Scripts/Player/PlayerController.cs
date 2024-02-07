@@ -171,6 +171,7 @@ namespace FlashSexJam.Player
 
             yield return new WaitForSeconds(.8f);
 
+            _hurt.DeleteDamageAnim(type);
             _hurt.gameObject.SetActive(false);
             _positionContainers.SetActive(true);
 
