@@ -120,6 +120,8 @@ namespace FlashSexJam.Player
             _modelMid.gameObject.SetActive(true);
             _modelDown.gameObject.SetActive(false);
 
+            _hurt.ResetClothes();
+
             foreach (var c in _clothes)
             {
                 foreach (var v in c.Value)

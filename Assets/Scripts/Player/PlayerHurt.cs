@@ -15,8 +15,16 @@ namespace FlashSexJam.Player
 
         public void DeleteDamageAnim(BodyPartType type)
         {
-            if (type == BodyPartType.UpperBody) Destroy(_upperAnim.gameObject);
-            else if (type == BodyPartType.LowerBody) Destroy(_lowerAnim.gameObject);
+            if (type == BodyPartType.UpperBody) _upperAnim.gameObject.SetActive(false);
+            else if (type == BodyPartType.LowerBody) _lowerAnim.gameObject.SetActive(false);
+        }
+
+        public void ResetClothes()
+        {
+            _upperAnim.gameObject.SetActive(false);
+            _upperAnim.enabled = false;
+            _lowerAnim.gameObject.SetActive(false);
+            _lowerAnim.enabled = false;
         }
     }
 }
