@@ -15,6 +15,9 @@ namespace FlashSexJam.Enemy.Boss
         [SerializeField]
         private Transform _lowerSpawn, _midSpawn;
 
+        [SerializeField]
+        private NunCloth[] _clothes;
+
         private Animator _anim;
 
         public int PlayerId { set; private get; }
@@ -22,6 +25,16 @@ namespace FlashSexJam.Enemy.Boss
         private void Awake()
         {
             _anim = GetComponent<Animator>();
+
+            foreach (var c in _clothes)
+            {
+                c.Owner = this;
+            }
+        }
+
+        public void TakeDamage()
+        {
+            _anim.SetTrigger("Hurt");
         }
 
         public IEnumerator Attack()

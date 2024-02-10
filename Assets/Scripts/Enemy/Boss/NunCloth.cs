@@ -4,6 +4,8 @@ namespace FlashSexJam.Enemy.Boss
 {
     public class NunCloth : MonoBehaviour
     {
+        public NunBoss Owner { set; private get; }
+
         [SerializeField]
         private GameObject[] _clothParts;
 
@@ -18,6 +20,7 @@ namespace FlashSexJam.Enemy.Boss
                 go.SetActive(false);
             }
             IsBroken = true;
+            Owner.TakeDamage();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
