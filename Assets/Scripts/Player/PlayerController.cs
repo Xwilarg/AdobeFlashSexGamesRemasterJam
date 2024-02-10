@@ -1,5 +1,4 @@
 using FlashSexJam.Achievement;
-using FlashSexJam.Enemy;
 using FlashSexJam.Enemy.Boss;
 using FlashSexJam.Manager;
 using System.Collections;
